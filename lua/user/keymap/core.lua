@@ -1,7 +1,7 @@
 local bind = require("keymap.bind")
 local map_cr = bind.map_cr
 local map_cmd = bind.map_cmd
-local map_callback = bind.map_callback
+--local map_callback = bind.map_callback
 
 return {
     -- 更方便地向下/上滚动
