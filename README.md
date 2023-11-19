@@ -1,210 +1,149 @@
-<h1 align="center">
-    nvimdots
-    <br>
-    <a href="https://github.com/neovim/neovim/releases/tag/stable">
-    <img
-        alt="NeoVim Version Capability"
-        src="https://img.shields.io/badge/Supports%20Nvim-v0.9-A6D895?style=for-the-badge&colorA=363A4F&logo=neovim&logoColor=D9E0EE">
-    </a>
-    <a href="https://github.com/ayamir/nvimdots/releases">
-    <img
-        alt="Release"
-        src="https://img.shields.io/github/v/release/ayamir/nvimdots.svg?style=for-the-badge&logo=github&color=F2CDCD&logoColor=D9E0EE&labelColor=363A4F">
-    </a>
-</h1>
+# nvim/
 
-<p align="center">
-    <a href="https://github.com/ayamir/nvimdots/stargazers">
-    <img
-        alt="Stars"
-        src="https://img.shields.io/github/stars/ayamir/nvimdots?colorA=363A4F&colorB=B7BDF8&logo=adafruit&logoColor=D9E0EE&style=for-the-badge">
-    </a>
-    <a href="https://github.com/ayamir/nvimdots/issues">
-    <img
-        alt="Issues"
-        src="https://img.shields.io/github/issues-raw/ayamir/nvimdots?colorA=363A4f&colorB=F5A97F&logo=github&logoColor=D9E0EE&style=for-the-badge">
-    </a>
-    <a href="https://github.com/ayamir/nvimdots/contributors">
-    <img
-        alt="Contributors"
-        src="https://img.shields.io/github/contributors/ayamir/nvimdots?colorA=363A4F&colorB=B5E8E0&logo=git&logoColor=D9E0EE&style=for-the-badge">
-    </a>
-    <img
-        alt="Code Size"
-        src="https://img.shields.io/github/languages/code-size/ayamir/nvimdots?colorA=363A4F&colorB=DDB6F2&logo=gitlfs&logoColor=D9E0EE&style=for-the-badge">
-</p>
+<a href="https://dotfyle.com/channinghsu/nvim"><img src="https://dotfyle.com/channinghsu/nvim/badges/plugins?style=flat" /></a>
+<a href="https://dotfyle.com/channinghsu/nvim"><img src="https://dotfyle.com/channinghsu/nvim/badges/leaderkey?style=flat" /></a>
+<a href="https://dotfyle.com/channinghsu/nvim"><img src="https://dotfyle.com/channinghsu/nvim/badges/plugin-manager?style=flat" /></a>
 
-## 🪷 Introduction
 
-This repo hosts our [NeoVim](https://neovim.io/) configuration for Linux [(with NixOS support)](#nixos-support), macOS, and Windows. `init.lua` is the config entry point.
+## Install Instructions
 
-Branch info:
+ > Install requires Neovim 0.9+. Always review the code before installing a configuration.
 
-<div align="center">
-
-| Branch | Supported neovim version |
-| :----: | :----------------------: |
-|  main  |     nvim 0.9 stable      |
-|  0.8   |         nvim 0.8         |
-|  0.7   |         nvim 0.7         |
-
-</div>
-
-We currently manage plugins using [lazy.nvim](https://github.com/folke/lazy.nvim).
-
-Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
-
-### 🎐 Features
-
-- **Fast.** Less than **30ms** to start (Depends on SSD and CPU, tested on Zephyrus G14 2022 version).
-- **Simple.** Run out of the box.
-- **Modern.** Pure `lua` config.
-- **Modular.** Easy to customize.
-- **Powerful.** Full functionality to code.
-
-## 🏗 How to Install
-
-Just run the following interactive bootstrap command, and you're good to go 👍
-
-- **Windows** _(Note: This script REQUIRES `pwsh` > `v7.1`)_
-
-```pwsh
-Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/ayamir/nvimdots/HEAD/scripts/install.ps1'))
-```
-
-- **\*nix**
+Clone the repository and install the plugins:
 
 ```sh
-if command -v curl >/dev/null 2>&1; then
-    bash -c "$(curl -fsSL https://raw.githubusercontent.com/ayamir/nvimdots/HEAD/scripts/install.sh)"
-else
-    bash -c "$(wget -O- https://raw.githubusercontent.com/ayamir/nvimdots/HEAD/scripts/install.sh)"
-fi
+git clone git@github.com:channinghsu/nvim ~/.config/channinghsu/nvim
+NVIM_APPNAME=channinghsu/nvim/ nvim --headless +"Lazy! sync" +qa
 ```
 
-It's strongly recommended to read [Wiki: Prerequisites](https://github.com/ayamir/nvimdots/wiki/Prerequisites) before starting, especially for \*nix users.
+Open Neovim with this config:
 
-## ⚙️ Configuration & Usage
+```sh
+NVIM_APPNAME=channinghsu/nvim/ nvim
+```
 
-<h3 align="center">
-    🗺️ Keybindings
-</h3>
-<p align="center">See <a href="https://github.com/ayamir/nvimdots/wiki/Keybindings" rel="nofollow">Wiki: Keybindings</a> for details</p>
-<br>
+## Plugins
 
-<h3 align="center">
-    🔌 Plugins & Deps
-</h3>
-<p align="center">See <a href="https://github.com/ayamir/nvimdots/wiki/Plugins" rel="nofollow">Wiki: Plugins</a> for details <br><em>(You can also find a deps diagram there!)</em></p>
-<br>
+### code-runner
 
-<h3 align="center">
-    🔧 Usage & Customization
-</h3>
-<p align="center">See <a href="https://github.com/ayamir/nvimdots/wiki/Usage" rel="nofollow">Wiki: Usage</a> for details</p>
-<br>
++ [michaelb/sniprun](https://dotfyle.com/plugins/michaelb/sniprun)
+### color
 
-<h3 align="center" id="nixos-support" name="nixos-support">
-    ❄️  NixOS Support
-</h3>
-<p align="center">See <a href="https://github.com/ayamir/nvimdots/wiki/NixOS-Support" rel="nofollow">Wiki: NixOS Support</a> for details</p>
-<br>
++ [NvChad/nvim-colorizer.lua](https://dotfyle.com/plugins/NvChad/nvim-colorizer.lua)
+### command-line
 
-<h3 align="center">
-    🤔 FAQ
-</h3>
-<p align="center">See <a href="https://github.com/ayamir/nvimdots/wiki/Issues" rel="nofollow">Wiki: FAQ</a> for details</p>
++ [gelguy/wilder.nvim](https://dotfyle.com/plugins/gelguy/wilder.nvim)
+### comment
 
-## ✨ Features
++ [numToStr/Comment.nvim](https://dotfyle.com/plugins/numToStr/Comment.nvim)
++ [JoosepAlviste/nvim-ts-context-commentstring](https://dotfyle.com/plugins/JoosepAlviste/nvim-ts-context-commentstring)
+### completion
 
-<h3 align="center">
-    ⏱️  Startup Time
-</h3>
++ [zbirenbaum/copilot.lua](https://dotfyle.com/plugins/zbirenbaum/copilot.lua)
++ [simrat39/rust-tools.nvim](https://dotfyle.com/plugins/simrat39/rust-tools.nvim)
++ [hrsh7th/nvim-cmp](https://dotfyle.com/plugins/hrsh7th/nvim-cmp)
+### cursorline
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/ayamir/blog-imgs/main/startuptime.png"
-  width = "80%"
-  alt = "StartupTime"
-  />
-</p>
++ [RRethy/vim-illuminate](https://dotfyle.com/plugins/RRethy/vim-illuminate)
+### debugging
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/ayamir/blog-imgs/main/vimstartup.png"
-  width = "60%"
-  alt = "Vim-StartupTime"
-  />
-</p>
++ [rcarriga/nvim-dap-ui](https://dotfyle.com/plugins/rcarriga/nvim-dap-ui)
++ [mfussenegger/nvim-dap](https://dotfyle.com/plugins/mfussenegger/nvim-dap)
+### dependency-management
 
-> Tested with [rhysd/vim-startuptime](https://github.com/rhysd/vim-startuptime)
++ [Saecki/crates.nvim](https://dotfyle.com/plugins/Saecki/crates.nvim)
+### diagnostics
 
-<h3 align="center">
-    📸 Screenshots
-</h3>
++ [folke/trouble.nvim](https://dotfyle.com/plugins/folke/trouble.nvim)
+### editing-support
 
-<p align="center">
-    <img src="https://raw.githubusercontent.com/ayamir/blog-imgs/main/dashboard.png" alt="Dashboard">
-    <em>Dashboard</em>
-</p>
-<br>
++ [debugloop/telescope-undo.nvim](https://dotfyle.com/plugins/debugloop/telescope-undo.nvim)
++ [nvim-treesitter/nvim-treesitter-context](https://dotfyle.com/plugins/nvim-treesitter/nvim-treesitter-context)
++ [m4xshen/autoclose.nvim](https://dotfyle.com/plugins/m4xshen/autoclose.nvim)
++ [windwp/nvim-ts-autotag](https://dotfyle.com/plugins/windwp/nvim-ts-autotag)
+### fuzzy-finder
 
-<p align="center">
-    <img src="https://raw.githubusercontent.com/ayamir/blog-imgs/main/telescope.png" alt="Telescope">
-    <em>Telescope</em>
-</p>
-<br>
++ [jvgrootveld/telescope-zoxide](https://dotfyle.com/plugins/jvgrootveld/telescope-zoxide)
++ [nvim-telescope/telescope.nvim](https://dotfyle.com/plugins/nvim-telescope/telescope.nvim)
+### git
 
-<p align="center">
-    <img src="https://raw.githubusercontent.com/ayamir/blog-imgs/main/coding.png" alt="Coding">
-    <em>Coding</em>
-</p>
-<br>
++ [lewis6991/gitsigns.nvim](https://dotfyle.com/plugins/lewis6991/gitsigns.nvim)
++ [sindrets/diffview.nvim](https://dotfyle.com/plugins/sindrets/diffview.nvim)
+### indent
 
-<p align="center">
-    <img src="https://raw.githubusercontent.com/ayamir/blog-imgs/main/code_action.png" alt="Code Action">
-    <em>Code Action</em>
-</p>
-<br>
++ [lukas-reineke/indent-blankline.nvim](https://dotfyle.com/plugins/lukas-reineke/indent-blankline.nvim)
+### keybinding
 
-<p align="center">
-    <img src="https://raw.githubusercontent.com/ayamir/blog-imgs/main/dap.png" alt="Debugging">
-    <em>Debugging</em>
-</p>
-<br>
++ [max397574/better-escape.nvim](https://dotfyle.com/plugins/max397574/better-escape.nvim)
++ [folke/which-key.nvim](https://dotfyle.com/plugins/folke/which-key.nvim)
+### lsp
 
-<p align="center">
-    <img src="https://raw.githubusercontent.com/ayamir/blog-imgs/main/lazygit.png" alt="Lazygit">
-    <em>Lazygit with built-in Terminal</em>
-</p>
-<br>
++ [simrat39/symbols-outline.nvim](https://dotfyle.com/plugins/simrat39/symbols-outline.nvim)
++ [jose-elias-alvarez/null-ls.nvim](https://dotfyle.com/plugins/jose-elias-alvarez/null-ls.nvim)
++ [neovim/nvim-lspconfig](https://dotfyle.com/plugins/neovim/nvim-lspconfig)
++ [j-hui/fidget.nvim](https://dotfyle.com/plugins/j-hui/fidget.nvim)
++ [nvimdev/lspsaga.nvim](https://dotfyle.com/plugins/nvimdev/lspsaga.nvim)
+### lsp-installer
 
-<p align="center">
-    <img src="https://raw.githubusercontent.com/ayamir/blog-imgs/main/command_ref.png" alt="Command quickref">
-    <em>Command quickref</em>
-</p>
++ [williamboman/mason.nvim](https://dotfyle.com/plugins/williamboman/mason.nvim)
+### markdown-and-latex
 
-## 👐 Contributing
++ [iamcco/markdown-preview.nvim](https://dotfyle.com/plugins/iamcco/markdown-preview.nvim)
+### motion
 
-- If you find anything that needs improving, do not hesitate to point it out or create a PR.
-- If you come across an issue, you can first use `:checkhealth` command provided by nvim to trouble-shoot yourself.
-  - If you still have such problems, feel free to open a new issue!
++ [folke/flash.nvim](https://dotfyle.com/plugins/folke/flash.nvim)
++ [abecodes/tabout.nvim](https://dotfyle.com/plugins/abecodes/tabout.nvim)
++ [smoka7/hop.nvim](https://dotfyle.com/plugins/smoka7/hop.nvim)
++ [edluffy/specs.nvim](https://dotfyle.com/plugins/edluffy/specs.nvim)
+### nvim-dev
 
-## ❤️ Thanks to
++ [MunifTanjim/nui.nvim](https://dotfyle.com/plugins/MunifTanjim/nui.nvim)
++ [nvim-lua/plenary.nvim](https://dotfyle.com/plugins/nvim-lua/plenary.nvim)
+### plugin-manager
 
-- [ayamir](https://github.com/ayamir)
-- [Jint-lzxy](https://github.com/Jint-lzxy)
-- [CharlesChiuGit](https://github.com/CharlesChiuGit)
++ [folke/lazy.nvim](https://dotfyle.com/plugins/folke/lazy.nvim)
+### project
 
-## 🎉 Acknowledgement
++ [ahmedkhalf/project.nvim](https://dotfyle.com/plugins/ahmedkhalf/project.nvim)
+### scrollbar
 
-- [glepnir/nvim](https://github.com/glepnir/nvim)
++ [dstein64/nvim-scrollview](https://dotfyle.com/plugins/dstein64/nvim-scrollview)
+### scrolling
 
-## 📜 License
++ [karb94/neoscroll.nvim](https://dotfyle.com/plugins/karb94/neoscroll.nvim)
+### session
 
-This NeoVim configuration is released under the MIT license, which grants the following permissions:
++ [olimorris/persisted.nvim](https://dotfyle.com/plugins/olimorris/persisted.nvim)
+### snippet
 
-- Commercial use
-- Distribution
-- Modification
-- Private use
++ [L3MON4D3/LuaSnip](https://dotfyle.com/plugins/L3MON4D3/LuaSnip)
+### startup
 
-For more convoluted language, see the [LICENSE](https://github.com/ayamir/nvimdots/blob/main/LICENSE).
++ [goolord/alpha-nvim](https://dotfyle.com/plugins/goolord/alpha-nvim)
+### statusline
+
++ [nvim-lualine/lualine.nvim](https://dotfyle.com/plugins/nvim-lualine/lualine.nvim)
+### syntax
+
++ [nvim-treesitter/nvim-treesitter-textobjects](https://dotfyle.com/plugins/nvim-treesitter/nvim-treesitter-textobjects)
++ [nvim-treesitter/nvim-treesitter](https://dotfyle.com/plugins/nvim-treesitter/nvim-treesitter)
+
+### tabline
+
++ [akinsho/bufferline.nvim](https://dotfyle.com/plugins/akinsho/bufferline.nvim)
+### utility
+
++ [zbirenbaum/neodim](https://dotfyle.com/plugins/zbirenbaum/neodim)
++ [rcarriga/nvim-notify](https://dotfyle.com/plugins/rcarriga/nvim-notify)
+## Language Servers
+
++ bashls
++ clangd
++ gopls
++ html
++ jsonls
++ lua_ls
++ pylsp
+
+
+ This readme was generated by [Dotfyle](https://dotfyle.com)
