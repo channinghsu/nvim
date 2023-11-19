@@ -6,7 +6,7 @@ settings["use_ssh"] = true
 
 -- Set it to false if you don't use copilot
 ---@type boolean
-settings["use_copilot"] = false
+settings["use_copilot"] = true
 
 -- Set it to false if there are no need to format on save.
 ---@type boolean
@@ -165,7 +165,7 @@ settings["treesitter_deps"] = {
 -- NOTE: Currently, only the following options related to the GUI are supported. Other entries will be IGNORED.
 ---@type { font_name: string, font_size: number }
 settings["gui_config"] = {
-	font_name = "CodeNewRoman Nerd Font",
+	font_name = "JetBrainsMono Nerd Font",
 	font_size = 12,
 }
 

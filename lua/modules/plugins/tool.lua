@@ -11,13 +11,6 @@ tool["tpope/vim-fugitive"] = {
 -- 	cond = vim.fn.executable("fcitx5-remote") == 1,
 -- 	config = require("tool.fcitx5"),
 -- }
-tool["iamcco/markdown-preview.nvim"] = {
-	lazy = true,
-	cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-	config = function()
-		vim.fn["mkdp#util#install"]()
-	end,
-}
 tool["nvim-tree/nvim-tree.lua"] = {
 	lazy = true,
 	cmd = {
