@@ -21,7 +21,7 @@ return {
 
 	-- 快速移动一行
 	-- Normal mode
-    ["n|<A-j>"] = map_cmd(":m .+1<CR>=="):with_desc("edit: Move this line down"),
+	["n|<A-j>"] = map_cmd(":m .+1<CR>=="):with_desc("edit: Move this line down"),
 	["n|<A-k>"] = map_cmd(":m .-2<CR>=="):with_desc("edit: Move this line up"),
 	["n|<"] = map_cmd("<<"):with_desc("edit: Decrease indent"),
 	["n|>"] = map_cmd(">>"):with_desc("edit: Increase indent"),
