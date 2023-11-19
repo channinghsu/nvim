@@ -6,4 +6,5 @@ settings["use_ssh"] = false
 
 settings["colorscheme"] = "catppuccin"
 
+settings["use_copilot"] = false
 return settings
