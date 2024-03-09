@@ -5,8 +5,6 @@ settings["use_ssh"] = false
 
 settings["colorscheme"] = "catppuccin"
 
-settings["use_copilot"] = false
-
 settings["dashboard_image"] = {
 	[[   ______ __                          _                  __  __            ]],
 	[[  / ____// /_   ____ _ ____   ____   (_)____   ____ _   / / / /_____ __  __]],
