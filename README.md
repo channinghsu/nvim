@@ -8,7 +8,42 @@
 
 > Install requires Neovim 0.9+. Always review the code before installing a configuration.
 
-Clone the repository and install the plugins:
+Branch info:
+
+<div align="center">
+
+| Branch | Supported neovim version |
+| :----: | :----------------------: |
+|  0.10  |    nvim 0.10 nightly     |
+|  main  |     nvim 0.9 stable      |
+|  0.8   |         nvim 0.8         |
+|  0.7   |         nvim 0.7         |
+
+</div>
+
+We currently manage plugins using [lazy.nvim](https://github.com/folke/lazy.nvim).
+
+Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
+
+### 🎐 Features
+
+- **Fast.** Less than **30ms** to start (Depends on SSD and CPU, tested on Zephyrus G14 2022 version).
+- **Simple.** Run out of the box.
+- **Modern.** Pure `lua` config.
+- **Modular.** Easy to customize.
+- **Powerful.** Full functionality to code.
+
+## 🏗 How to Install
+
+Just run the following interactive bootstrap command, and you're good to go 👍
+
+- **Windows** _(Note: This script REQUIRES `pwsh` > `v7.1`)_
+
+```pwsh
+Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/ayamir/nvimdots/HEAD/scripts/install.ps1'))
+```
+
+- **\*nix**
 
 ```sh
 git clone git@github.com:channinghsu/nvim ~/.config/channinghsu/nvim
