@@ -273,9 +273,9 @@ fi
 
 info "Fetching in progress..."
 if [[ "${USE_SSH}" -eq "1" ]]; then
-	clone_by_https_or_ssh "git@github.com:ayamir/nvimdots.git"
+	clone_by_https_or_ssh "git@github.com:channinghsu/nvim.git"
 else
-	clone_by_https_or_ssh "https://github.com/ayamir/nvimdots.git"
+	clone_by_https_or_ssh "https://github.com/channinghsu/nvim.git"
 fi
 
 cd "${DEST_DIR}" || return

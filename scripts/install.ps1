@@ -375,9 +375,9 @@ You must install Git before installing this Nvim config. See:
 	info -Msg "Fetching in progress..."
 
 	if ($USE_SSH) {
-		clone_by_https_or_ssh 'git@github.com:ayamir/nvimdots.git'
+		clone_by_https_or_ssh 'git@github.com:channinghsu/nvim.git'
 	} else {
-		clone_by_https_or_ssh 'https://github.com/ayamir/nvimdots.git'
+		clone_by_https_or_ssh 'https://github.com/channinghsu/nvim.git'
 	}
 
 	safe_execute -WithCmd { Set-Location -Path "$env:CCDEST_DIR" }
