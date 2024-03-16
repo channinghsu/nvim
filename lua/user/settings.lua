@@ -3,6 +3,8 @@ local settings = {}
 
 settings["use_ssh"] = false
 
+settings["format_notify"] = false
+
 settings["colorscheme"] = "catppuccin"
 
 settings["dashboard_image"] = {
@@ -13,4 +15,5 @@ settings["dashboard_image"] = {
 	[[\____//_/ /_/ \__,_//_/ /_//_/ /_//_//_/ /_/ \__, /  /_/ /_//____/ \__,_/  ]],
 	[[                                            /____/                         ]],
 }
+
 return settings
