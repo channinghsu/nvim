@@ -25,8 +25,5 @@ return {
 		:with_noremap()
 		:with_silent()
 		:with_desc("debug: Info"),
-	["n|<leader>f"] = map_cu("telescope colorscheme"):with_noremap():with_silent():with_desc("find: Info"),
 	["n|<leader>p"] = map_cr("Lazy"):with_silent():with_noremap():with_nowait():with_desc("Lazy: Show"),
-	["n|<leader>s"] = map_cu("SessionSave"):with_noremap():with_silent():with_desc("session: Info"),
-	["n|<leader>t"] = map_cr("TroubleToggle lsp_references"):with_noremap():with_silent():with_desc("lsp: Trouble"),
 }
