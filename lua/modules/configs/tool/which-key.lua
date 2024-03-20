@@ -8,6 +8,9 @@ return function()
 
 	require("which-key").register({
 		["<leader>"] = {
+			a = {
+				name = icons.cmp.copilot_alt .. "Copilot",
+			},
 			b = {
 				name = icons.ui.Buffer .. " Buffer",
 			},
