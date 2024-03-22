@@ -353,7 +353,7 @@ You must install Git before installing this Nvim config. See:
 '@
 	}
 
-	info -Msg "This script will install ayamir/nvimdots to:"
+	info -Msg "This script will install channinghsu/nvim to:"
 	Write-Host $env:CCDEST_DIR
 
 	if ((Test-Path $env:CCDEST_DIR)) {
@@ -401,10 +401,10 @@ You must install Git before installing this Nvim config. See:
 
 Thank you for using this set of configuration!
 - Project Homepage:
-    https://github.com/ayamir/nvimdots
+    https://github.com/channinghsu/nvim
     ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
 - Further documentation (including executables you |must| install for full functionality):
-    https://github.com/ayamir/nvimdots/wiki/Prerequisites
+    https://github.com/channinghsu/nvim/wiki/Prerequisites
     ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
 '@
 
