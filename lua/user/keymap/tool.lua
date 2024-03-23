@@ -1,5 +1,4 @@
 local bind = require("keymap.bind")
-local map_cu = bind.map_cu
 local map_callback = bind.map_callback
 local map_cr = bind.map_cr
 return {
@@ -13,17 +12,10 @@ return {
 		:with_silent()
 		:with_desc("tool: Toggle command panel"),
 
-	["n|<leader>ui"] = map_callback(function()
-			require("telescope.builtin").colorscheme({ enable_preview = true })
-		end)
-		:with_noremap()
-		:with_silent()
-		:with_desc("ui: Change colorscheme for current session"),
 	["n|<leader>d"] = map_callback(function()
 			require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
 		end)
 		:with_noremap()
 		:with_silent()
 		:with_desc("debug: Info"),
-	["n|<leader>p"] = map_cr("Lazy"):with_silent():with_noremap():with_nowait():with_desc("Lazy: Show"),
 }
