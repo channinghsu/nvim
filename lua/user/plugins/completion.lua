@@ -47,6 +47,7 @@ local prompts = {
 	Spelling = "请校对以下文本，纠正其中的语法错误和拼写错误，确保文本的专业性和准确性。",
 	Wording = "请优化以下文本的措辞和表达，提高其清晰度和专业性，同时保持语言的流畅性。",
 	Concise = "请将以下文本改写为更加简洁明了的形式，去除冗余信息，同时保留必要的技术细节和关键概念。",
+	Optimize = "将所选定的代码段进行细致的优化处理，目的是在于提升代码的执行效率以及增强代码的可读性。",
 }
 
 completion["CopilotC-Nvim/CopilotChat.nvim"] = {
@@ -71,43 +72,20 @@ completion["CopilotC-Nvim/CopilotChat.nvim"] = {
 	end,
 	event = "VeryLazy",
 	keys = {
-		-- Show help actions with telescope
-		{
-			"<leader>ah",
-			function()
-				local actions = require("CopilotChat.actions")
-				require("CopilotChat.integrations.telescope").pick(actions.help_actions())
-			end,
-			desc = "CopilotChat - Help actions",
-		},
-		-- Show prompts actions with telescope
-		{
-			"<leader>ap",
-			function()
-				local actions = require("CophilotChat.actions")
-				require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
-			end,
-			desc = "CopilotChat - Prompt actions",
-		},
 		-- Code related commands
 		{ "<leader>ae", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
 		{ "<leader>at", "<cmd>CopilotChatTests<cr>", desc = "CopilotChat - Generate tests" },
 		{ "<leader>ar", "<cmd>CopilotChatReview<cr>", desc = "CopilotChat - Review code" },
 		{ "<leader>aR", "<cmd>CopilotChatRefactor<cr>", desc = "CopilotChat - Refactor code" },
+		{
+			"<leader>ao",
+			"<cmd>CopilotChatOptimize<cr>",
+			mode = "x",
+			desc = "CopilotChat - Optimize the selected code to improve performance and readablilty",
+		},
 		{ "<leader>an", "<cmd>CopilotChatBetterNamings<cr>", desc = "CopilotChat - Better Naming" },
 		-- Chat with Copilot in visual mode
-		{
-			"<leader>av",
-			":CopilotChatVisual",
-			mode = "x",
-			desc = "CopilotChat - Open in vertical split",
-		},
-		{
-			"<leader>ax",
-			":CopilotChatInPlace<cr>",
-			mode = "x",
-			desc = "CopilotChat - Run in-place code",
-		},
+		{ "<leader>av", ":CopilotChatVisual", mode = "x", desc = "CopilotChat - Open in vertical split" },
 		-- Custom input for CopilotChat
 		{
 			"<leader>ai",
@@ -119,27 +97,10 @@ completion["CopilotC-Nvim/CopilotChat.nvim"] = {
 			end,
 			desc = "CopilotChat - Ask input",
 		},
-		-- Generate commit message based on the git diff
-		{
-			"<leader>am",
-			function()
-				local diff = get_git_diff()
-				if diff ~= "" then
-					vim.fn.setreg('"', diff)
-					vim.cmd("CopilotChat Write commit message for the change with commitizen convention.")
-				end
-			end,
-			desc = "CopilotChat - Generate commit message for all changes",
-		},
+		{ "<leader>am", "<cmd>CopilotChatCommit<cr>", desc = "CopilotChat - Generate commit message for all change" },
 		{
 			"<leader>aM",
-			function()
-				local diff = get_git_diff(true)
-				if diff ~= "" then
-					vim.fn.setreg('"', diff)
-					vim.cmd("CopilotChat Write commit message for the change with commitizen convention.")
-				end
-			end,
+			"<cmd>CopilotChatCommitStaged<cr>",
 			desc = "CopilotChat - Generate commit message for staged changes",
 		},
 		-- Quick chat with Copilot
