@@ -15,10 +15,7 @@ mappings["lsp"] = function(buf)
 		["n|gD"] = map_cr("Glance definitions"):with_silent():with_buffer(buf):with_desc("lsp: Preview definition"),
 		["n|gd"] = map_cr("Lspsaga goto_definition"):with_silent():with_buffer(buf):with_desc("lsp: Goto definition"),
 		["n|<leader>l"] = map_cr("LspInfo"):with_silent():with_buffer(buf):with_desc("lsp: Info"),
-		["n|<leader>c"] = map_cr("Lspsaga incoming_calls")
-			:with_silent()
-			:with_buffer(buf)
-			:with_desc("lsp: Show incoming calls"),
+		["n|<leader>c"] = map_cr("Lspsaga incoming_calls"):with_silent():with_buffer(buf):with_desc("lsp: Show incoming calls"),
 	}
 end
 

@@ -29,6 +29,10 @@ NVIM_APPNAME=channinghsu/nvim/ nvim
 
 ## Plugins
 
+### ai
+
+- [CopilotC-Nvim/CopilotChat.nvim](https://dotfyle.com/plugins/CopilotC-Nvim/CopilotChat.nvim)
+
 ### code-runner
 
 - [michaelb/sniprun](https://dotfyle.com/plugins/michaelb/sniprun)
@@ -36,22 +40,20 @@ NVIM_APPNAME=channinghsu/nvim/ nvim
 ### color
 
 - [NvChad/nvim-colorizer.lua](https://dotfyle.com/plugins/NvChad/nvim-colorizer.lua)
+- [folke/twilight.nvim](https://dotfyle.com/plugins/folke/twilight.nvim)
 
 ### colorscheme
 
-- [folke/tokyonight.nvim](https://dotfyle.com/plugins/folke/tokyonight.nvim)
-- [EdenEast/nightfox.nvim](https://dotfyle.com/plugins/EdenEast/nightfox.nvim)
 - [rebelot/kanagawa.nvim](https://dotfyle.com/plugins/rebelot/kanagawa.nvim)
 - [rose-pine/neovim](https://dotfyle.com/plugins/rose-pine/neovim)
-
-### command-line
-
-- [gelguy/wilder.nvim](https://dotfyle.com/plugins/gelguy/wilder.nvim)
+- [folke/tokyonight.nvim](https://dotfyle.com/plugins/folke/tokyonight.nvim)
+- [EdenEast/nightfox.nvim](https://dotfyle.com/plugins/EdenEast/nightfox.nvim)
 
 ### comment
 
-- [numToStr/Comment.nvim](https://dotfyle.com/plugins/numToStr/Comment.nvim)
 - [JoosepAlviste/nvim-ts-context-commentstring](https://dotfyle.com/plugins/JoosepAlviste/nvim-ts-context-commentstring)
+- [folke/todo-comments.nvim](https://dotfyle.com/plugins/folke/todo-comments.nvim)
+- [numToStr/Comment.nvim](https://dotfyle.com/plugins/numToStr/Comment.nvim)
 
 ### completion
 
@@ -59,14 +61,10 @@ NVIM_APPNAME=channinghsu/nvim/ nvim
 - [zbirenbaum/copilot.lua](https://dotfyle.com/plugins/zbirenbaum/copilot.lua)
 - [lukas-reineke/cmp-under-comparator](https://dotfyle.com/plugins/lukas-reineke/cmp-under-comparator)
 
-### cursorline
-
-- [RRethy/vim-illuminate](https://dotfyle.com/plugins/RRethy/vim-illuminate)
-
 ### debugging
 
-- [rcarriga/nvim-dap-ui](https://dotfyle.com/plugins/rcarriga/nvim-dap-ui)
 - [mfussenegger/nvim-dap](https://dotfyle.com/plugins/mfussenegger/nvim-dap)
+- [rcarriga/nvim-dap-ui](https://dotfyle.com/plugins/rcarriga/nvim-dap-ui)
 
 ### dependency-management
 
@@ -78,10 +76,15 @@ NVIM_APPNAME=channinghsu/nvim/ nvim
 
 ### editing-support
 
+- [debugloop/telescope-undo.nvim](https://dotfyle.com/plugins/debugloop/telescope-undo.nvim)
+- [folke/zen-mode.nvim](https://dotfyle.com/plugins/folke/zen-mode.nvim)
+- [nvim-treesitter/nvim-treesitter-context](https://dotfyle.com/plugins/nvim-treesitter/nvim-treesitter-context)
 - [windwp/nvim-ts-autotag](https://dotfyle.com/plugins/windwp/nvim-ts-autotag)
 - [m4xshen/autoclose.nvim](https://dotfyle.com/plugins/m4xshen/autoclose.nvim)
-- [debugloop/telescope-undo.nvim](https://dotfyle.com/plugins/debugloop/telescope-undo.nvim)
-- [nvim-treesitter/nvim-treesitter-context](https://dotfyle.com/plugins/nvim-treesitter/nvim-treesitter-context)
+
+### formatting
+
+- [echasnovski/mini.align](https://dotfyle.com/plugins/echasnovski/mini.align)
 
 ### fuzzy-finder
 
@@ -90,7 +93,6 @@ NVIM_APPNAME=channinghsu/nvim/ nvim
 
 ### git
 
-- [sindrets/diffview.nvim](https://dotfyle.com/plugins/sindrets/diffview.nvim)
 - [lewis6991/gitsigns.nvim](https://dotfyle.com/plugins/lewis6991/gitsigns.nvim)
 
 ### indent
@@ -104,12 +106,13 @@ NVIM_APPNAME=channinghsu/nvim/ nvim
 
 ### lsp
 
-- [neovim/nvim-lspconfig](https://dotfyle.com/plugins/neovim/nvim-lspconfig)
-- [j-hui/fidget.nvim](https://dotfyle.com/plugins/j-hui/fidget.nvim)
 - [nvimdev/lspsaga.nvim](https://dotfyle.com/plugins/nvimdev/lspsaga.nvim)
 - [stevearc/aerial.nvim](https://dotfyle.com/plugins/stevearc/aerial.nvim)
+- [mfussenegger/nvim-jdtls](https://dotfyle.com/plugins/mfussenegger/nvim-jdtls)
+- [j-hui/fidget.nvim](https://dotfyle.com/plugins/j-hui/fidget.nvim)
 - [nvimtools/none-ls.nvim](https://dotfyle.com/plugins/nvimtools/none-ls.nvim)
 - [mrcjkb/rustaceanvim](https://dotfyle.com/plugins/mrcjkb/rustaceanvim)
+- [neovim/nvim-lspconfig](https://dotfyle.com/plugins/neovim/nvim-lspconfig)
 
 ### lsp-installer
 
@@ -121,10 +124,8 @@ NVIM_APPNAME=channinghsu/nvim/ nvim
 
 ### motion
 
-- [abecodes/tabout.nvim](https://dotfyle.com/plugins/abecodes/tabout.nvim)
 - [folke/flash.nvim](https://dotfyle.com/plugins/folke/flash.nvim)
 - [smoka7/hop.nvim](https://dotfyle.com/plugins/smoka7/hop.nvim)
-- [edluffy/specs.nvim](https://dotfyle.com/plugins/edluffy/specs.nvim)
 
 ### nvim-dev
 
@@ -160,6 +161,10 @@ NVIM_APPNAME=channinghsu/nvim/ nvim
 - [rafamadriz/friendly-snippets](https://dotfyle.com/plugins/rafamadriz/friendly-snippets)
 - [L3MON4D3/LuaSnip](https://dotfyle.com/plugins/L3MON4D3/LuaSnip)
 
+### split-and-window
+
+- [mrjones2014/smart-splits.nvim](https://dotfyle.com/plugins/mrjones2014/smart-splits.nvim)
+
 ### startup
 
 - [goolord/alpha-nvim](https://dotfyle.com/plugins/goolord/alpha-nvim)
@@ -179,8 +184,8 @@ NVIM_APPNAME=channinghsu/nvim/ nvim
 
 ### utility
 
-- [zbirenbaum/neodim](https://dotfyle.com/plugins/zbirenbaum/neodim)
 - [rcarriga/nvim-notify](https://dotfyle.com/plugins/rcarriga/nvim-notify)
+- [zbirenbaum/neodim](https://dotfyle.com/plugins/zbirenbaum/neodim)
 
 ## Language Servers
 
@@ -188,6 +193,7 @@ NVIM_APPNAME=channinghsu/nvim/ nvim
 - clangd
 - gopls
 - html
+- jdtls
 - jsonls
 - lua_ls
 - pylsp
