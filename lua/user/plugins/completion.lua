@@ -1,21 +1,5 @@
 local completion = {}
 local IS_DEV = false
-
---- Get all the changes in the git repository
----@param staged? boolean
----@return string
-local function get_git_diff(staged)
-	local cmd = staged and "git diff --staged" or "git diff"
-	local handle = io.popen(cmd)
-	if not handle then
-		return ""
-	end
-
-	local result = handle:read("*a")
-	handle:close()
-	return result
-end
-
 local prompts = {
 	--    Explain = "Please explain how the following code works.",
 	-- Review = "Please review the following code and provide suggestions for improvement.",
@@ -38,6 +22,7 @@ local prompts = {
 	Refactor = "请对以下代码段进行重构，通过改进代码结构和命名规范，提高代码的可维护性和可读性。",
 	FixCode = "请修正以下代码段中存在的问题，确保其能够按照设计意图正确执行。",
 	FixError = "请分析并解释以下文本中存在的编程错误，并提供相应的修复方案。",
+	Fix = "此代码存在问题。请重写代码，并在修复错误后展示。",
 	BetterNamings = "请为以下代码段中的变量和函数提供更具描述性和符合命名规范的命名，以增强代码的自解释能力。",
 	Documentation = "请为以下代码段编写技术文档，包括功能描述、参数说明、返回值、异常处理等详细信息。",
 	SwaggerApiDocs = "请使用Swagger规范为以下API生成标准、详细的API文档，包括路径、操作、参数、响应等信息。",
@@ -47,9 +32,10 @@ local prompts = {
 	Spelling = "请校对以下文本，纠正其中的语法错误和拼写错误，确保文本的专业性和准确性。",
 	Wording = "请优化以下文本的措辞和表达，提高其清晰度和专业性，同时保持语言的流畅性。",
 	Concise = "请将以下文本改写为更加简洁明了的形式，去除冗余信息，同时保留必要的技术细节和关键概念。",
-	Optimize = "将所选定的代码段进行细致的优化处理，目的是在于提升代码的执行效率以及增强代码的可读性。",
+	Optimize = "请将所选定的代码段进行细致的优化处理，目的是在于提升代码的执行效率以及增强代码的可读性。",
+	FixDiagnostic = "请协助处理文件中的以下诊断问题：",
+	Docs = "请为选定的代码编写文档。回复应包含原始代码和已添加注释的代码块。使用最适合所用编程语言的文档风格（例如 JavaScript 使用 JSDoc，Python 使用 docstrings 等）。",
 }
-
 completion["CopilotC-Nvim/CopilotChat.nvim"] = {
 	branch = "canary",
 	dependencies = {
@@ -59,33 +45,159 @@ completion["CopilotC-Nvim/CopilotChat.nvim"] = {
 	},
 	opts = {
 		model = "gpt-4",
-		show_help = false,
-		prompts = prompts,
 		debug = false, -- Set to true to see response from Github Copilot API. The log file will be in ~/.local/state/nvim/CopilotChat.nvim.log.
 		disable_extra_info = "no", -- Disable extra information (e.g: system prompt, token count) in the response.
 		hide_system_prompt = "yes", -- Show user prompts only and hide system prompts.
-		proxy = "", -- Proxies requests via https or socks
-		language = "Chinese",
+		question_header = "## Channing ",
+		answer_header = "## Copilot ",
+		error_header = "## Error ",
+		separator = " ", -- Separator to use in chat
+		prompts = prompts,
+		auto_follow_cursor = false, -- Don't follow the cursor after getting response
+		show_help = false, -- Show help in virtual text, set to true if that's 1st time using Copilot Chat
+		mappings = {
+			-- Use tab for completion
+			complete = {
+				detail = "Use @<Tab> or /<Tab> for options.",
+				insert = "<Tab>",
+			},
+			-- Close the chat
+			close = {
+				normal = "q",
+				insert = "<C-c>",
+			},
+			-- Reset the chat buffer
+			reset = {
+				normal = "<C-l>",
+				insert = "<C-l>",
+			},
+			-- Submit the prompt to Copilot
+			submit_prompt = {
+				normal = "<CR>",
+				insert = "<C-CR>",
+			},
+			-- Accept the diff
+			accept_diff = {
+				normal = "<C-y>",
+				insert = "<C-y>",
+			},
+			-- Show the diff
+			show_diff = {
+				normal = "gmd",
+			},
+			-- Show the prompt
+			show_system_prompt = {
+				normal = "gmp",
+			},
+			-- Show the user selection
+			show_user_selection = {
+				normal = "gms",
+			},
+		},
 	},
-	build = function()
-		vim.notify("Please update the remote plugins by running ':UpdateRemotePlugins', then restart Neovim.")
+	config = function(_, opts)
+		local chat = require("CopilotChat")
+		local select = require("CopilotChat.select")
+		-- Use unnamed register for the selection
+		opts.selection = select.unnamed
+
+		-- Override the git prompts message
+		opts.prompts.Commit = {
+			prompt = "Write commit message for the change with commitizen convention",
+			selection = select.gitdiff,
+		}
+		opts.prompts.CommitStaged = {
+			prompt = "Write commit message for the change with commitizen convention",
+			selection = function(source)
+				return select.gitdiff(source, true)
+			end,
+		}
+
+		chat.setup(opts)
+
+		vim.api.nvim_create_user_command("CopilotChatVisual", function(args)
+			chat.ask(args.args, { selection = select.visual })
+		end, { nargs = "*", range = true })
+
+		-- Inline chat with Copilot
+		vim.api.nvim_create_user_command("CopilotChatInline", function(args)
+			chat.ask(args.args, {
+				selection = select.visual,
+				window = {
+					layout = "float",
+					relative = "cursor",
+					width = 1,
+					height = 0.4,
+					row = 1,
+				},
+			})
+		end, { nargs = "*", range = true })
+
+		-- Restore CopilotChatBuffer
+		vim.api.nvim_create_user_command("CopilotChatBuffer", function(args)
+			chat.ask(args.args, { selection = select.buffer })
+		end, { nargs = "*", range = true })
+
+		-- Custom buffer for CopilotChat
+		vim.api.nvim_create_autocmd("BufEnter", {
+			pattern = "copilot-*",
+			callback = function()
+				vim.opt_local.relativenumber = true
+				vim.opt_local.number = true
+
+				-- Get current filetype and set it to markdown if the current filetype is copilot-chat
+				local ft = vim.bo.filetype
+				if ft == "copilot-chat" then
+					vim.bo.filetype = "markdown"
+				end
+			end,
+		})
 	end,
 	event = "VeryLazy",
 	keys = {
+		-- Show help actions with telescope
+		{
+			"<leader>ah",
+			function()
+				local actions = require("CopilotChat.actions")
+				require("CopilotChat.integrations.telescope").pick(actions.help_actions())
+			end,
+			desc = "CopilotChat - Help actions",
+		},
+		-- Show prompts actions with telescope
+		{
+			"<leader>ap",
+			function()
+				local actions = require("CopilotChat.actions")
+				require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
+			end,
+			desc = "CopilotChat - Prompt actions",
+		},
+		{
+			"<leader>ap",
+			":lua require('CopilotChat.integrations.telescope').pick(require('CopilotChat.actions').prompt_actions({selection = require('CopilotChat.select').visual}))<CR>",
+			mode = "x",
+			desc = "CopilotChat - Prompt actions",
+		},
 		-- Code related commands
 		{ "<leader>ae", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
 		{ "<leader>at", "<cmd>CopilotChatTests<cr>", desc = "CopilotChat - Generate tests" },
 		{ "<leader>ar", "<cmd>CopilotChatReview<cr>", desc = "CopilotChat - Review code" },
 		{ "<leader>aR", "<cmd>CopilotChatRefactor<cr>", desc = "CopilotChat - Refactor code" },
-		{
-			"<leader>ao",
-			"<cmd>CopilotChatOptimize<cr>",
-			mode = "x",
-			desc = "CopilotChat - Optimize the selected code to improve performance and readablilty",
-		},
 		{ "<leader>an", "<cmd>CopilotChatBetterNamings<cr>", desc = "CopilotChat - Better Naming" },
 		-- Chat with Copilot in visual mode
-		{ "<leader>av", ":CopilotChatVisual", mode = "x", desc = "CopilotChat - Open in vertical split" },
+		{
+			"<leader>av",
+			":CopilotChatVisual",
+			mode = "x",
+			desc = "CopilotChat - Open in vertical split",
+		},
+		{
+			"<leader>ax",
+			":CopilotChatInline<cr>",
+			mode = "x",
+			desc = "CopilotChat - Inline chat",
+		},
 		-- Custom input for CopilotChat
 		{
 			"<leader>ai",
@@ -97,7 +209,12 @@ completion["CopilotC-Nvim/CopilotChat.nvim"] = {
 			end,
 			desc = "CopilotChat - Ask input",
 		},
-		{ "<leader>am", "<cmd>CopilotChatCommit<cr>", desc = "CopilotChat - Generate commit message for all change" },
+		-- Generate commit message based on the git diff
+		{
+			"<leader>am",
+			"<cmd>CopilotChatCommit<cr>",
+			desc = "CopilotChat - Generate commit message for all changes",
+		},
 		{
 			"<leader>aM",
 			"<cmd>CopilotChatCommitStaged<cr>",
@@ -109,7 +226,7 @@ completion["CopilotC-Nvim/CopilotChat.nvim"] = {
 			function()
 				local input = vim.fn.input("Quick Chat: ")
 				if input ~= "" then
-					require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
+					vim.cmd("CopilotChatBuffer " .. input)
 				end
 			end,
 			desc = "CopilotChat - Quick chat",
@@ -118,11 +235,10 @@ completion["CopilotC-Nvim/CopilotChat.nvim"] = {
 		{ "<leader>ad", "<cmd>CopilotChatDebugInfo<cr>", desc = "CopilotChat - Debug Info" },
 		-- Fix the issue with diagnostic
 		{ "<leader>af", "<cmd>CopilotChatFixDiagnostic<cr>", desc = "CopilotChat - Fix Diagnostic" },
-		{ "<leader>aF", "<cmd>CopilotChatFixError<cr>", desc = "CopilotChat - Fix Error" },
 		-- Clear buffer and chat history
 		{ "<leader>al", "<cmd>CopilotChatReset<cr>", desc = "CopilotChat - Clear buffer and chat history" },
 		-- Toggle Copilot Chat Vsplit
-		{ "<leader>av", "<cmd>CopilotChatToggle<cr>", desc = "CopilotChat - Toggle Vsplit" },
+		{ "<leader>av", "<cmd>CopilotChatToggle<cr>", desc = "CopilotChat - Toggle" },
 	},
 }
 return completion
