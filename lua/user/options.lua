@@ -1,6 +1,6 @@
 local options = {
 	autoindent = true,
-	relativenumber = false,
+	-- relativenumber = false,
 }
 
 return options
