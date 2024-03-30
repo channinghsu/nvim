@@ -7,6 +7,8 @@ settings["format_notify"] = false
 
 settings["colorscheme"] = "catppuccin"
 
+settings["transparent_background"] = true
+
 -- settings["dashboard_image"] = {
 -- 	[[   ______ __                          _                  __  __            ]],
 -- 	[[  / ____// /_   ____ _ ____   ____   (_)____   ____ _   / / / /_____ __  __]],

@@ -1,18 +1,19 @@
 local ui = {}
 ui["folke/tokyonight.nvim"] = {
-	lazy = true,
+	lazy = false,
 	name = "tokyonight",
+	config = require("user.configs.ui.tokyonight"),
 }
 ui["rebelot/kanagawa.nvim"] = {
-	lazy = true,
+	lazy = false,
 	name = "kanagawa",
 }
 ui["rose-pine/neovim"] = {
-	lazy = true,
+	lazy = false,
 	name = "rose-pine",
 }
 ui["EdenEast/nightfox.nvim"] = {
-	lazy = true,
+	lazy = false,
 	name = "nightfox",
 }
 
