@@ -12,5 +12,4 @@ editor["max397574/better-escape.nvim"] = {
 	event = { "CursorHold", "CursorHoldI" },
 	config = require("user.configs.editor.better-escape"),
 }
-
 return editor

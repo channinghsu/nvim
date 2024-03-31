@@ -16,37 +16,23 @@ local plug_map = {
 
 	-- Plugin: comment.nvim
 	["n|gcc"] = map_callback(function()
-			return vim.v.count == 0 and et("<Plug>(comment_toggle_linewise_current)")
-				or et("<Plug>(comment_toggle_linewise_count)")
+			return vim.v.count == 0 and et("<Plug>(comment_toggle_linewise_current)") or et("<Plug>(comment_toggle_linewise_count)")
 		end)
 		:with_silent()
 		:with_noremap()
 		:with_expr()
 		:with_desc("edit: Toggle comment for line"),
 	["n|gbc"] = map_callback(function()
-			return vim.v.count == 0 and et("<Plug>(comment_toggle_blockwise_current)")
-				or et("<Plug>(comment_toggle_blockwise_count)")
+			return vim.v.count == 0 and et("<Plug>(comment_toggle_blockwise_current)") or et("<Plug>(comment_toggle_blockwise_count)")
 		end)
 		:with_silent()
 		:with_noremap()
 		:with_expr()
 		:with_desc("edit: Toggle comment for block"),
-	["n|gc"] = map_cmd("<Plug>(comment_toggle_linewise)")
-		:with_silent()
-		:with_noremap()
-		:with_desc("edit: Toggle comment for line with operator"),
-	["n|gb"] = map_cmd("<Plug>(comment_toggle_blockwise)")
-		:with_silent()
-		:with_noremap()
-		:with_desc("edit: Toggle comment for block with operator"),
-	["x|gc"] = map_cmd("<Plug>(comment_toggle_linewise_visual)")
-		:with_silent()
-		:with_noremap()
-		:with_desc("edit: Toggle comment for line with selection"),
-	["x|gb"] = map_cmd("<Plug>(comment_toggle_blockwise_visual)")
-		:with_silent()
-		:with_noremap()
-		:with_desc("edit: Toggle comment for block with selection"),
+	["n|gc"] = map_cmd("<Plug>(comment_toggle_linewise)"):with_silent():with_noremap():with_desc("edit: Toggle comment for line with operator"),
+	["n|gb"] = map_cmd("<Plug>(comment_toggle_blockwise)"):with_silent():with_noremap():with_desc("edit: Toggle comment for block with operator"),
+	["x|gc"] = map_cmd("<Plug>(comment_toggle_linewise_visual)"):with_silent():with_noremap():with_desc("edit: Toggle comment for line with selection"),
+	["x|gb"] = map_cmd("<Plug>(comment_toggle_blockwise_visual)"):with_silent():with_noremap():with_desc("edit: Toggle comment for block with selection"),
 
 	-- Plugin: hop.nvim
 	["nv|<leader>w"] = map_cmd("<Cmd>HopWordMW<CR>"):with_noremap():with_desc("jump: Goto word"),
@@ -70,22 +56,10 @@ local plug_map = {
 	["n|<leader>Wl"] = map_cu("SmartSwapRight"):with_silent():with_noremap():with_desc("window: Move window to right"),
 
 	-- Plugin: nvim-spectre
-	["n|<leader>Ss"] = map_cmd([[<Cmd>lua require("spectre").toggle()<CR>]])
-		:with_silent()
-		:with_noremap()
-		:with_desc("editn: Toggle search&replace panel"),
-	["n|<leader>Sp"] = map_cmd([[<Cmd>lua require("spectre").open_visual({select_word=true})<CR>]])
-		:with_silent()
-		:with_noremap()
-		:with_desc("editn: search&replace current word (project)"),
-	["v|<leader>Sp"] = map_cmd([[<Esc><Cmd>lua require("spectre").open_visual()<CR>]])
-		:with_silent()
-		:with_noremap()
-		:with_desc("edit: search&replace current word (project)"),
-	["n|<leader>Sf"] = map_cmd([[<Cmd>lua require("spectre").open_file_search({select_word=true})<CR>]])
-		:with_silent()
-		:with_noremap()
-		:with_desc("editn: search&replace current word (file)"),
+	["n|<leader>Ss"] = map_cmd([[<Cmd>lua require("spectre").toggle()<CR>]]):with_silent():with_noremap():with_desc("editn: Toggle search&replace panel"),
+	["n|<leader>Sp"] = map_cmd([[<Cmd>lua require("spectre").open_visual({select_word=true})<CR>]]):with_silent():with_noremap():with_desc("editn: search&replace current word (project)"),
+	["v|<leader>Sp"] = map_cmd([[<Esc><Cmd>lua require("spectre").open_visual()<CR>]]):with_silent():with_noremap():with_desc("edit: search&replace current word (project)"),
+	["n|<leader>Sf"] = map_cmd([[<Cmd>lua require("spectre").open_file_search({select_word=true})<CR>]]):with_silent():with_noremap():with_desc("editn: search&replace current word (file)"),
 
 	-- Plugin: nvim-treehopper
 	["o|m"] = map_cu("lua require('tsht').nodes()"):with_silent():with_desc("jump: Operate across syntax tree"),
