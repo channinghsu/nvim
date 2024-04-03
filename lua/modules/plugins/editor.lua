@@ -83,43 +83,4 @@ editor["mrjones2014/smart-splits.nvim"] = {
 	config = require("editor.smart-splits"),
 }
 
-----------------------------------------------------------------------
---                  :treesitter related plugins                    --
-----------------------------------------------------------------------
-editor["nvim-treesitter/nvim-treesitter"] = {
-	lazy = true,
-	build = function()
-		if #vim.api.nvim_list_uis() ~= 0 then
-			vim.api.nvim_command([[TSUpdate]])
-		end
-	end,
-	event = "BufReadPre",
-	config = require("editor.treesitter"),
-	dependencies = {
-		{ "andymass/vim-matchup" },
-		{ "mfussenegger/nvim-treehopper" },
-		{ "nvim-treesitter/nvim-treesitter-textobjects" },
-		{
-			"windwp/nvim-ts-autotag",
-			config = require("editor.autotag"),
-		},
-		{
-			"NvChad/nvim-colorizer.lua",
-			config = require("editor.colorizer"),
-		},
-		{
-			"hiphish/rainbow-delimiters.nvim",
-			config = require("editor.rainbow_delims"),
-		},
-		{
-			"nvim-treesitter/nvim-treesitter-context",
-			config = require("editor.ts-context"),
-		},
-		{
-			"JoosepAlviste/nvim-ts-context-commentstring",
-			config = require("editor.ts-context-commentstring"),
-		},
-	},
-}
-
 return editor

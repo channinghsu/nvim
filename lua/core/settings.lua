@@ -6,7 +6,7 @@ settings["use_ssh"] = true
 
 -- Set it to false if you don't use copilot
 ---@type boolean
-settings["use_copilot"] = true
+settings["use_copilot"] = false
 
 -- Set it to false if there are no need to format on save.
 ---@type boolean
@@ -109,19 +109,6 @@ settings["lsp_deps"] = {
 	-- "gopls",
 }
 
--- Set the general-purpose servers that will be installed during bootstrap here.
--- Check the below link for all supported sources.
--- in `code_actions`, `completion`, `diagnostics`, `formatting`, `hover` folders:
--- https://github.com/nvimtools/none-ls.nvim/tree/main/lua/null-ls/builtins
----@type string[]
-settings["null_ls_deps"] = {
-	"clang_format",
-	"prettier",
-	"shfmt",
-	"stylua",
-	"vint",
-}
-
 -- Set the Debug Adapter Protocol (DAP) clients that will be installed and configured during bootstrap here.
 -- Check the below link for all supported DAPs:
 -- https://github.com/jay-babu/mason-nvim-dap.nvim/blob/main/lua/mason-nvim-dap/mappings/source.lua
@@ -132,32 +119,6 @@ settings["dap_deps"] = {
 	"python", -- Python (debugpy)
 }
 
--- Set the Treesitter parsers that will be installed during bootstrap here.
--- Check the below link for all supported languages:
--- https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
----@type string[]
-settings["treesitter_deps"] = {
-	"bash",
-	"c",
-	"cpp",
-	"css",
-	"go",
-	"gomod",
-	"html",
-	"javascript",
-	"json",
-	"latex",
-	"lua",
-	"make",
-	"markdown",
-	"markdown_inline",
-	"python",
-	"rust",
-	"typescript",
-	"vimdoc",
-	"vue",
-	"yaml",
-}
 
 -- Set the options for neovim's gui clients like `neovide` and `neovim-qt` here.
 -- NOTE: Currently, only the following options related to the GUI are supported. Other entries will be IGNORED.
