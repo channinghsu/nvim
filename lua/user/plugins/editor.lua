@@ -1,12 +1,8 @@
 local editor = {}
 
-editor["folke/twilight.nvim"] = {
-	opts = {},
-}
+editor["folke/twilight.nvim"] = {}
 
-editor["folke/zen-mode.nvim"] = {
-	opts = {},
-}
+editor["folke/zen-mode.nvim"] = {}
 editor["max397574/better-escape.nvim"] = {
 	lazy = true,
 	event = { "CursorHold", "CursorHoldI" },
