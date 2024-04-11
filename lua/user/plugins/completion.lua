@@ -1,5 +1,4 @@
 local completion = {}
-local IS_DEV = false
 local prompts = {
 	--    Explain = "Please explain how the following code works.",
 	-- Review = "Please review the following code and provide suggestions for improvement.",
