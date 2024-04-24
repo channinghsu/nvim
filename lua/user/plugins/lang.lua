@@ -2,7 +2,7 @@ local lang = {}
 lang["monaqa/dial.nvim"] = {
 	keys = {
 		{
-			"<C-o>",
+			"<C-a>",
 			function()
 				return require("dial.map").inc_normal()
 			end,
@@ -10,11 +10,11 @@ lang["monaqa/dial.nvim"] = {
 			desc = "dial: Increment",
 		},
 		{
-			"<C-i>",
+			"<C-x>",
 			function()
 				return require("dial.map").dec_normal()
 			end,
-			expr = true,
+			expr = false,
 			desc = "dial: Decrement",
 		},
 	},
