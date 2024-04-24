@@ -1,5 +1,5 @@
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
-local workspace_dir = "/home/ayamir/code/java/" .. project_name
+local workspace_dir = "/home/channinghsu/code/java/" .. project_name
 
 local config = {
 	-- The command that starts the language server
@@ -24,14 +24,14 @@ local config = {
 
 		-- 💀
 		"-jar",
-		"/home/ayamir/jdtls/plugins/org.eclipse.equinox.launcher_1.6.700.v20231214-2017.jar",
+		"/home/channinghsu/jdtls/plugins/org.eclipse.equinox.launcher_1.6.700.v20231214-2017.jar",
 		-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                       ^^^^^^^^^^^^^^
 		-- Must point to the                                                     Change this to
 		-- eclipse.jdt.ls installation                                           the actual version
 
 		-- 💀
 		"-configuration",
-		"/home/ayamir/jdtls/config_linux",
+		"/home/channinghsu/jdtls/config_linux",
 		-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        ^^^^^^
 		-- Must point to the                      Change to one of `linux`, `win` or `mac`
 		-- eclipse.jdt.ls installation            Depending on your system.

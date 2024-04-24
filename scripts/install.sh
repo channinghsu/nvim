@@ -291,7 +291,7 @@ Thank you for using this set of configuration!
 - Project Homepage:
     ${tty_underline}https://github.com/channinghsu/nvimdots$_reset}
 - Further documentation (including executables you ${tty_bold}must${tty_reset} install for full functionality):
-    ${tty_underline}https://github.com/ayamir/nvimddots/wiki/Prerequisites${tty_reset}
+    ${tty_underline}https://github.com/channinghsu/nvimddots/wiki/Prerequisites${tty_reset}
 EOS
 
 if [[ -z "${NONINTERACTIVE-}" ]]; then
