@@ -9,6 +9,8 @@ settings["colorscheme"] = "catppuccin"
 
 settings["transparent_background"] = true
 
+settings["format_on_save"] = false
+
 settings["dashboard_image"] = {
 	[[                                                                       ]],
 	[[  ██████   █████                   █████   █████  ███                  ]],
