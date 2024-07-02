@@ -6,7 +6,7 @@
 
 ## 🏗 How to Install
 
-Just run the following interactive bootstrap command, and you're good to go 👍
+Simply run the following interactive bootstrap command, and you should be all set 👍
 
 - **Windows** _(Note: This script REQUIRES `pwsh` > `v7.1`)_
 
@@ -82,7 +82,11 @@ NVIM_APPNAME=channinghsu/nvim/ nvim
 - [windwp/nvim-ts-autotag](https://dotfyle.com/plugins/windwp/nvim-ts-autotag)
 - [m4xshen/autoclose.nvim](https://dotfyle.com/plugins/m4xshen/autoclose.nvim)
 
-### formatting
+- [ayamir](https://github.com/ayamir)
+- [Jint-lzxy](https://github.com/Jint-lzxy)
+- [CharlesChiuGit](https://github.com/CharlesChiuGit)
+- [aarnphm](https://github.com/aarnphm)
+- [misumisumi](https://github.com/misumisumi)
 
 - [echasnovski/mini.align](https://dotfyle.com/plugins/echasnovski/mini.align)
 
@@ -91,7 +95,7 @@ NVIM_APPNAME=channinghsu/nvim/ nvim
 - [jvgrootveld/telescope-zoxide](https://dotfyle.com/plugins/jvgrootveld/telescope-zoxide)
 - [nvim-telescope/telescope.nvim](https://dotfyle.com/plugins/nvim-telescope/telescope.nvim)
 
-### git
+This Neovim configuration is released under the BSD 3-Clause license, which grants the following permissions:
 
 - [lewis6991/gitsigns.nvim](https://dotfyle.com/plugins/lewis6991/gitsigns.nvim)
 
