@@ -33,12 +33,12 @@ return function()
 					{ id = "breakpoints", size = 0.1 },
 				},
 				size = 0.3,
-				position = "right",
+				position = "left",
 			},
 			{
 				elements = {
-					{ id = "console", size = 0.55 },
-					{ id = "repl", size = 0.45 },
+					{ id = "console", size = 0.30 },
+					{ id = "repl", size = 0.60 },
 				},
 				position = "bottom",
 				size = 0.25,

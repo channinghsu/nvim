@@ -19,10 +19,42 @@ return {
 	["n|<leader>fs"] = map_cu("Telescope grep_string"):with_noremap():with_silent():with_desc("tool: Find word under cursor"),
 	["n|<leader>fe"] = map_cu("Telescope oldfiles"):with_noremap():with_silent():with_desc("find: File by history"),
 	["n|<leader>e"] = map_cr("NvimTreeToggle"):with_noremap():with_silent():with_desc("filetree: Toggle"),
-	["n|<leader>d"] = map_callback(function()
-			require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
+
+	-- Plugin: dap
+	["n|<leader>dd"] = map_callback(function()
+			require("dap").continue()
 		end)
 		:with_noremap()
 		:with_silent()
-		:with_desc("debug: Info"),
+		:with_desc("debug: Run/Continue"),
+	["n|<leader>dj"] = map_callback(function()
+			require("dap").terminate()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("debug: Stop"),
+	["n|<leader>db"] = map_callback(function()
+			require("dap").toggle_breakpoint()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("debug: Toggle breakpoint"),
+	["n|<M-l>"] = map_callback(function()
+			require("dap").step_into()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("debug: Step into"),
+	["n|<M-k>"] = map_callback(function()
+			require("dap").step_out()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("debug: Step out"),
+	["n|<M-j>"] = map_callback(function()
+			require("dap").step_over()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("debug: Step over")
 }
