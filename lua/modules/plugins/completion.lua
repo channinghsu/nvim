@@ -82,12 +82,12 @@ if use_copilot then
 		cmd = "Copilot",
 		event = "InsertEnter",
 		config = require("completion.copilot"),
-		dependencies = {
-			{
-				"zbirenbaum/copilot-cmp",
-				config = require("completion.copilot-cmp"),
-			},
-		},
+		-- dependencies = {
+		-- 	{
+		-- 		"zbirenbaum/copilot-cmp",
+		-- 		config = require("completion.copilot-cmp"),
+		-- 	},
+		-- },
 	}
 end
 

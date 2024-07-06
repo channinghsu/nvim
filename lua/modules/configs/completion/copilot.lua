@@ -10,8 +10,17 @@ return function()
 				enabled = false,
 			},
 			suggestion = {
-				-- if true, it can interfere with completions in copilot-cmp
-				enabled = false,
+				enabled = true, -- 启用内联建议
+				auto_trigger = true, -- 自动触发建议
+				debounce = 75,
+				keymap = {
+					accept = "<M-l>", -- 接受建议的快捷键
+					accept_word = false,
+					accept_line = false,
+					next = "<M-]>", -- 下一个建议
+					prev = "<M-[>", -- 上一个建议
+					dismiss = "<C-]>", -- 关闭建议
+				},
 			},
 			filetypes = {
 				["bigfile"] = false,

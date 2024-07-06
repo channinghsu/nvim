@@ -32,7 +32,8 @@ return function()
 		return (diff < 0)
 	end
 
-	local use_copilot = require("core.settings").use_copilot
+	-- local use_copilot = require("core.settings").use_copilot
+	local use_copilot = false
 	local comparators = use_copilot == true
 			and {
 				require("copilot_cmp.comparators").prioritize,
