@@ -3,12 +3,6 @@ local map_callback = bind.map_callback
 local map_cr = bind.map_cr
 local map_cu = bind.map_cu
 return {
-	["n|<C-o>"] = map_callback(function()
-			_command_panel()
-		end)
-		:with_noremap()
-		:with_silent()
-		:with_desc("tool: Toggle command panel"),
 	["n|<leader>fz"] = map_cu("Telescope zoxide list"):with_noremap():with_silent():with_desc("edit: Change current directory by zoxide"),
 	["n|<leader>fw"] = map_callback(function()
 			require("telescope").extensions.live_grep_args.live_grep_args()
