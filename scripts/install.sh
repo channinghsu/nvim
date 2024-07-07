@@ -270,13 +270,13 @@ fi
 
 info "Fetching in progress..."
 if [[ "${USE_SSH}" -eq "1" ]]; then
-	clone_repo git@github.com:channinghsu/nvim.git""
+	clone_repo "git@github.com:channinghsu/nvim.git"
 else
 	clone_repo "https://github.com/channinghsu/nvim.git"
 fi
 
 cd "${DEST_DIR}" || return
-execute "cp" "-fRpP" "${DEST_DIR}/lua/user_template/" "${DEST_DIR}/lua/user"
+# execute "cp" "-fRpP" "${DEST_DIR}/lua/user_template/" "${DEST_DIR}/lua/user"
 
 if [[ "${USE_SSH}" -eq "0" ]]; then
 	info "Changing default fetching method to HTTPS..."
