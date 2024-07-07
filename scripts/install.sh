@@ -270,10 +270,13 @@ fi
 
 info "Fetching in progress..."
 if [[ "${USE_SSH}" -eq "1" ]]; then
-	clone_by_https_or_ssh "git@github.com:channinghsu/nvim.git"
+	clone_repo git@github.com:channinghsu/nvim.git""
 else
-	clone_by_https_or_ssh "https://github.com/channinghsu/nvim.git"
+	clone_repo "https://github.com/channinghsu/nvim.git"
 fi
+
+cd "${DEST_DIR}" || return
+execute "cp" "-fRpP" "${DEST_DIR}/lua/user_template/" "${DEST_DIR}/lua/user"
 
 if [[ "${USE_SSH}" -eq "0" ]]; then
 	info "Changing default fetching method to HTTPS..."
@@ -289,9 +292,9 @@ cat <<EOS
 
 Thank you for using this set of configuration!
 - Project Homepage:
-    ${tty_underline}https://github.com/channinghsu/nvimdots$_reset}
+    ${tty_underline}https://github.com/ayamir/nvimdots${tty_reset}
 - Further documentation (including executables you ${tty_bold}must${tty_reset} install for full functionality):
-    ${tty_underline}https://github.com/channinghsu/nvimddots/wiki/Prerequisites${tty_reset}
+    ${tty_underline}https://github.com/ayamir/nvimdots/wiki/Prerequisites${tty_reset}
 EOS
 
 if [[ -z "${NONINTERACTIVE-}" ]]; then
