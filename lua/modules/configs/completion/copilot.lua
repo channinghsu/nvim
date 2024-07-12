@@ -14,7 +14,7 @@ return function()
 				auto_trigger = true, -- 自动触发建议
 				debounce = 75,
 				keymap = {
-					accept = "<M-l>", -- 接受建议的快捷键
+					accept = "<M-;>", -- 接受建议的快捷键
 					accept_word = false,
 					accept_line = false,
 					next = "<M-]>", -- 下一个建议
