@@ -20,16 +20,9 @@ return function()
 
 	require("modules.utils").load_plugin("which-key", {
 		preset = "classic",
-		-- delay = vim.o.timeoutlen,
+		delay = vim.o.timeoutlen,
 		triggers = {
-			{ "<leader>", "n" },
-			{ "<leader>", "v" },
-			{ "<leader>", "V" },
-			{ "<leader>", "i" },
-			{ "<leader>", "c" },
-			{ "<leader>", "t" },
-			{ "<leader>", "o" },
-			{ "<leader>", "s" },
+			{ "<auto>", mode = "nixso" },
 		},
 		plugins = {
 			marks = true,
