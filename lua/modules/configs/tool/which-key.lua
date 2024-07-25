@@ -19,30 +19,65 @@ return function()
 	})
 
 	require("modules.utils").load_plugin("which-key", {
+		preset = "classic",
+		-- delay = vim.o.timeoutlen,
+		triggers = {
+			{ "<leader>", "n" },
+			{ "<leader>", "v" },
+			{ "<leader>", "V" },
+			{ "<leader>", "i" },
+			{ "<leader>", "c" },
+			{ "<leader>", "t" },
+			{ "<leader>", "o" },
+			{ "<leader>", "s" },
+		},
 		plugins = {
+			marks = true,
+			registers = true,
+			spelling = {
+				enabled = true,
+				suggestions = 20,
+			},
 			presets = {
-				operators = false,
 				motions = false,
-				text_objects = false,
-				windows = false,
-				nav = false,
+				operators = false,
+				text_objects = true,
+				windows = true,
+				nav = true,
 				z = true,
 				g = true,
 			},
 		},
 
+		win = {
+			border = "none",
+			padding = { 1, 2 },
+			wo = { winblend = 0 },
+		},
+		expand = 1,
 		icons = {
+			group = "",
+			-- rules = false,
+			-- colors = false,
 			breadcrumb = icons.ui.Separator,
 			separator = icons.misc.Vbar,
-			group = "",
-		},
-
-		window = {
-			border = "none",
-			position = "bottom",
-			margin = { 1, 0, 1, 0 },
-			padding = { 1, 1, 1, 1 },
-			winblend = 0,
+			keys = {
+				C = "C-",
+				M = "A-",
+				S = "S-",
+				BS = "<BS> ",
+				CR = "<CR> ",
+				NL = "<NL> ",
+				Esc = "<Esc> ",
+				Tab = "<Tab> ",
+				Up = "<Up> ",
+				Down = "<Down> ",
+				Left = "<Left> ",
+				Right = "<Right> ",
+				Space = "<Space> ",
+				ScrollWheelUp = "<ScrollWheelUp> ",
+				ScrollWheelDown = "<ScrollWheelDown> ",
+			},
 		},
 	})
 end
