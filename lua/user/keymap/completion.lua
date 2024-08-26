@@ -15,8 +15,8 @@ mappings["lsp"] = function(buf)
 		["n|K"] = require("keymap.bind").map_cr("Lspsaga hover_doc"):with_buffer(buf):with_desc("lsp: Show doc"),
 		["n|gD"] = map_cr("Glance definitions"):with_silent():with_buffer(buf):with_desc("lsp: Preview definition"),
 		["n|gd"] = map_cr("Lspsaga goto_definition"):with_silent():with_buffer(buf):with_desc("lsp: Goto definition"),
-		["n|<leader>r"] = map_cmd(":make<CR>"):with_desc("run: run all"),
-		["n|<leader>c"] = map_cmd(":make clean<CR>"):with_desc("run: clean all"),
+		["n|<leader>r"] = map_cmd(":make<CR>"):with_desc("which_key_ignore"),
+		["n|<leader>c"] = map_cmd(":make clean<CR>"):with_desc("which_key_ignore"),
 	}
 end
 
