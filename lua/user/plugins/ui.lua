@@ -2,7 +2,6 @@ local ui = {}
 ui["folke/tokyonight.nvim"] = {
 	lazy = false,
 	name = "tokyonight",
-	config = require("user.configs.ui.tokyonight"),
 }
 ui["rebelot/kanagawa.nvim"] = {
 	lazy = false,
