@@ -18,5 +18,4 @@ return {
 	["nv|<leader>k"] = map_cmd("<Cmd>HopLineMW<CR>"):with_noremap():with_desc("which_key_ignore"),
 	["nv|<leader>C"] = map_cmd("<Cmd>HopChar2MW<CR>"):with_noremap():with_desc("which_key_ignore"),
 	["n|<leader>v"] = map_cu("vsplit"):with_noremap():with_desc("window: Vertical split"),
-
 }
