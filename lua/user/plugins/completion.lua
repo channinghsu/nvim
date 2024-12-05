@@ -36,7 +36,7 @@ local prompts = {
 	Docs = "请为选定的代码编写文档。回复应包含原始代码和已添加注释的代码块。使用最适合所用编程语言的文档风格（例如 JavaScript 使用 JSDoc，Python 使用 docstrings 等）。",
 }
 completion["CopilotC-Nvim/CopilotChat.nvim"] = {
-	branch = "canary",
+	branch = "main",
 	dependencies = {
 		{ "nvim-telescope/telescope.nvim" }, -- Use telescope for help actions
 		{ "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
