@@ -141,6 +141,7 @@ NVIM_APPNAME=channinghsu/nvim/ nvim
 ### search
 
 + [nvim-pack/nvim-spectre](https://dotfyle.com/plugins/nvim-pack/nvim-spectre)
++ [nvim-telescope/telescope-frecency.nvim](https://dotfyle.com/plugins/nvim-telescope/telescope-frecency.nvim)
 + [FabianWirth/search.nvim](https://dotfyle.com/plugins/FabianWirth/search.nvim)
 ### session
 
@@ -168,13 +169,12 @@ NVIM_APPNAME=channinghsu/nvim/ nvim
 ### terminal-integration
 
 + [akinsho/toggleterm.nvim](https://dotfyle.com/plugins/akinsho/toggleterm.nvim)
-### treesitter-based
+### tree-sitter-based
 
 + [mfussenegger/nvim-treehopper](https://dotfyle.com/plugins/mfussenegger/nvim-treehopper)
 ### utility
 
 + [rcarriga/nvim-notify](https://dotfyle.com/plugins/rcarriga/nvim-notify)
-+ [zbirenbaum/neodim](https://dotfyle.com/plugins/zbirenbaum/neodim)
 ## Language Servers
 
 + bashls
