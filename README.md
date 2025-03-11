@@ -56,6 +56,9 @@ NVIM_APPNAME=channinghsu/nvim/ nvim
 + [hrsh7th/nvim-cmp](https://dotfyle.com/plugins/hrsh7th/nvim-cmp)
 + [zbirenbaum/copilot.lua](https://dotfyle.com/plugins/zbirenbaum/copilot.lua)
 + [lukas-reineke/cmp-under-comparator](https://dotfyle.com/plugins/lukas-reineke/cmp-under-comparator)
+### cursorline
+
++ [echasnovski/mini.cursorword](https://dotfyle.com/plugins/echasnovski/mini.cursorword)
 ### debugging
 
 + [mfussenegger/nvim-dap](https://dotfyle.com/plugins/mfussenegger/nvim-dap)
@@ -103,7 +106,6 @@ NVIM_APPNAME=channinghsu/nvim/ nvim
 
 + [nvimdev/lspsaga.nvim](https://dotfyle.com/plugins/nvimdev/lspsaga.nvim)
 + [DNLHC/glance.nvim](https://dotfyle.com/plugins/DNLHC/glance.nvim)
-+ [stevearc/aerial.nvim](https://dotfyle.com/plugins/stevearc/aerial.nvim)
 + [j-hui/fidget.nvim](https://dotfyle.com/plugins/j-hui/fidget.nvim)
 + [nvimtools/none-ls.nvim](https://dotfyle.com/plugins/nvimtools/none-ls.nvim)
 + [mrcjkb/rustaceanvim](https://dotfyle.com/plugins/mrcjkb/rustaceanvim)
@@ -140,9 +142,9 @@ NVIM_APPNAME=channinghsu/nvim/ nvim
 + [karb94/neoscroll.nvim](https://dotfyle.com/plugins/karb94/neoscroll.nvim)
 ### search
 
-+ [nvim-pack/nvim-spectre](https://dotfyle.com/plugins/nvim-pack/nvim-spectre)
 + [nvim-telescope/telescope-frecency.nvim](https://dotfyle.com/plugins/nvim-telescope/telescope-frecency.nvim)
 + [FabianWirth/search.nvim](https://dotfyle.com/plugins/FabianWirth/search.nvim)
++ [MagicDuck/grug-far.nvim](https://dotfyle.com/plugins/MagicDuck/grug-far.nvim)
 ### session
 
 + [olimorris/persisted.nvim](https://dotfyle.com/plugins/olimorris/persisted.nvim)
@@ -153,6 +155,7 @@ NVIM_APPNAME=channinghsu/nvim/ nvim
 ### split-and-window
 
 + [mrjones2014/smart-splits.nvim](https://dotfyle.com/plugins/mrjones2014/smart-splits.nvim)
++ [folke/edgy.nvim](https://dotfyle.com/plugins/folke/edgy.nvim)
 ### startup
 
 + [goolord/alpha-nvim](https://dotfyle.com/plugins/goolord/alpha-nvim)
