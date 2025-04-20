@@ -1,4 +1,17 @@
-# nvim config based on [nvimdots](https://github.com/ayamir/nvimdots)
+<h1 align="center">
+    nvimdots
+    <br>
+    <a href="https://github.com/neovim/neovim/releases/tag/stable">
+    <img
+        alt="Neovim Version Capability"
+        src="https://img.shields.io/badge/Supports%20Nvim-v0.11-A6D895?style=for-the-badge&colorA=363A4F&logo=neovim&logoColor=D9E0EE">
+    </a>
+    <a href="https://github.com/ayamir/nvimdots/releases">
+    <img
+        alt="Release"
+        src="https://img.shields.io/github/v/release/ayamir/nvimdots.svg?style=for-the-badge&logo=github&color=F2CDCD&logoColor=D9E0EE&labelColor=363A4F">
+    </a>
+</h1>
 
 <a href="https://dotfyle.com/channinghsu/nvim"><img src="https://dotfyle.com/channinghsu/nvim/badges/plugins?style=flat" /></a>
 <a href="https://dotfyle.com/channinghsu/nvim"><img src="https://dotfyle.com/channinghsu/nvim/badges/leaderkey?style=flat" /></a>
