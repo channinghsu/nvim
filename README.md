@@ -121,13 +121,19 @@ NVIM_APPNAME=channinghsu/nvim/ nvim
 + [EdenEast/nightfox.nvim](https://dotfyle.com/plugins/EdenEast/nightfox.nvim)
 ### command-line
 
-+ [gelguy/wilder.nvim](https://dotfyle.com/plugins/gelguy/wilder.nvim)
-### comment
+<p align="center">
+  <img src="https://raw.githubusercontent.com/ayamir/nvimdots-imgs/main/startuptime.png"
+  width = "80%"
+  alt = "StartupTime"
+  />
+</p>
 
-+ [JoosepAlviste/nvim-ts-context-commentstring](https://dotfyle.com/plugins/JoosepAlviste/nvim-ts-context-commentstring)
-+ [folke/todo-comments.nvim](https://dotfyle.com/plugins/folke/todo-comments.nvim)
-+ [numToStr/Comment.nvim](https://dotfyle.com/plugins/numToStr/Comment.nvim)
-### completion
+<p align="center">
+  <img src="https://raw.githubusercontent.com/ayamir/nvimdots-imgs/main/vimstartup.png"
+  width = "60%"
+  alt = "Vim-StartupTime"
+  />
+</p>
 
 + [hrsh7th/nvim-cmp](https://dotfyle.com/plugins/hrsh7th/nvim-cmp)
 + [zbirenbaum/copilot.lua](https://dotfyle.com/plugins/zbirenbaum/copilot.lua)
@@ -137,33 +143,46 @@ NVIM_APPNAME=channinghsu/nvim/ nvim
 + [echasnovski/mini.cursorword](https://dotfyle.com/plugins/echasnovski/mini.cursorword)
 ### debugging
 
-+ [mfussenegger/nvim-dap](https://dotfyle.com/plugins/mfussenegger/nvim-dap)
-+ [rcarriga/nvim-dap-ui](https://dotfyle.com/plugins/rcarriga/nvim-dap-ui)
-### dependency-management
+<p align="center">
+    <img src="https://raw.githubusercontent.com/ayamir/nvimdots-imgs/main/dashboard.png" alt="Dashboard">
+    <em>Dashboard</em>
+</p>
+<br>
 
-+ [Saecki/crates.nvim](https://dotfyle.com/plugins/Saecki/crates.nvim)
-### diagnostics
+<p align="center">
+    <img src="https://raw.githubusercontent.com/ayamir/nvimdots-imgs/main/telescope.png" alt="Telescope">
+    <em>Telescope</em>
+</p>
+<br>
 
-+ [folke/trouble.nvim](https://dotfyle.com/plugins/folke/trouble.nvim)
-### editing-support
+<p align="center">
+    <img src="https://raw.githubusercontent.com/ayamir/nvimdots-imgs/main/coding.png" alt="Coding">
+    <em>Coding with LLM</em>
+</p>
+<br>
 
-+ [debugloop/telescope-undo.nvim](https://dotfyle.com/plugins/debugloop/telescope-undo.nvim)
-+ [monaqa/dial.nvim](https://dotfyle.com/plugins/monaqa/dial.nvim)
-+ [folke/zen-mode.nvim](https://dotfyle.com/plugins/folke/zen-mode.nvim)
-+ [nvim-treesitter/nvim-treesitter-context](https://dotfyle.com/plugins/nvim-treesitter/nvim-treesitter-context)
-+ [windwp/nvim-ts-autotag](https://dotfyle.com/plugins/windwp/nvim-ts-autotag)
-+ [m4xshen/autoclose.nvim](https://dotfyle.com/plugins/m4xshen/autoclose.nvim)
-### file-explorer
+<p align="center">
+    <img src="https://raw.githubusercontent.com/ayamir/nvimdots-imgs/main/code_action.png" alt="Code Action">
+    <em>Code Action</em>
+</p>
+<br>
 
-+ [nvim-tree/nvim-tree.lua](https://dotfyle.com/plugins/nvim-tree/nvim-tree.lua)
-### formatting
+<p align="center">
+    <img src="https://raw.githubusercontent.com/ayamir/nvimdots-imgs/main/dap.png" alt="Debugging">
+    <em>Debugging</em>
+</p>
+<br>
 
-+ [echasnovski/mini.align](https://dotfyle.com/plugins/echasnovski/mini.align)
-### fuzzy-finder
+<p align="center">
+    <img src="https://raw.githubusercontent.com/ayamir/nvimdots-imgs/main/lazygit.png" alt="Lazygit">
+    <em>Lazygit with built-in Terminal</em>
+</p>
+<br>
 
-+ [jvgrootveld/telescope-zoxide](https://dotfyle.com/plugins/jvgrootveld/telescope-zoxide)
-+ [nvim-telescope/telescope.nvim](https://dotfyle.com/plugins/nvim-telescope/telescope.nvim)
-### git
+<p align="center">
+    <img src="https://raw.githubusercontent.com/ayamir/nvimdots-imgs/main/command_ref.png" alt="Command quickref">
+    <em>Command quickref</em>
+</p>
 
 + [lewis6991/gitsigns.nvim](https://dotfyle.com/plugins/lewis6991/gitsigns.nvim)
 + [aaronhallaert/advanced-git-search.nvim](https://dotfyle.com/plugins/aaronhallaert/advanced-git-search.nvim)
