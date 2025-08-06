@@ -141,7 +141,6 @@ return function()
 			if has_catppuccin then
 				return function()
 					local guifg = colors[fg]
-					local guibg = gen_bg and require("modules.utils").hl_to_rgb("StatusLine", true, colors.mantle) or colors[bg]
 					local nobg = special_nobg and require("core.settings").transparent_background
 					return {
 						fg = guifg and guifg or colors.none,

@@ -119,7 +119,7 @@ settings["lsp_deps"] = {
 	"jsonls",
 	"lua_ls",
 	"pylsp",
-	-- "gopls",
+	"gopls",
 }
 
 -- General-purpose sources for none-ls to install during bootstrap.
@@ -127,6 +127,8 @@ settings["lsp_deps"] = {
 ---@type string[]
 settings["null_ls_deps"] = {
 	"clang_format",
+	"gofumpt",
+	"goimports",
 	"prettier",
 	"shfmt",
 	"stylua",

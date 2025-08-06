@@ -95,13 +95,13 @@ return function()
 	local function footer()
 		local stats = require("lazy").stats()
 		local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-		return "  Stay Foolish Stay hungry "
-			-- .. "  󰀨 v"
-			-- .. vim.version().major
-			-- .. "."
-			-- .. vim.version().minor
-			-- .. "."
-			-- .. vim.version().patch
+		return "   Hi from neovim"
+			.. "  󰀨 v"
+			.. vim.version().major
+			.. "."
+			.. vim.version().minor
+			.. "."
+			.. vim.version().patch
 			.. "  󰂖 "
 			.. stats.count
 			.. " plugins in "

@@ -4,9 +4,6 @@ return function()
 		type = require("modules.utils.icons").get("type"),
 		cmp = require("modules.utils.icons").get("cmp"),
 	}
-	local t = function(str)
-		return vim.api.nvim_replace_termcodes(str, true, true, true)
-	end
 
 	local border = function(hl)
 		return {
@@ -135,7 +132,7 @@ return function()
 				if cmp.visible() then
 					cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
 				elseif require("luasnip").jumpable(-1) then
-					vim.fn.feedkeys(t("<Plug>luasnip-jump-prev"), "")
+					require("luasnip").jump(-1)
 				else
 					fallback()
 				end
@@ -169,7 +166,7 @@ return function()
 				name = "buffer",
 				option = {
 					get_bufnrs = function()
-						return vim.api.nvim_buf_line_count(0) < 7500 and vim.api.nvim_list_bufs() or {}
+						return vim.api.nvim_buf_line_count(0) < 15000 and vim.api.nvim_list_bufs() or {}
 					end,
 				},
 			},
