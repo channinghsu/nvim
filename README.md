@@ -1,4 +1,4 @@
-# nvim config based on (ayamir)[https://github.com/ayamir/nvimdots]
+# nvim config based on [ayamir](https://github.com/ayamir/nvimdots)
 
 <a href="https://dotfyle.com/channinghsu/nvim"><img src="https://dotfyle.com/channinghsu/nvim/badges/plugins?style=flat" /></a>
 <a href="https://dotfyle.com/channinghsu/nvim"><img src="https://dotfyle.com/channinghsu/nvim/badges/leaderkey?style=flat" /></a>
