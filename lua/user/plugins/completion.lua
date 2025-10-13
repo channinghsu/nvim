@@ -89,11 +89,11 @@ completion["CopilotC-Nvim/CopilotChat.nvim"] = {
 				normal = "gmd",
 			},
 			-- Show the prompt
-			show_info= {
+			show_info = {
 				normal = "gmp",
 			},
 			-- Show the user selection
-			show_context= {
+			show_context = {
 				normal = "gms",
 			},
 		},
@@ -166,21 +166,6 @@ completion["CopilotC-Nvim/CopilotChat.nvim"] = {
 				require("CopilotChat.integrations.telescope").pick(actions.help_actions())
 			end,
 			desc = "CopilotChat - Help actions",
-		},
-		-- Show prompts actions with telescope
-		{
-			"<leader>ap",
-			function()
-				local actions = require("CopilotChat.actions")
-				require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
-			end,
-			desc = "CopilotChat - Prompt actions",
-		},
-		{
-			"<leader>ap",
-			":lua require('CopilotChat.integrations.telescope').pick(require('CopilotChat.actions').prompt_actions({selection = require('CopilotChat.select').visual}))<CR>",
-			mode = "x",
-			desc = "CopilotChat - Prompt actions",
 		},
 		-- Code related commands
 		{ "<leader>ae", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
