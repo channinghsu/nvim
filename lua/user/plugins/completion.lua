@@ -43,7 +43,6 @@ completion["CopilotC-Nvim/CopilotChat.nvim"] = {
 		{ "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
 	},
 	opts = {
-		model = "gpt-4",
 		debug = false, -- Set to true to see response from Github Copilot API. The log file will be in ~/.local/state/nvim/CopilotChat.nvim.log.
 		disable_extra_info = "no", -- Disable extra information (e.g: system prompt, token count) in the response.
 		hide_system_prompt = "yes", -- Show user prompts only and hide system prompts.

@@ -18,7 +18,12 @@ return {
 		:with_silent()
 		:with_desc("tool: Find word under cursor"),
 	["n|<leader>fe"] = map_cu("Telescope oldfiles"):with_noremap():with_silent():with_desc("find: File by history"),
-	["n|<leader>e"] = map_cr("NvimTreeToggle"):with_noremap():with_silent():with_desc("filetree: Toggle"),
+	["n|<leader>e"] = map_callback(function()
+				require("edgy").toggle("left")
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("filetree: Toggle"),
 
 	-- Plugin: dap
 	["n|<leader>dd"] = map_callback(function()
