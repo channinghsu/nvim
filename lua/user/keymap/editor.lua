@@ -9,9 +9,7 @@ return {
 	["n|<A-L>"] = map_cu("SmartCursorMoveRight"):with_silent():with_noremap():with_desc("window: Focus right"),
 	["n|<leader>t"] = map_cmd("<Cmd>Twilight<CR>"):with_noremap():with_desc("Twilight: Toggle Twilight"),
 	["n|<leader>z"] = map_cmd("<Cmd>ZenMode<CR>"):with_noremap():with_desc("ZenMode: Toggle ZenMode"),
-	["nv|<leader>j"] = map_cmd("<Cmd>HopWordMW<CR>"):with_noremap():with_desc("which_key_ignore"),
 	["nv|<leader>w"] = map_cmd("<Cmd>HopWordMW<CR>"):with_noremap():with_desc("which_key_ignore"),
-	["nv|<leader>k"] = map_cmd("<Cmd>HopLineMW<CR>"):with_noremap():with_desc("which_key_ignore"),
 	["nv|<leader>C"] = map_cmd("<Cmd>HopChar2MW<CR>"):with_noremap():with_desc("which_key_ignore"),
 	["n|<leader>v"] = map_cu("vsplit"):with_noremap():with_desc("window: Vertical split"),
 }
