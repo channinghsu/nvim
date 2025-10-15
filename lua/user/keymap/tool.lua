@@ -19,7 +19,7 @@ return {
 		:with_desc("tool: Find word under cursor"),
 	["n|<leader>fe"] = map_cu("Telescope oldfiles"):with_noremap():with_silent():with_desc("find: File by history"),
 	["n|<leader>e"] = map_callback(function()
-		require("edgy").toggle("left")
+			require("edgy").toggle("left")
 		end)
 		:with_noremap()
 		:with_silent()
