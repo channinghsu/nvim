@@ -1,6 +1,5 @@
 local bind = require("keymap.bind")
 local map_callback = bind.map_callback
-local map_cr = bind.map_cr
 local map_cu = bind.map_cu
 return {
 	["n|<leader>fz"] = map_cu("Telescope zoxide list")
