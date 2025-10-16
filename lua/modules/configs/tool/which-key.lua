@@ -71,7 +71,7 @@ return function()
 			{ "<leader>l", group = icons.misc.LspAvailable .. " Lsp" },
 			{ "<leader>f", group = icons.ui.Telescope .. " Fuzzy Find" },
 			{ "<leader>n", group = icons.ui.FolderOpen .. " Nvim Tree" },
-			{ "<leader>c", group = icons.aichat.Chat .. " Chat" },
+			{ "<leader>a", group = icons.aichat.Copilot.. " Chat" },
 		},
 	})
 end
