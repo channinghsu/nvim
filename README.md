@@ -157,7 +157,7 @@ return settings
 | [todo-comments.nvim](https://github.com/folke/todo-comments.nvim) | Highlight TODOs |
 | [edgy.nvim](https://github.com/folke/edgy.nvim) | Window layout manager |
 
-### Language Support
+## 🌐 Languages
 
 | Language | LSP | DAP | Extras |
 |----------|-----|-----|--------|
