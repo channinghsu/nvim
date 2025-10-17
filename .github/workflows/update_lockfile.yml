@@ -22,6 +22,11 @@ jobs:
         if: ${{ steps.check_lockfile.outputs.files_exists == 'true' }}
         with:
           neovim: true
+      - name: Setup Neovim config directory
+        if: ${{ steps.check_lockfile.outputs.files_exists == 'true' }}
+        run: |
+          mkdir -p ~/.config/nvim
+          cp -r * ~/.config/nvim/
       - name: Run lockfile-autoupdate
         if: ${{ steps.check_lockfile.outputs.files_exists == 'true' }}
         timeout-minutes: 5
