@@ -32,46 +32,46 @@ jobs:
       
       - name: Cherry-pick upstream commits
         run: |
-          # 获取当前分支最新的 commit
-          CURRENT_HEAD=$(git rev-parse HEAD)
+          echo "Fetching recent commits from upstream/main"
           
-          # 获取 upstream/main 和当前分支的共同祖先
-          MERGE_BASE=$(git merge-base HEAD upstream/main)
-          
-          echo "Merge base: $MERGE_BASE"
-          echo "Current HEAD: $CURRENT_HEAD"
-          
-          # 获取需要 cherry-pick 的提交列表（排除 github-actions[bot]）
-          COMMITS=$(git log --reverse --pretty=format:"%H %an" $MERGE_BASE..upstream/main | grep -v "github-actions\[bot\]" | awk '{print $1}' || true)
+          # 获取 upstream/main 最近 50 个提交（排除 github-actions[bot]）
+          COMMITS=$(git log --reverse --pretty=format:"%H %an" upstream/main -50 | grep -v "github-actions\[bot\]" | awk '{print $1}' || true)
           
           if [ -z "$COMMITS" ]; then
-            echo "No new commits to cherry-pick"
+            echo "No commits to cherry-pick"
             exit 0
           fi
           
-          echo "Commits to cherry-pick:"
-          echo "$COMMITS"
+          echo "Found $(echo "$COMMITS" | wc -l) commits from upstream"
           
-          # 逐个 cherry-pick
+          # 逐个 cherry-pick，跳过已存在的提交
           CHERRY_PICKED=0
           CONFLICTS=0
+          SKIPPED=0
           for commit in $COMMITS; do
+            # 检查该提交是否已经存在于当前分支
+            if git branch --contains $commit 2>/dev/null | grep -q "^\*"; then
+              echo "⊘ Skipping $commit (already in current branch)"
+              SKIPPED=$((SKIPPED + 1))
+              continue
+            fi
+            
             echo "Cherry-picking $commit"
-            if git cherry-pick $commit; then
+            if git cherry-pick $commit 2>&1; then
               CHERRY_PICKED=$((CHERRY_PICKED + 1))
               echo "✓ Successfully cherry-picked $commit"
             else
               CONFLICTS=$((CONFLICTS + 1))
               echo "✗ Conflict detected for $commit"
-              git cherry-pick --abort
+              git cherry-pick --abort 2>&1 || true
               echo "Skipping commit $commit due to conflicts"
             fi
           done
           
-          echo "Summary: $CHERRY_PICKED commits cherry-picked, $CONFLICTS conflicts skipped"
+          echo "Summary: $CHERRY_PICKED commits cherry-picked, $SKIPPED skipped, $CONFLICTS conflicts"
           
           if [ $CHERRY_PICKED -eq 0 ]; then
-            echo "No commits were cherry-picked"
+            echo "No new commits were cherry-picked"
             exit 0
           fi
       
