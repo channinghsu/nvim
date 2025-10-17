@@ -8,7 +8,7 @@ A modern, feature-rich Neovim configuration built for productivity and aesthetic
 [![Lua](https://img.shields.io/badge/Lua-5.1+-blue?logo=lua)](https://www.lua.org/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-[Features](#-features) • [Installation](#-installation) • [Plugins](#-plugins) • [Keymaps](#keymaps) • [Configuration](#configuration) • [Languages](#-languages)
+[Features](#-features) • [Installation](#-installation) • [Plugins](#-plugins) • [Keymaps](#-keymaps) • [Configuration](#-configuration) • [Languages](#-languages)
 
 </div>
 
@@ -172,7 +172,7 @@ return settings
 | **JSON** | jsonls | - | prettier |
 | **Markdown** | - | - | render-markdown, markdown-preview |
 
-## ⌨️ Keymaps
+## 🎹 Keymaps
 
 > Leader key: `<Space>`
 
@@ -237,7 +237,7 @@ return settings
 | `<Leader>ca` | v | Add selection to chat |
 | `ga` | v | Quick chat with selection |
 
-## 🛠️ Configuration
+## 🔧 Configuration
 
 ### LSP Servers
 
