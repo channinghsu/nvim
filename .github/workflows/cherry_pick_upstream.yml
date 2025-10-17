@@ -81,11 +81,19 @@ jobs:
               echo "✓ Successfully cherry-picked $commit"
               echo "- ✅ [\`${commit:0:7}\`](https://github.com/ayamir/nvimdots/commit/$commit) $COMMIT_MSG" >> $SUCCESS_FILE
             else
-              CONFLICTS=$((CONFLICTS + 1))
-              echo "✗ Conflict detected for $commit"
-              echo "- ❌ [\`${commit:0:7}\`](https://github.com/ayamir/nvimdots/commit/$commit) $COMMIT_MSG (by $COMMIT_AUTHOR)" >> $CONFLICT_FILE
-              git cherry-pick --abort 2>&1 || true
-              echo "Skipping commit $commit due to conflicts"
+          else
+              # 检查是否是因为内容已存在导致的失败
+              if git status | grep -q "nothing to commit"; then
+                echo "⊘ Content already exists for $commit"
+                SKIPPED=$((SKIPPED + 1))
+                git cherry-pick --abort 2>&1 || true
+              else
+                CONFLICTS=$((CONFLICTS + 1))
+                echo "✗ Conflict detected for $commit"
+                echo "- ❌ [\`${commit:0:7}\`](https://github.com/ayamir/nvimdots/commit/$commit) $COMMIT_MSG (by $COMMIT_AUTHOR)" >> $CONFLICT_FILE
+                git cherry-pick --abort 2>&1 || true
+                echo "Skipping commit $commit due to conflicts"
+              fi
             fi
           done
 
