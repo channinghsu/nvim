@@ -42,7 +42,7 @@ jobs:
           echo "Current HEAD: $CURRENT_HEAD"
           
           # 获取需要 cherry-pick 的提交列表（排除 github-actions[bot]）
-          COMMITS=$(git log --reverse --pretty=format:"%H" $MERGE_BASE..upstream/main --author-not="github-actions[bot]")
+          COMMITS=$(git log --reverse --pretty=format:"%H %an" $MERGE_BASE..upstream/main | grep -v "github-actions\[bot\]" | awk '{print $1}')
           
           if [ -z "$COMMITS" ]; then
             echo "No new commits to cherry-pick"
