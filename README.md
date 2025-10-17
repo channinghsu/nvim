@@ -8,10 +8,6 @@ A modern, feature-rich Neovim configuration built for productivity and aesthetic
 [![Lua](https://img.shields.io/badge/Lua-5.1+-blue?logo=lua)](https://www.lua.org/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-<a href="https://dotfyle.com/channinghsu/nvim"><img src="https://dotfyle.com/channinghsu/nvim/badges/plugins?style=flat" /></a>
-<a href="https://dotfyle.com/channinghsu/nvim"><img src="https://dotfyle.com/channinghsu/nvim/badges/leaderkey?style=flat" /></a>
-<a href="https://dotfyle.com/channinghsu/nvim"><img src="https://dotfyle.com/channinghsu/nvim/badges/plugin-manager?style=flat" /></a>
-
 [Features](#-features) • [Installation](#-installation) • [Plugins](#-plugins) • [Keymaps](#-keymaps) • [Configuration](#-configuration) • [Languages](#-languages)
 
 </div>
