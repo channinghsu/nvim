@@ -1,0 +1,85 @@
+name: cherry-pick upstream
+
+on:
+  # Manual trigger - go to Actions tab and click "Run workflow"
+  workflow_dispatch:
+  # Scheduled sync (每天凌晨 3 点) - 默认禁用
+  schedule: [{ cron: "0 3 * * *" }]
+
+jobs:
+  cherry-pick-upstream:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      
+      - name: Add upstream remote
+        run: |
+          if ! git remote | grep -q upstream; then
+            git remote add upstream https://github.com/ayamir/nvimdots.git
+          fi
+          git fetch upstream main
+      
+      - name: Cherry-pick upstream commits
+        run: |
+          # 获取当前分支最新的 commit
+          CURRENT_HEAD=$(git rev-parse HEAD)
+          
+          # 获取 upstream/main 和当前分支的共同祖先
+          MERGE_BASE=$(git merge-base HEAD upstream/main)
+          
+          echo "Merge base: $MERGE_BASE"
+          echo "Current HEAD: $CURRENT_HEAD"
+          
+          # 获取需要 cherry-pick 的提交列表（排除 github-actions[bot]）
+          COMMITS=$(git log --reverse --pretty=format:"%H" $MERGE_BASE..upstream/main --author-not="github-actions[bot]")
+          
+          if [ -z "$COMMITS" ]; then
+            echo "No new commits to cherry-pick"
+            exit 0
+          fi
+          
+          echo "Commits to cherry-pick:"
+          echo "$COMMITS"
+          
+          # 逐个 cherry-pick
+          CHERRY_PICKED=0
+          CONFLICTS=0
+          for commit in $COMMITS; do
+            echo "Cherry-picking $commit"
+            if git cherry-pick $commit; then
+              CHERRY_PICKED=$((CHERRY_PICKED + 1))
+              echo "✓ Successfully cherry-picked $commit"
+            else
+              CONFLICTS=$((CONFLICTS + 1))
+              echo "✗ Conflict detected for $commit"
+              git cherry-pick --abort
+              echo "Skipping commit $commit due to conflicts"
+            fi
+          done
+          
+          echo "Summary: $CHERRY_PICKED commits cherry-picked, $CONFLICTS conflicts skipped"
+          
+          if [ $CHERRY_PICKED -eq 0 ]; then
+            echo "No commits were cherry-picked"
+            exit 0
+          fi
+      
+      - name: Push changes
+        run: |
+          if git diff --quiet origin/main; then
+            echo "No changes to push"
+          else
+            git push origin main
+            echo "Successfully pushed cherry-picked commits"
+          fi
