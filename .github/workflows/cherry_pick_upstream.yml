@@ -4,7 +4,7 @@ on:
   # Manual trigger - go to Actions tab and click "Run workflow"
   workflow_dispatch:
   # Scheduled sync (每天凌晨 3 点) - 默认禁用
-  schedule: [{ cron: "0 3 * * *" }]
+  # schedule: [{ cron: "0 3 * * *" }]
 
 jobs:
   cherry-pick-upstream:
@@ -12,42 +12,57 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      issues: write
     steps:
       - uses: actions/checkout@v5
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
-      
+
       - name: Configure Git
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-      
+
       - name: Add upstream remote
         run: |
           if ! git remote | grep -q upstream; then
             git remote add upstream https://github.com/ayamir/nvimdots.git
           fi
           git fetch upstream main
-      
+
       - name: Cherry-pick upstream commits
+        id: cherry_pick
         run: |
           echo "Fetching recent commits from upstream/main"
-          
+
           # 获取 upstream/main 最近 50 个提交（排除 github-actions[bot]）
-          COMMITS=$(git log --reverse --pretty=format:"%H %an" upstream/main -50 | grep -v "github-actions\[bot\]" | awk '{print $1}' || true)
-          
+          COMMITS=$(git log --reverse --pretty=format:"%H %an" upstream/main -10 | grep -v "github-actions\[bot\]" | awk '{print $1}' || true)
+
           if [ -z "$COMMITS" ]; then
             echo "No commits to cherry-pick"
+            echo "status=no_commits" >> $GITHUB_OUTPUT
             exit 0
           fi
-          
+
           echo "Found $(echo "$COMMITS" | wc -l) commits from upstream"
-          
+
+          # 创建报告文件
+          REPORT_FILE="/tmp/sync_report.md"
+          CONFLICT_FILE="/tmp/conflicts.txt"
+          SUCCESS_FILE="/tmp/success.txt"
+
+          echo "# 🔄 Upstream Sync Report" > $REPORT_FILE
+          echo "" >> $REPORT_FILE
+          echo "**Sync Date:** $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> $REPORT_FILE
+          echo "**Workflow Run:** [\#$GITHUB_RUN_ID](https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID)" >> $REPORT_FILE
+          echo "" >> $REPORT_FILE
+
           # 逐个 cherry-pick，跳过已存在的提交
           CHERRY_PICKED=0
           CONFLICTS=0
           SKIPPED=0
+
           for commit in $COMMITS; do
             # 检查该提交是否已经存在于当前分支
             if git branch --contains $commit 2>/dev/null | grep -q "^\*"; then
@@ -55,31 +70,121 @@ jobs:
               SKIPPED=$((SKIPPED + 1))
               continue
             fi
-            
-            echo "Cherry-picking $commit"
+
+            # 获取提交信息
+            COMMIT_MSG=$(git log --format=%s -n 1 $commit)
+            COMMIT_AUTHOR=$(git log --format=%an -n 1 $commit)
+
+            echo "Cherry-picking $commit: $COMMIT_MSG"
             if git cherry-pick $commit 2>&1; then
               CHERRY_PICKED=$((CHERRY_PICKED + 1))
               echo "✓ Successfully cherry-picked $commit"
+              echo "- ✅ [\`${commit:0:7}\`](https://github.com/ayamir/nvimdots/commit/$commit) $COMMIT_MSG" >> $SUCCESS_FILE
             else
               CONFLICTS=$((CONFLICTS + 1))
               echo "✗ Conflict detected for $commit"
+              echo "- ❌ [\`${commit:0:7}\`](https://github.com/ayamir/nvimdots/commit/$commit) $COMMIT_MSG (by $COMMIT_AUTHOR)" >> $CONFLICT_FILE
               git cherry-pick --abort 2>&1 || true
               echo "Skipping commit $commit due to conflicts"
             fi
           done
-          
+
           echo "Summary: $CHERRY_PICKED commits cherry-picked, $SKIPPED skipped, $CONFLICTS conflicts"
-          
-          if [ $CHERRY_PICKED -eq 0 ]; then
-            echo "No new commits were cherry-picked"
-            exit 0
+
+          # 生成报告
+          echo "## 📊 Summary" >> $REPORT_FILE
+          echo "" >> $REPORT_FILE
+          echo "| Status | Count |" >> $REPORT_FILE
+          echo "|--------|-------|" >> $REPORT_FILE
+          echo "| ✅ Successfully Cherry-picked | $CHERRY_PICKED |" >> $REPORT_FILE
+          echo "| ⊘ Skipped (Already exists) | $SKIPPED |" >> $REPORT_FILE
+          echo "| ❌ Conflicts | $CONFLICTS |" >> $REPORT_FILE
+          echo "" >> $REPORT_FILE
+
+          if [ -f $SUCCESS_FILE ]; then
+            echo "## ✅ Successfully Cherry-picked Commits" >> $REPORT_FILE
+            echo "" >> $REPORT_FILE
+            cat $SUCCESS_FILE >> $REPORT_FILE
+            echo "" >> $REPORT_FILE
           fi
-      
+
+          if [ -f $CONFLICT_FILE ]; then
+            echo "## ⚠️ Conflicted Commits (Skipped)" >> $REPORT_FILE
+            echo "" >> $REPORT_FILE
+            echo "> These commits could not be applied due to conflicts and require manual intervention." >> $REPORT_FILE
+            echo "" >> $REPORT_FILE
+            cat $CONFLICT_FILE >> $REPORT_FILE
+            echo "" >> $REPORT_FILE
+          fi
+
+          # 输出状态
+          if [ $CHERRY_PICKED -eq 0 ]; then
+            echo "status=no_changes" >> $GITHUB_OUTPUT
+            exit 0
+          elif [ $CONFLICTS -gt 0 ]; then
+            echo "status=partial_success" >> $GITHUB_OUTPUT
+          else
+            echo "status=success" >> $GITHUB_OUTPUT
+          fi
+
+          echo "cherry_picked=$CHERRY_PICKED" >> $GITHUB_OUTPUT
+          echo "conflicts=$CONFLICTS" >> $GITHUB_OUTPUT
+          echo "skipped=$SKIPPED" >> $GITHUB_OUTPUT
+
       - name: Push changes
+        id: push
         run: |
           if git diff --quiet origin/main; then
             echo "No changes to push"
+            echo "pushed=false" >> $GITHUB_OUTPUT
           else
             git push origin main
             echo "Successfully pushed cherry-picked commits"
+            echo "pushed=true" >> $GITHUB_OUTPUT
           fi
+
+      - name: Create sync report issue
+        if: steps.cherry_pick.outputs.status != 'no_commits'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const status = '${{ steps.cherry_pick.outputs.status }}';
+            const cherryPicked = '${{ steps.cherry_pick.outputs.cherry_picked }}';
+            const conflicts = '${{ steps.cherry_pick.outputs.conflicts }}';
+            const skipped = '${{ steps.cherry_pick.outputs.skipped }}';
+            const pushed = '${{ steps.push.outputs.pushed }}';
+
+            let reportBody = '';
+            try {
+              reportBody = fs.readFileSync('/tmp/sync_report.md', 'utf8');
+            } catch (error) {
+              reportBody = '⚠️ Report file not found';
+            }
+
+            reportBody += '\n## 📤 Push Status\n\n';
+            if (pushed === 'true') {
+              reportBody += '✅ Changes have been pushed to main branch\n';
+            } else {
+              reportBody += '⊘ No changes to push\n';
+            }
+
+            let title, labels;
+            if (status === 'success') {
+              title = `✅ Upstream Sync Successful - ${cherryPicked} commits applied`;
+              labels = ['upstream-sync', 'success'];
+            } else if (status === 'partial_success') {
+              title = `⚠️ Upstream Sync Partial - ${cherryPicked} applied, ${conflicts} conflicts`;
+              labels = ['upstream-sync', 'conflicts', 'attention-needed'];
+            } else {
+              title = `ℹ️ Upstream Sync - No new changes`;
+              labels = ['upstream-sync', 'no-changes'];
+            }
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: title,
+              body: reportBody,
+              labels: labels
+            });
