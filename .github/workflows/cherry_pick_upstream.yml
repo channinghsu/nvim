@@ -4,7 +4,7 @@ on:
   # Manual trigger - go to Actions tab and click "Run workflow"
   workflow_dispatch:
   # Scheduled sync (每天凌晨 3 点) - 默认禁用
-  # schedule: [{ cron: "0 3 * * *" }]
+  schedule: [{ cron: "0 3 * * *" }]
 
 jobs:
   cherry-pick-upstream:

@@ -3,7 +3,7 @@ on:
   # Manual trigger only - go to Actions tab and click "Run workflow"
   workflow_dispatch:
   # Scheduled update (each day) - disabled by default
-  # schedule: [{ cron: "30 01 * * *" }]
+  schedule: [{ cron: "30 01 * * *" }]
 
 jobs:
   update-lockfile:
