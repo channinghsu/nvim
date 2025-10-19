@@ -37,7 +37,7 @@ jobs:
           echo "Fetching recent commits from upstream/main"
 
           # 获取 upstream/main 最近 50 个提交（排除 github-actions[bot]）
-          COMMITS=$(git log --reverse --pretty=format:"%H %an" upstream/main -10 | grep -v "github-actions\[bot\]" | awk '{print $1}' || true)
+          COMMITS=$(git log --reverse --pretty=format:"%H %an" upstream/main -5 | grep -v "github-actions\[bot\]" | awk '{print $1}' || true)
 
           if [ -z "$COMMITS" ]; then
             echo "No commits to cherry-pick"
