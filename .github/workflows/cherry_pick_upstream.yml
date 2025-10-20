@@ -47,16 +47,9 @@ jobs:
 
           echo "Found $(echo "$COMMITS" | wc -l) commits from upstream"
 
-          # 创建报告文件
-          REPORT_FILE="/tmp/sync_report.md"
+          # 创建临时文件
           CONFLICT_FILE="/tmp/conflicts.txt"
           SUCCESS_FILE="/tmp/success.txt"
-
-          echo "# 🔄 Upstream Sync Report" > $REPORT_FILE
-          echo "" >> $REPORT_FILE
-          echo "**Sync Date:** $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> $REPORT_FILE
-          echo "**Workflow Run:** [\#$GITHUB_RUN_ID](https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID)" >> $REPORT_FILE
-          echo "" >> $REPORT_FILE
 
           # 逐个 cherry-pick，跳过已存在的提交
           CHERRY_PICKED=0
@@ -87,45 +80,81 @@ jobs:
                 SKIPPED=$((SKIPPED + 1))
                 git cherry-pick --abort 2>&1 || true
               else
-                CONFLICTS=$((CONFLICTS + 1))
                 echo "✗ Conflict detected for $commit"
-                echo "- ❌ [\`${commit:0:7}\`](https://github.com/ayamir/nvimdots/commit/$commit) $COMMIT_MSG (by $COMMIT_AUTHOR)" >> $CONFLICT_FILE
+                
+                # 获取冲突的文件列表
+                CONFLICTED_FILES=$(git diff --name-only --diff-filter=U)
+                
+                # 检查是否所有冲突文件都应该跳过
+                SHOULD_SKIP=true
+                for file in $CONFLICTED_FILES; do
+                  # 跳过 README.md
+                  if [[ "$file" =~ [Rr][Ee][Aa][Dd][Mm][Ee]\.[Mm][Dd]$ ]]; then
+                    echo "⊘ Skipping README.md file: $file"
+                    continue
+                  fi
+                  
+                  # 检查文件是否存在于 main 分支
+                  if git cat-file -e origin/main:"$file" 2>/dev/null; then
+                    SHOULD_SKIP=false
+                    break
+                  else
+                    echo "⊘ File $file does not exist in main branch, will skip"
+                  fi
+                done
+                
+                if [ "$SHOULD_SKIP" = true ]; then
+                  echo "⊘ All conflicted files should be skipped for $commit"
+                  SKIPPED=$((SKIPPED + 1))
+                else
+                  CONFLICTS=$((CONFLICTS + 1))
+                  echo "- ❌ [\`${commit:0:7}\`](https://github.com/ayamir/nvimdots/commit/$commit) $COMMIT_MSG (by $COMMIT_AUTHOR)" >> $CONFLICT_FILE
+                fi
+                
                 git cherry-pick --abort 2>&1 || true
-                echo "Skipping commit $commit due to conflicts"
               fi
             fi
           done
 
           echo "Summary: $CHERRY_PICKED commits cherry-picked, $SKIPPED skipped, $CONFLICTS conflicts"
 
-          # 生成报告
-          echo "## 📊 Summary" >> $REPORT_FILE
-          echo "" >> $REPORT_FILE
-          echo "| Status | Count |" >> $REPORT_FILE
-          echo "|--------|-------|" >> $REPORT_FILE
-          echo "| ✅ Successfully Cherry-picked | $CHERRY_PICKED |" >> $REPORT_FILE
-          echo "| ⊘ Skipped (Already exists) | $SKIPPED |" >> $REPORT_FILE
-          echo "| ❌ Conflicts | $CONFLICTS |" >> $REPORT_FILE
-          echo "" >> $REPORT_FILE
+          # 只有在有成功或失败的提交时才生成报告
+          if [ $CHERRY_PICKED -gt 0 ] || [ $CONFLICTS -gt 0 ]; then
+            REPORT_FILE="/tmp/sync_report.md"
+            echo "# 🔄 Upstream Sync Report" > $REPORT_FILE
+            echo "" >> $REPORT_FILE
+            echo "**Sync Date:** $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> $REPORT_FILE
+            echo "**Workflow Run:** [\#$GITHUB_RUN_ID](https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID)" >> $REPORT_FILE
+            echo "" >> $REPORT_FILE
 
-          if [ -f $SUCCESS_FILE ]; then
-            echo "## ✅ Successfully Cherry-picked Commits" >> $REPORT_FILE
+            echo "## 📊 Summary" >> $REPORT_FILE
             echo "" >> $REPORT_FILE
-            cat $SUCCESS_FILE >> $REPORT_FILE
+            echo "| Status | Count |" >> $REPORT_FILE
+            echo "|--------|-------|" >> $REPORT_FILE
+            echo "| ✅ Successfully Cherry-picked | $CHERRY_PICKED |" >> $REPORT_FILE
+            echo "| ⊘ Skipped (Already exists) | $SKIPPED |" >> $REPORT_FILE
+            echo "| ❌ Conflicts | $CONFLICTS |" >> $REPORT_FILE
             echo "" >> $REPORT_FILE
-          fi
 
-          if [ -f $CONFLICT_FILE ]; then
-            echo "## ⚠️ Conflicted Commits (Skipped)" >> $REPORT_FILE
-            echo "" >> $REPORT_FILE
-            echo "> These commits could not be applied due to conflicts and require manual intervention." >> $REPORT_FILE
-            echo "" >> $REPORT_FILE
-            cat $CONFLICT_FILE >> $REPORT_FILE
-            echo "" >> $REPORT_FILE
+            if [ -f $SUCCESS_FILE ]; then
+              echo "## ✅ Successfully Cherry-picked Commits" >> $REPORT_FILE
+              echo "" >> $REPORT_FILE
+              cat $SUCCESS_FILE >> $REPORT_FILE
+              echo "" >> $REPORT_FILE
+            fi
+
+            if [ -f $CONFLICT_FILE ]; then
+              echo "## ⚠️ Conflicted Commits (Skipped)" >> $REPORT_FILE
+              echo "" >> $REPORT_FILE
+              echo "> These commits could not be applied due to conflicts and require manual intervention." >> $REPORT_FILE
+              echo "" >> $REPORT_FILE
+              cat $CONFLICT_FILE >> $REPORT_FILE
+              echo "" >> $REPORT_FILE
+            fi
           fi
 
           # 输出状态
-          if [ $CHERRY_PICKED -eq 0 ]; then
+          if [ $CHERRY_PICKED -eq 0 ] && [ $CONFLICTS -eq 0 ]; then
             echo "status=no_changes" >> $GITHUB_OUTPUT
             exit 0
           elif [ $CONFLICTS -gt 0 ]; then
@@ -151,7 +180,7 @@ jobs:
           fi
 
       - name: Create sync report issue
-        if: steps.cherry_pick.outputs.status != 'no_commits'
+        if: steps.cherry_pick.outputs.status == 'success' || steps.cherry_pick.outputs.status == 'partial_success'
         uses: actions/github-script@v7
         with:
           script: |
