@@ -23,16 +23,13 @@ return {
 		:with_noremap()
 		:with_silent()
 		:with_desc("AI: 保存当前对话"),
-	["n|<leader>ap"] = map_cr("CopilotChatModels")
+	["n|<leader>aP"] = map_cr("CopilotChatModels")
 		:with_noremap()
 		:with_silent()
 		:with_desc("AI: 选择 AI 模型"),
-	["n|<leader>aP"] = map_callback(function()
-			local actions = require("CopilotChat.actions")
-			require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
-		end)
-		:with_noremap()
+	["n|<leader>ap"] = map_cr("CopilotChatPrompts")
 		:with_silent()
+		:with_noremap()
 		:with_desc("AI: 选择 Prompt 模板"),
 	["n|<leader>ae"] = map_cr("CopilotChatExplain")
 		:with_noremap()
