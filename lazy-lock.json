@@ -95,7 +95,7 @@
   "tiny-inline-diagnostic.nvim": { "branch": "main", "commit": "1cb11cc658ee24a9826e3b909ca0b0f5e60597c7" },
   "todo-comments.nvim": { "branch": "main", "commit": "19d461ddd543e938eb22505fb03fa878800270b6" },
   "toggleterm.nvim": { "branch": "main", "commit": "9a88eae817ef395952e08650b3283726786fb5fb" },
-  "tokyonight": { "branch": "main", "commit": "e63c42a42b11cd6225f009dd949b9ee0fccc15ef" },
+  "tokyonight": { "branch": "main", "commit": "8734a4e9a9b03549337faf5a86637abd5e16721e" },
   "trouble.nvim": { "branch": "main", "commit": "c098362fe603d3922095e7db595961e020bdf2d0" },
   "vim-cool": { "branch": "master", "commit": "9ea940c0d537e55de0de4c0298c04b976960fb12" },
   "vim-fugitive": { "branch": "master", "commit": "61b51c09b7c9ce04e821f6cf76ea4f6f903e3cf4" },
