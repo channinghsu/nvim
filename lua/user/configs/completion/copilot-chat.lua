@@ -5,12 +5,20 @@ return function()
 	local prompts = {
 		Commit = {
 			name = "📦 生成 Commit 信息",
-			prompt = "请基于以下 git diff 改动，生成符合 Conventional Commits 规范的英文提交信息。\n\n格式要求：\n<type>(<scope>): <subject>\n\n<body>\n\n<footer>\n\n其中：\n- type: feat(新功能)/fix(修复)/docs(文档)/style(格式)/refactor(重构)/perf(性能)/test(测试)/chore(构建)\n- scope: 影响范围（可选）\n- subject: 简短描述（不超过50字）\n- body: 详细说明（可选，说明改动原因和内容）\n- footer: 关联 issue 或 breaking changes（可选）\n\n示例：\nfeat(auth): 添加 JWT 认证功能\n\n实现了基于 JWT 的用户认证系统，包括：\n- 登录接口\n- Token 生成和验证\n- 刷新 Token 机制\n\nCloses #123",
+			prompt = "请基于以下 git diff 改动，生成符合 Conventional Commits 规范的英文提交信息。\n\n格式要求：\n"
+				.. "<type>(<scope>): <subject>\n\n<body>\n\n<footer>\n\n其中：\n"
+				.. "- type: feat(新功能)/fix(修复)/docs(文档)/style(格式)/refactor(重构)/perf(性能)/test(测试)/chore(构建)\n"
+				.. "- scope: 影响范围（可选）\n- subject: 简短描述（不超过50字）\n"
+				.. "- body: 详细说明（可选，说明改动原因和内容）\n- footer: 关联 issue 或 breaking changes（可选）\n\n示例：\n"
+				.. "feat(auth): 添加 JWT 认证功能\n\n实现了基于 JWT 的用户认证系统，包括：\n"
+				.. "- 登录接口\n- Token 生成和验证\n- 刷新 Token 机制\n\nCloses #123",
 			selection = select.gitdiff,
 		},
 		CommitStaged = {
 			name = "📦 生成暂存区 Commit",
-			prompt = "请基于暂存区（staged）的改动，生成符合 Conventional Commits 规范的英文提交信息。\n\n格式：<type>(<scope>): <subject>\n\n要求：\n- 使用简体中文\n- 准确描述改动内容\n- 如有多个改动，用列表说明\n- subject 简洁明了（不超过50字）",
+			prompt = "请基于暂存区（staged）的改动，生成符合 Conventional Commits 规范的英文提交信息。\n\n"
+				.. "格式：<type>(<scope>): <subject>\n\n要求：\n- 使用简体中文\n- 准确描述改动内容\n"
+				.. "- 如有多个改动，用列表说明\n- subject 简洁明了（不超过50字）",
 			selection = function(source)
 				return select.gitdiff(source, true)
 			end,
@@ -70,15 +78,21 @@ return function()
 		-- },
 		-- Docs = {
 		-- 	name = "📚 生成 API 文档",
-		-- 	prompt = "请根据以下代码生成完整的 API 文档，包括：\n1. 功能概述\n2. 函数/方法签名\n3. 参数详细说明（类型、默认值、是否必需）\n4. 返回值说明\n5. 抛出的异常\n6. 使用示例（至少 2 个）\n7. 注意事项和最佳实践\n\n使用简体中文，格式清晰。",
+		-- 	prompt = "请根据以下代码生成完整的 API 文档，包括：\n1. 功能概述\n2. 函数/方法签名\n"
+		-- 		.. "3. 参数详细说明（类型、默认值、是否必需）\n4. 返回值说明\n5. 抛出的异常\n"
+		-- 		.. "6. 使用示例（至少 2 个）\n7. 注意事项和最佳实践\n\n使用简体中文，格式清晰。",
 		-- },
 		-- Readme = {
 		-- 	name = "📖 生成 README",
-		-- 	prompt = "请为以下代码/项目生成详细的 README.md 文档，包括：\n1. 项目简介和特性\n2. 快速开始（安装、配置）\n3. 使用示例和教程\n4. API 文档\n5. 配置选项说明\n6. 常见问题（FAQ）\n7. 贡献指南\n8. 许可证信息\n\n使用简体中文，Markdown 格式。",
+		-- 	prompt = "请为以下代码/项目生成详细的 README.md 文档，包括：\n1. 项目简介和特性\n2. 快速开始（安装、配置）\n"
+		-- 		.. "3. 使用示例和教程\n4. API 文档\n5. 配置选项说明\n6. 常见问题（FAQ）\n7. 贡献指南\n"
+		-- 		.. "8. 许可证信息\n\n使用简体中文，Markdown 格式。",
 		-- },
 		-- Changelog = {
 		-- 	name = "📋 生成变更日志",
-		-- 	prompt = "请根据以下代码改动，生成清晰的变更日志（Changelog），使用简体中文。\n\n格式要求：\n## [版本号] - 日期\n\n### 新增（Added）\n- 新功能1\n- 新功能2\n\n### 修改（Changed）\n- 改进项1\n- 改进项2\n\n### 修复（Fixed）\n- 修复的 bug 1\n- 修复的 bug 2\n\n### 删除（Removed）\n- 移除的功能1",
+		-- 	prompt = "请根据以下代码改动，生成清晰的变更日志（Changelog），使用简体中文。\n\n格式要求：\n"
+		-- 		.. "## [版本号] - 日期\n\n### 新增（Added）\n- 新功能1\n- 新功能2\n\n### 修改（Changed）\n- 改进项1\n"
+		-- 		.. "- 改进项2\n\n### 修复（Fixed）\n- 修复的 bug 1\n- 修复的 bug 2\n\n### 删除（Removed）\n- 移除的功能1",
 		-- },
 		-- Translate = {
 		-- 	name = "🌐 语言转换",
@@ -86,7 +100,9 @@ return function()
 		-- },
 		-- TypeScript = {
 		-- 	name = "🔷 添加 TypeScript 类型",
-		-- 	prompt = "请为以下 JavaScript 代码添加完整的 TypeScript 类型注解，包括：\n1. 函数参数和返回值类型\n2. 接口（Interface）定义\n3. 类型别名（Type Alias）\n4. 泛型（如适用）\n5. 枚举（如适用）\n\n用简体中文注释复杂类型的含义。",
+		-- 	prompt = "请为以下 JavaScript 代码添加完整的 TypeScript 类型注解，包括：\n1. 函数参数和返回值类型\n"
+		-- 		.. "2. 接口（Interface）定义\n3. 类型别名（Type Alias）\n4. 泛型（如适用）\n5. 枚举（如适用）\n\n"
+		-- 		.. "用简体中文注释复杂类型的含义。",
 		-- },
 		-- Learn = {
 		-- 	name = "🎓 教学讲解",
@@ -102,7 +118,10 @@ return function()
 		-- },
 		-- Security = {
 		-- 	name = "🔒 安全审查",
-		-- 	prompt = "请从安全角度全面审查以下代码，识别潜在的安全漏洞和风险，包括但不限于：\n1. 注入攻击（SQL、NoSQL、命令注入等）\n2. XSS（跨站脚本攻击）\n3. CSRF（跨站请求伪造）\n4. 认证和授权问题\n5. 敏感信息泄露\n6. 不安全的加密/哈希\n7. 路径遍历攻击\n8. DoS 攻击风险\n\n对每个问题给出：\n- 问题描述\n- 风险等级（高/中/低）\n- 修复建议\n- 安全的代码示例\n\n使用简体中文。",
+		-- 	prompt = "请从安全角度全面审查以下代码，识别潜在的安全漏洞和风险，包括但不限于：\n"
+		-- 		.. "1. 注入攻击（SQL、NoSQL、命令注入等）\n2. XSS（跨站脚本攻击）\n3. CSRF（跨站请求伪造）\n"
+		-- 		.. "4. 认证和授权问题\n5. 敏感信息泄露\n6. 不安全的加密/哈希\n7. 路径遍历攻击\n8. DoS 攻击风险\n\n"
+		-- 		.. "对每个问题给出：\n- 问题描述\n- 风险等级（高/中/低）\n- 修复建议\n- 安全的代码示例\n\n使用简体中文。",
 		-- },
 		-- Performance = {
 		-- 	name = "📊 性能分析",
@@ -206,34 +225,34 @@ return function()
 		chat.ask(args.args, { selection = select.buffer })
 	end, { nargs = "*" })
 
-	vim.api.nvim_create_user_command("CopilotChatExplain", function(args)
+	vim.api.nvim_create_user_command("CopilotChatExplain", function(_args)
 		chat.ask("请详细解释这段代码", { selection = select.visual })
 	end, { range = true })
 
-	vim.api.nvim_create_user_command("CopilotChatReview", function(args)
+	vim.api.nvim_create_user_command("CopilotChatReview", function(_args)
 		chat.ask("请审查这段代码", { selection = select.visual })
 	end, { range = true })
 
-	vim.api.nvim_create_user_command("CopilotChatFix", function(args)
+	vim.api.nvim_create_user_command("CopilotChatFix", function(_args)
 		chat.ask("请修复这段代码的问题", { selection = select.visual })
 	end, { range = true })
 
-	vim.api.nvim_create_user_command("CopilotChatOptimize", function(args)
+	vim.api.nvim_create_user_command("CopilotChatOptimize", function(_args)
 		chat.ask("请优化这段代码", { selection = select.visual })
 	end, { range = true })
 
-	vim.api.nvim_create_user_command("CopilotChatTests", function(args)
+	vim.api.nvim_create_user_command("CopilotChatTests", function(_args)
 		chat.ask("请为这段代码编写单元测试", { selection = select.visual })
 	end, { range = true })
 
-	vim.api.nvim_create_user_command("CopilotChatCommit", function(args)
+	vim.api.nvim_create_user_command("CopilotChatCommit", function(_args)
 		chat.ask(
 			"请为以下改动生成符合 Conventional Commits 规范的英文提交信息",
 			{ selection = select.gitdiff }
 		)
 	end, {})
 
-	vim.api.nvim_create_user_command("CopilotChatCommitStaged", function(args)
+	vim.api.nvim_create_user_command("CopilotChatCommitStaged", function(_args)
 		chat.ask("请为暂存区改动生成英文提交信息", {
 			selection = function(source)
 				return select.gitdiff(source, true)
