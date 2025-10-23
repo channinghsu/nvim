@@ -1,326 +1,868 @@
 <div align="center">
 
-# 🚀 Neovim Configuration
+# 🚀 Modern Neovim Configuration
 
-A modern, feature-rich Neovim configuration built for productivity and aesthetics.
+<p align="center">
+  <i>A powerful, blazingly fast, and beautifully crafted Neovim setup for modern development</i>
+</p>
 
-[![Neovim](https://img.shields.io/badge/Neovim-0.9+-blue?logo=neovim&logoColor=green)](https://neovim.io/)
-[![Lua](https://img.shields.io/badge/Lua-5.1+-blue?logo=lua)](https://www.lua.org/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Neovim](https://img.shields.io/badge/Neovim-0.9+-57A143?style=for-the-badge&logo=neovim&logoColor=white)](https://neovim.io/)
+[![Lua](https://img.shields.io/badge/Lua-5.1+-2C2D72?style=for-the-badge&logo=lua&logoColor=white)](https://www.lua.org/)
+[![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
+[![Stars](https://img.shields.io/github/stars/channinghsu/nvim?style=for-the-badge&color=yellow)](https://github.com/channinghsu/nvim/stargazers)
 
-[Features](#-features) • [Installation](#-installation) • [Plugins](#-plugins) • [Keymaps](#-keymaps) • [Configuration](#-configuration) • [Languages](#-languages)
+[Features](#-features) • [Quick Start](#-quick-start) • [Installation](#-installation) • [Plugins](#-plugins) • [Keybindings](#-keybindings) • [Configuration](#-configuration) • [Languages](#-language-support) • [FAQ](#-faq)
 
 </div>
 
 ---
 
+## 📖 Overview
+
+This is a feature-rich, highly customizable Neovim configuration designed for productivity, aesthetics, and performance. Built with Lua and lazy-loading in mind, it provides a modern IDE-like experience without sacrificing Vim's efficiency.
+
+**Highlights:**
+- 🎨 Beautiful Catppuccin theme with transparency support
+- 🧠 Full LSP support with auto-completion, diagnostics, and code actions
+- 🤖 Built-in AI assistant powered by CodeCompanion (supports multiple AI models)
+- ⚡ Lightning-fast startup with lazy.nvim plugin manager
+- 🐛 Complete debugging experience with DAP for multiple languages
+- 🔍 Advanced fuzzy finding with Telescope/FzfLua
+- 🌳 Comprehensive Git integration
+- 📦 90+ carefully selected plugins
+- 🎯 Smart navigation with Hop, Flash, and Treesitter
+- 💾 Automatic session management
+- 🔧 Highly customizable through user overrides
+
+---
+
 ## ✨ Features
 
-- 🎨 **Beautiful UI** - Catppuccin colorscheme with custom dashboard and statusline
-- 🧠 **LSP Integration** - Full LSP support with auto-completion and diagnostics
-- 🤖 **AI Assistant** - Built-in AI chat with CodeCompanion (supports multiple models)
-- 🔍 **Fuzzy Finding** - Telescope/FzfLua for files, grep, and more
-- 🐛 **Debug Support** - DAP integration for C/C++, Go, Python, and Rust
-- 📦 **Package Management** - Lazy.nvim for fast plugin loading
-- 🌳 **Git Integration** - Gitsigns, Fugitive, and advanced git search
-- 🎯 **Smart Navigation** - Hop, Flash, and Dropbar for quick movement
-- 💾 **Session Management** - Automatic session persistence
-- 🔧 **Auto-formatting** - Format on save with null-ls/none-ls
-- 📝 **Snippet Support** - LuaSnip with friendly-snippets
-- 🎭 **Treesitter** - Advanced syntax highlighting and code understanding
-- 🖥️ **Terminal Integration** - Toggleterm for integrated terminal
+### 🎨 **UI & Appearance**
+- **Colorscheme**: Catppuccin with multiple variants (Mocha, Latte, Frappe, Macchiato)
+- **Statusline**: Beautiful Lualine with git info, LSP status, and diagnostics
+- **Bufferline**: Stylish buffer tabs with close buttons
+- **Dashboard**: Custom Alpha dashboard with ASCII art
+- **Transparency**: Optional transparent background support
+- **Icons**: Full Nerd Font icon support
+- **Notifications**: Elegant nvim-notify for system messages
+- **Indent Guides**: Visual indent lines for better code structure
+- **Git Signs**: Line-by-line git change indicators
 
-## 📋 Requirements
+### 🧠 **LSP & Completion**
+- **LSP Servers**: Support for 15+ languages via Mason
+- **Auto-completion**: Powered by nvim-cmp with multiple sources
+- **Snippets**: LuaSnip with friendly-snippets collection
+- **Signature Help**: Function signature hints while typing
+- **Diagnostics**: Inline diagnostics with virtual text/lines
+- **Code Actions**: Quick fixes and refactoring suggestions
+- **Formatting**: Auto-format on save with none-ls
+- **Inlay Hints**: Optional type hints (configurable)
+- **Symbol Outline**: Dropbar for code context
 
-- Neovim >= 0.9.0
-- Git >= 2.23.0
-- Node.js (for some LSP servers)
-- A [Nerd Font](https://www.nerdfonts.com/) (recommended: JetBrainsMono Nerd Font)
-- Ripgrep (for telescope live grep)
-- fd (optional, for faster file searching)
-- lazygit (optional, for git UI)
+### 🤖 **AI Integration**
+- **CodeCompanion**: Multi-model AI chat assistant
+- **Supported Providers**: OpenRouter, OpenAI, Anthropic, DeepSeek, and more
+- **Free Models**: Kimi-K2, Qwen3-Coder, DeepSeek-R1, Gemma-3
+- **Premium Models**: GPT-4.1, Claude Sonnet 4, Gemini 2.5 Flash
+- **Visual Selection**: Send code snippets to AI for explanation or improvement
+- **Inline Suggestions**: GitHub Copilot integration
 
-## 🚀 Installation
+### 🔍 **Search & Navigation**
+- **Fuzzy Finder**: Telescope or FzfLua (switchable)
+- **File Search**: Quick file finding with previews
+- **Live Grep**: Ripgrep-powered text search
+- **Git Search**: Search commits, branches, and status
+- **Symbol Search**: Navigate by functions, classes, variables
+- **Quick Jump**: Hop and Flash for rapid cursor movement
+- **Treesitter**: Smart syntax-aware navigation
 
-### Backup Existing Configuration
+### 🐛 **Debugging (DAP)**
+- **Languages**: C/C++, Go, Python, Rust
+- **Breakpoints**: Conditional and log breakpoints
+- **REPL**: Interactive debugging console
+- **UI**: Beautiful DAP-UI with scopes, watches, and call stack
+- **Adapters**: CodeLLDB, Delve, debugpy pre-configured
+
+### 🌳 **Git Integration**
+- **Gitsigns**: Inline git blame and hunk preview
+- **Lazygit**: Full-featured git UI
+- **Diffview**: Side-by-side diff viewer
+- **Fugitive**: Git commands in Neovim
+- **Conflict Resolution**: Merge conflict helpers
+
+### 🔧 **Editor Enhancements**
+- **Treesitter**: Advanced syntax highlighting (70+ languages)
+- **Auto-pairs**: Smart bracket/quote closing
+- **Auto-tags**: Auto-close HTML/JSX tags
+- **Comment**: Smart language-aware commenting
+- **Align**: Text alignment helpers
+- **Surround**: Change surrounding quotes/brackets
+- **Multi-cursor**: Visual-block mode enhancements
+- **Search & Replace**: Grug-far for project-wide replacements
+- **Session Management**: Auto-save and restore sessions
+- **Large File Optimization**: Auto-disable features for large files
+
+### 🖥️ **Terminal & Tools**
+- **Toggleterm**: Integrated terminal with float/split modes
+- **Lazygit Integration**: Toggle with `<leader>gg`
+- **REPL Support**: Run code snippets with SnipRun
+- **Which-key**: Popup keybinding hints
+- **Trouble**: Beautiful diagnostics list
+- **Todo Comments**: Highlight TODO, FIXME, NOTE, etc.
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+Ensure you have the following installed:
+
+| Tool | Version | Required | Purpose |
+|------|---------|----------|---------|
+| **Neovim** | >= 0.9.0 | ✅ Yes | Editor |
+| **Git** | >= 2.23.0 | ✅ Yes | Version control |
+| **Node.js** | >= 16.x | ⚠️ Recommended | LSP servers (ts_ls, etc.) |
+| **Nerd Font** | Any | ⚠️ Recommended | Icons (try [JetBrainsMono](https://www.nerdfonts.com/)) |
+| **Ripgrep** | Latest | ⚠️ Recommended | Telescope live grep |
+| **fd** | Latest | ⬜ Optional | Faster file searching |
+| **lazygit** | Latest | ⬜ Optional | Git UI |
+| **fzf** | Latest | ⬜ Optional | FzfLua backend |
+
+### One-Line Install
 
 ```bash
-mv ~/.config/nvim ~/.config/nvim.bak
-mv ~/.local/share/nvim ~/.local/share/nvim.bak
-mv ~/.local/state/nvim ~/.local/state/nvim.bak
-mv ~/.cache/nvim ~/.cache/nvim.bak
+# Backup existing config and install
+mv ~/.config/nvim{,.bak.$(date +%Y%m%d%H%M%S)} 2>/dev/null; \
+git clone https://github.com/channinghsu/nvim.git ~/.config/nvim && \
+nvim
 ```
 
-### Clone Configuration
+### What Happens on First Launch?
+
+1. ⏳ Lazy.nvim automatically installs itself
+2. 📦 All plugins are downloaded and installed
+3. 🔧 Mason installs LSP servers, formatters, and linters
+4. 🌳 Treesitter parsers are compiled
+5. 🐛 DAP adapters are configured
+6. ✅ You're ready to code!
+
+**First launch may take 2-5 minutes depending on your internet speed.**
+
+---
+
+## 📥 Installation
+
+### Detailed Installation Steps
+
+#### 1. Backup Existing Configuration
 
 ```bash
-git clone git@github.com:channinghsu/nvim ~/.config/nvim
+# Backup all Neovim data
+mv ~/.config/nvim ~/.config/nvim.backup
+mv ~/.local/share/nvim ~/.local/share/nvim.backup
+mv ~/.local/state/nvim ~/.local/state/nvim.backup
+mv ~/.cache/nvim ~/.cache/nvim.backup
 ```
 
-### First Launch
+#### 2. Clone the Repository
+
+```bash
+# SSH (recommended for contributors)
+git clone git@github.com:channinghsu/nvim.git ~/.config/nvim
+
+# HTTPS (alternative)
+git clone https://github.com/channinghsu/nvim.git ~/.config/nvim
+```
+
+#### 3. Launch Neovim
 
 ```bash
 nvim
 ```
 
-On first launch, the configuration will automatically:
-- Install lazy.nvim plugin manager
-- Download and install all plugins
-- Install LSP servers via Mason
-- Install Treesitter parsers
-- Set up DAP adapters
+#### 4. Post-Install Checks
 
-## 🎨 Customization
+After installation completes, run health checks:
 
-This configuration supports extensive customization through user overrides:
-
-### User Directory Structure
-
-```
-~/.config/nvim/lua/user/
-├── configs/        # Override plugin configs
-├── keymap/         # Custom keybindings
-├── plugins/        # Additional plugins
-├── event.lua       # Custom autocommands
-├── options.lua     # Custom vim options
-└── settings.lua    # Override core settings
+```vim
+:checkhealth
+:Mason
+:Lazy
 ```
 
-### Core Settings
+#### 5. (Optional) Install Additional Tools
 
-Edit `lua/core/settings.lua` or create `lua/user/settings.lua`:
+```bash
+# macOS
+brew install ripgrep fd lazygit fzf
 
-```lua
-local settings = {}
+# Ubuntu/Debian
+sudo apt install ripgrep fd-find lazygit fzf
 
-settings["use_copilot"] = true           -- Enable GitHub Copilot
-settings["format_on_save"] = true        -- Auto-format on save
-settings["colorscheme"] = "catppuccin"   -- Colorscheme
-settings["search_backend"] = "telescope" -- "telescope" or "fzf"
-settings["use_chat"] = true              -- Enable AI chat
+# Arch Linux
+sudo pacman -S ripgrep fd lazygit fzf
 
-return settings
+# Fedora
+sudo dnf install ripgrep fd-find lazygit fzf
 ```
+
+---
 
 ## 🔌 Plugins
 
-### Completion & LSP
+### 📊 Plugin Categories
 
-| Plugin | Description |
-|--------|-------------|
-| [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) | LSP configuration |
-| [mason.nvim](https://github.com/williamboman/mason.nvim) | LSP/DAP/Linter installer |
-| [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) | Completion engine |
-| [LuaSnip](https://github.com/L3MON4D3/LuaSnip) | Snippet engine |
-| [lspsaga.nvim](https://github.com/nvimdev/lspsaga.nvim) | Enhanced LSP UI |
-| [copilot.lua](https://github.com/zbirenbaum/copilot.lua) | GitHub Copilot integration |
-| [none-ls.nvim](https://github.com/nvimtools/none-ls.nvim) | Formatting and linting |
+This configuration includes **90+ plugins** organized into 5 categories:
 
-### Editor Enhancement
+<details>
+<summary><b>💻 Completion & LSP (19 plugins)</b></summary>
 
-| Plugin | Description |
-|--------|-------------|
-| [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) | Syntax highlighting |
-| [flash.nvim](https://github.com/folke/flash.nvim) | Enhanced navigation |
-| [hop.nvim](https://github.com/smoka7/hop.nvim) | Quick jump to locations |
-| [Comment.nvim](https://github.com/numToStr/Comment.nvim) | Smart commenting |
-| [grug-far.nvim](https://github.com/MagicDuck/grug-far.nvim) | Search and replace |
-| [mini.align](https://github.com/echasnovski/mini.align) | Text alignment |
-| [autoclose.nvim](https://github.com/m4xshen/autoclose.nvim) | Auto-close pairs |
-| [persisted.nvim](https://github.com/olimorris/persisted.nvim) | Session management |
+| Plugin | Description | Stars |
+|--------|-------------|-------|
+| [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) | Quickstart configs for Nvim LSP | ![stars](https://img.shields.io/github/stars/neovim/nvim-lspconfig?style=social) |
+| [mason.nvim](https://github.com/williamboman/mason.nvim) | Portable package manager | ![stars](https://img.shields.io/github/stars/williamboman/mason.nvim?style=social) |
+| [mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim) | Bridge mason and lspconfig | ![stars](https://img.shields.io/github/stars/williamboman/mason-lspconfig.nvim?style=social) |
+| [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) | Completion engine | ![stars](https://img.shields.io/github/stars/hrsh7th/nvim-cmp?style=social) |
+| [cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp) | LSP completion source | ![stars](https://img.shields.io/github/stars/hrsh7th/cmp-nvim-lsp?style=social) |
+| [cmp-buffer](https://github.com/hrsh7th/cmp-buffer) | Buffer completion source | ![stars](https://img.shields.io/github/stars/hrsh7th/cmp-buffer?style=social) |
+| [cmp-path](https://github.com/hrsh7th/cmp-path) | Path completion source | ![stars](https://img.shields.io/github/stars/hrsh7th/cmp-path?style=social) |
+| [cmp_luasnip](https://github.com/saadparwaiz1/cmp_luasnip) | Luasnip completion source | ![stars](https://img.shields.io/github/stars/saadparwaiz1/cmp_luasnip?style=social) |
+| [LuaSnip](https://github.com/L3MON4D3/LuaSnip) | Snippet engine | ![stars](https://img.shields.io/github/stars/L3MON4D3/LuaSnip?style=social) |
+| [friendly-snippets](https://github.com/rafamadriz/friendly-snippets) | Snippet collection | ![stars](https://img.shields.io/github/stars/rafamadriz/friendly-snippets?style=social) |
+| [lspsaga.nvim](https://github.com/nvimdev/lspsaga.nvim) | Enhanced LSP UI | ![stars](https://img.shields.io/github/stars/nvimdev/lspsaga.nvim?style=social) |
+| [lsp_signature.nvim](https://github.com/ray-x/lsp_signature.nvim) | Function signature help | ![stars](https://img.shields.io/github/stars/ray-x/lsp_signature.nvim?style=social) |
+| [none-ls.nvim](https://github.com/nvimtools/none-ls.nvim) | Formatting & diagnostics | ![stars](https://img.shields.io/github/stars/nvimtools/none-ls.nvim?style=social) |
+| [copilot.lua](https://github.com/zbirenbaum/copilot.lua) | GitHub Copilot | ![stars](https://img.shields.io/github/stars/zbirenbaum/copilot.lua?style=social) |
+| [copilot-cmp](https://github.com/zbirenbaum/copilot-cmp) | Copilot completion source | ![stars](https://img.shields.io/github/stars/zbirenbaum/copilot-cmp?style=social) |
+| [neoconf.nvim](https://github.com/folke/neoconf.nvim) | Project-local LSP config | ![stars](https://img.shields.io/github/stars/folke/neoconf.nvim?style=social) |
+| [glance.nvim](https://github.com/dnlhc/glance.nvim) | Pretty LSP references | ![stars](https://img.shields.io/github/stars/dnlhc/glance.nvim?style=social) |
+| [tiny-inline-diagnostic.nvim](https://github.com/rachartier/tiny-inline-diagnostic.nvim) | Inline diagnostics | ![stars](https://img.shields.io/github/stars/rachartier/tiny-inline-diagnostic.nvim?style=social) |
 
-### Tools
+</details>
 
-| Plugin | Description |
-|--------|-------------|
-| [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) | Fuzzy finder |
-| [fzf-lua](https://github.com/ibhagwan/fzf-lua) | Alternative fuzzy finder |
-| [nvim-tree.lua](https://github.com/nvim-tree/nvim-tree.lua) | File explorer |
-| [toggleterm.nvim](https://github.com/akinsho/toggleterm.nvim) | Terminal management |
-| [which-key.nvim](https://github.com/folke/which-key.nvim) | Keybinding hints |
-| [trouble.nvim](https://github.com/folke/trouble.nvim) | Diagnostics list |
-| [nvim-dap](https://github.com/mfussenegger/nvim-dap) | Debug adapter |
-| [codecompanion.nvim](https://github.com/olimorris/codecompanion.nvim) | AI chat assistant |
-| [dropbar.nvim](https://github.com/Bekaboo/dropbar.nvim) | Winbar with context |
+<details>
+<summary><b>✏️ Editor Enhancement (25 plugins)</b></summary>
 
-### UI
+| Plugin | Description | Stars |
+|--------|-------------|-------|
+| [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) | Advanced syntax highlighting | ![stars](https://img.shields.io/github/stars/nvim-treesitter/nvim-treesitter?style=social) |
+| [nvim-treesitter-textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects) | Syntax-aware text objects | ![stars](https://img.shields.io/github/stars/nvim-treesitter/nvim-treesitter-textobjects?style=social) |
+| [nvim-ts-context-commentstring](https://github.com/JoosepAlviste/nvim-ts-context-commentstring) | Context-aware commenting | ![stars](https://img.shields.io/github/stars/JoosepAlviste/nvim-ts-context-commentstring?style=social) |
+| [nvim-treesitter-context](https://github.com/nvim-treesitter/nvim-treesitter-context) | Show code context | ![stars](https://img.shields.io/github/stars/nvim-treesitter/nvim-treesitter-context?style=social) |
+| [flash.nvim](https://github.com/folke/flash.nvim) | Enhanced navigation | ![stars](https://img.shields.io/github/stars/folke/flash.nvim?style=social) |
+| [hop.nvim](https://github.com/smoka7/hop.nvim) | EasyMotion-like jumping | ![stars](https://img.shields.io/github/stars/smoka7/hop.nvim?style=social) |
+| [Comment.nvim](https://github.com/numToStr/Comment.nvim) | Smart commenting | ![stars](https://img.shields.io/github/stars/numToStr/Comment.nvim?style=social) |
+| [grug-far.nvim](https://github.com/MagicDuck/grug-far.nvim) | Search & replace UI | ![stars](https://img.shields.io/github/stars/MagicDuck/grug-far.nvim?style=social) |
+| [mini.align](https://github.com/echasnovski/mini.align) | Text alignment | ![stars](https://img.shields.io/github/stars/echasnovski/mini.align?style=social) |
+| [autoclose.nvim](https://github.com/m4xshen/autoclose.nvim) | Auto-close pairs | ![stars](https://img.shields.io/github/stars/m4xshen/autoclose.nvim?style=social) |
+| [nvim-ts-autotag](https://github.com/windwp/nvim-ts-autotag) | Auto-close HTML tags | ![stars](https://img.shields.io/github/stars/windwp/nvim-ts-autotag?style=social) |
+| [vim-matchup](https://github.com/andymass/vim-matchup) | Enhanced % matching | ![stars](https://img.shields.io/github/stars/andymass/vim-matchup?style=social) |
+| [rainbow-delimiters.nvim](https://github.com/HiPhish/rainbow-delimiters.nvim) | Rainbow parentheses | ![stars](https://img.shields.io/github/stars/HiPhish/rainbow-delimiters.nvim?style=social) |
+| [persisted.nvim](https://github.com/olimorris/persisted.nvim) | Session management | ![stars](https://img.shields.io/github/stars/olimorris/persisted.nvim?style=social) |
+| [diffview.nvim](https://github.com/sindrets/diffview.nvim) | Git diff viewer | ![stars](https://img.shields.io/github/stars/sindrets/diffview.nvim?style=social) |
+| [vim-illuminate](https://github.com/RRethy/vim-illuminate) | Highlight word under cursor | ![stars](https://img.shields.io/github/stars/RRethy/vim-illuminate?style=social) |
+| [nvim-highlight-colors](https://github.com/brenoprata10/nvim-highlight-colors) | Color highlighter | ![stars](https://img.shields.io/github/stars/brenoprata10/nvim-highlight-colors?style=social) |
+| [suda.vim](https://github.com/lambdalisue/suda.vim) | Write with sudo | ![stars](https://img.shields.io/github/stars/lambdalisue/suda.vim?style=social) |
+| [vim-better-whitespace](https://github.com/ntpeters/vim-better-whitespace) | Highlight trailing whitespace | ![stars](https://img.shields.io/github/stars/ntpeters/vim-better-whitespace?style=social) |
 
-| Plugin | Description |
-|--------|-------------|
-| [catppuccin](https://github.com/catppuccin/nvim) | Colorscheme |
-| [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) | Statusline |
-| [bufferline.nvim](https://github.com/akinsho/bufferline.nvim) | Buffer tabs |
-| [alpha-nvim](https://github.com/goolord/alpha-nvim) | Dashboard |
-| [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) | Git decorations |
-| [indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim) | Indent guides |
-| [nvim-notify](https://github.com/rcarriga/nvim-notify) | Notification manager |
-| [todo-comments.nvim](https://github.com/folke/todo-comments.nvim) | Highlight TODOs |
-| [edgy.nvim](https://github.com/folke/edgy.nvim) | Window layout manager |
+</details>
 
-## 🌐 Languages
+<details>
+<summary><b>🔧 Tools (20 plugins)</b></summary>
 
-| Language | LSP | DAP | Extras |
-|----------|-----|-----|--------|
-| **Lua** | lua_ls | - | stylua formatting |
-| **Go** | gopls | delve | go.nvim, goimports, gofumpt |
-| **Rust** | rust-analyzer | codelldb | rustaceanvim, crates.nvim |
-| **Python** | pylsp | debugpy | - |
-| **C/C++** | clangd | codelldb/lldb | clang-format |
-| **JavaScript/TypeScript** | ts_ls | - | prettier |
-| **Bash** | bashls | - | shfmt |
-| **HTML/CSS** | html | - | prettier |
-| **JSON** | jsonls | - | prettier |
-| **Markdown** | - | - | render-markdown, markdown-preview |
+| Plugin | Description | Stars |
+|--------|-------------|-------|
+| [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) | Fuzzy finder | ![stars](https://img.shields.io/github/stars/nvim-telescope/telescope.nvim?style=social) |
+| [fzf-lua](https://github.com/ibhagwan/fzf-lua) | Fast fuzzy finder | ![stars](https://img.shields.io/github/stars/ibhagwan/fzf-lua?style=social) |
+| [nvim-tree.lua](https://github.com/nvim-tree/nvim-tree.lua) | File explorer | ![stars](https://img.shields.io/github/stars/nvim-tree/nvim-tree.lua?style=social) |
+| [toggleterm.nvim](https://github.com/akinsho/toggleterm.nvim) | Terminal management | ![stars](https://img.shields.io/github/stars/akinsho/toggleterm.nvim?style=social) |
+| [which-key.nvim](https://github.com/folke/which-key.nvim) | Keybinding hints | ![stars](https://img.shields.io/github/stars/folke/which-key.nvim?style=social) |
+| [trouble.nvim](https://github.com/folke/trouble.nvim) | Diagnostics list | ![stars](https://img.shields.io/github/stars/folke/trouble.nvim?style=social) |
+| [nvim-dap](https://github.com/mfussenegger/nvim-dap) | Debug adapter | ![stars](https://img.shields.io/github/stars/mfussenegger/nvim-dap?style=social) |
+| [nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui) | DAP UI | ![stars](https://img.shields.io/github/stars/rcarriga/nvim-dap-ui?style=social) |
+| [codecompanion.nvim](https://github.com/olimorris/codecompanion.nvim) | AI chat assistant | ![stars](https://img.shields.io/github/stars/olimorris/codecompanion.nvim?style=social) |
+| [dropbar.nvim](https://github.com/Bekaboo/dropbar.nvim) | Winbar breadcrumbs | ![stars](https://img.shields.io/github/stars/Bekaboo/dropbar.nvim?style=social) |
+| [project.nvim](https://github.com/ahmedkhalf/project.nvim) | Project management | ![stars](https://img.shields.io/github/stars/ahmedkhalf/project.nvim?style=social) |
+| [sniprun](https://github.com/michaelb/sniprun) | Code runner | ![stars](https://img.shields.io/github/stars/michaelb/sniprun?style=social) |
+| [smart-splits.nvim](https://github.com/mrjones2014/smart-splits.nvim) | Smart window resizing | ![stars](https://img.shields.io/github/stars/mrjones2014/smart-splits.nvim?style=social) |
+| [wilder.nvim](https://github.com/gelguy/wilder.nvim) | Command-line completion | ![stars](https://img.shields.io/github/stars/gelguy/wilder.nvim?style=social) |
 
-## 🎹 Keymaps
+</details>
 
-> Leader key: `<Space>`
+<details>
+<summary><b>🎨 UI & Appearance (16 plugins)</b></summary>
 
-### General
+| Plugin | Description | Stars |
+|--------|-------------|-------|
+| [catppuccin](https://github.com/catppuccin/nvim) | Soothing pastel theme | ![stars](https://img.shields.io/github/stars/catppuccin/nvim?style=social) |
+| [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) | Statusline | ![stars](https://img.shields.io/github/stars/nvim-lualine/lualine.nvim?style=social) |
+| [bufferline.nvim](https://github.com/akinsho/bufferline.nvim) | Buffer tabs | ![stars](https://img.shields.io/github/stars/akinsho/bufferline.nvim?style=social) |
+| [alpha-nvim](https://github.com/goolord/alpha-nvim) | Dashboard | ![stars](https://img.shields.io/github/stars/goolord/alpha-nvim?style=social) |
+| [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) | Git decorations | ![stars](https://img.shields.io/github/stars/lewis6991/gitsigns.nvim?style=social) |
+| [indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim) | Indent guides | ![stars](https://img.shields.io/github/stars/lukas-reineke/indent-blankline.nvim?style=social) |
+| [nvim-notify](https://github.com/rcarriga/nvim-notify) | Notification manager | ![stars](https://img.shields.io/github/stars/rcarriga/nvim-notify?style=social) |
+| [todo-comments.nvim](https://github.com/folke/todo-comments.nvim) | Highlight TODOs | ![stars](https://img.shields.io/github/stars/folke/todo-comments.nvim?style=social) |
+| [edgy.nvim](https://github.com/folke/edgy.nvim) | Window layout manager | ![stars](https://img.shields.io/github/stars/folke/edgy.nvim?style=social) |
+| [nvim-scrollview](https://github.com/dstein64/nvim-scrollview) | Scrollbar | ![stars](https://img.shields.io/github/stars/dstein64/nvim-scrollview?style=social) |
+| [neoscroll.nvim](https://github.com/karb94/neoscroll.nvim) | Smooth scrolling | ![stars](https://img.shields.io/github/stars/karb94/neoscroll.nvim?style=social) |
+| [paint.nvim](https://github.com/folke/paint.nvim) | Highlight patterns | ![stars](https://img.shields.io/github/stars/folke/paint.nvim?style=social) |
+| [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons) | File icons | ![stars](https://img.shields.io/github/stars/nvim-tree/nvim-web-devicons?style=social) |
+
+</details>
+
+<details>
+<summary><b>🌐 Language-Specific (10 plugins)</b></summary>
+
+| Plugin | Description | Stars |
+|--------|-------------|-------|
+| [go.nvim](https://github.com/ray-x/go.nvim) | Golang toolkit | ![stars](https://img.shields.io/github/stars/ray-x/go.nvim?style=social) |
+| [rustaceanvim](https://github.com/mrcjkb/rustaceanvim) | Rust tools | ![stars](https://img.shields.io/github/stars/mrcjkb/rustaceanvim?style=social) |
+| [crates.nvim](https://github.com/saecki/crates.nvim) | Cargo.toml helper | ![stars](https://img.shields.io/github/stars/saecki/crates.nvim?style=social) |
+| [render-markdown.nvim](https://github.com/MeanderingProgrammer/render-markdown.nvim) | Markdown rendering | ![stars](https://img.shields.io/github/stars/MeanderingProgrammer/render-markdown.nvim?style=social) |
+| [nvim-bqf](https://github.com/kevinhwang91/nvim-bqf) | Better quickfix | ![stars](https://img.shields.io/github/stars/kevinhwang91/nvim-bqf?style=social) |
+
+</details>
+
+---
+
+## ⌨️ Keybindings
+
+> **Leader Key**: `<Space>`
+
+### 📌 Core Keybindings
+
+<details>
+<summary><b>File Operations</b></summary>
 
 | Key | Mode | Action |
 |-----|------|--------|
-| `<Leader>w` | n | Save file |
-| `<Leader>q` | n | Quit |
+| `<C-s>` | n, i | Save file |
+| `<C-q>` | n, i | Save and quit |
+| `<A-S-q>` | n | Force quit |
+
+</details>
+
+<details>
+<summary><b>Window & Buffer Management</b></summary>
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `<C-h>` | n | Focus left split |
+| `<C-j>` | n | Focus down split |
+| `<C-k>` | n | Focus up split |
+| `<C-l>` | n | Focus right split |
+| `<C-Up>` | n | Resize split up |
+| `<C-Down>` | n | Resize split down |
+| `<C-Left>` | n | Resize split left |
+| `<C-Right>` | n | Resize split right |
+
+</details>
+
+<details>
+<summary><b>Editing</b></summary>
+
+| Key | Mode | Action |
+|-----|------|--------|
 | `<Esc>` | n | Clear search highlight |
-| `<C-h/j/k/l>` | n | Navigate splits |
-| `<C-Up/Down>` | n | Resize splits |
+| `Y` | n | Yank to end of line |
+| `D` | n | Delete to end of line |
+| `J` | v | Move line down |
+| `K` | v | Move line up |
+| `<` | v | Decrease indent |
+| `>` | v | Increase indent |
+| `gcc` | n | Toggle line comment |
+| `gc` | v | Toggle comment on selection |
+| `<S-Tab>` | n | Toggle fold |
 
-### File Navigation
+</details>
+
+### 🔍 Search & Navigation
+
+<details>
+<summary><b>Fuzzy Finding (Telescope/FzfLua)</b></summary>
 
 | Key | Mode | Action |
 |-----|------|--------|
-| `<Leader>ff` | n | Find files |
-| `<Leader>fw` | n | Live grep |
-| `<Leader>fb` | n | Find buffers |
-| `<Leader>fo` | n | Find old files |
-| `<Leader>fp` | n | Find projects |
-| `<Leader>e` | n | Toggle file explorer |
+| `<leader>ff` | n | Find files |
+| `<leader>fp` | n | Find patterns (live grep) |
+| `<leader>fs` | v | Find selected text |
+| `<leader>fg` | n | Find Git objects |
+| `<leader>fd` | n | Find dossiers |
+| `<leader>fm` | n | Miscellaneous searches |
+| `<leader>fr` | n | Resume last search |
+| `<leader>fc` | n | Telescope collections |
+| `<C-p>` | n | Command panel |
 
-### LSP
+</details>
+
+<details>
+<summary><b>Quick Jump (Hop)</b></summary>
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `<leader>w` | n, v | Jump to word |
+| `<leader>j` | n, v | Jump to line |
+| `<leader>k` | n, v | Jump to line |
+| `<leader>c` | n, v | Jump to char |
+| `<leader>C` | n, v | Jump to two chars |
+
+</details>
+
+### 🧠 LSP & Completion
+
+<details>
+<summary><b>LSP Actions</b></summary>
 
 | Key | Mode | Action |
 |-----|------|--------|
 | `gd` | n | Go to definition |
+| `gD` | n | Go to declaration |
 | `gr` | n | Find references |
+| `gi` | n | Go to implementation |
+| `gt` | n | Go to type definition |
 | `K` | n | Hover documentation |
-| `<Leader>ca` | n | Code action |
-| `<Leader>rn` | n | Rename |
-| `[d` / `]d` | n | Previous/Next diagnostic |
-| `<Leader>ld` | n | Open diagnostics list |
+| `<leader>ca` | n | Code actions |
+| `<leader>rn` | n | Rename symbol |
+| `[d` | n | Previous diagnostic |
+| `]d` | n | Next diagnostic |
+| `<leader>ld` | n | Show document diagnostics |
+| `<leader>lw` | n | Show workspace diagnostics |
+| `<leader>lp` | n | Show project diagnostics |
 
-### Git
+</details>
 
-| Key | Mode | Action |
-|-----|------|--------|
-| `<Leader>gg` | n | Lazygit |
-| `<Leader>gd` | n | Diff view |
-| `<Leader>gb` | n | Git blame |
-| `]g` / `[g` | n | Next/Previous hunk |
-
-### Debug (DAP)
+<details>
+<summary><b>Completion (Insert Mode)</b></summary>
 
 | Key | Mode | Action |
 |-----|------|--------|
-| `<Leader>db` | n | Toggle breakpoint |
-| `<Leader>dc` | n | Continue |
-| `<Leader>di` | n | Step into |
-| `<Leader>do` | n | Step over |
-| `<Leader>dO` | n | Step out |
-| `<Leader>dr` | n | Toggle REPL |
+| `<Tab>` | i | Next completion item |
+| `<S-Tab>` | i | Previous completion item |
+| `<CR>` | i | Confirm completion |
+| `<C-e>` | i | Close completion menu |
+| `<C-d>` | i | Scroll docs down |
+| `<C-u>` | i | Scroll docs up |
 
-### AI Chat
+</details>
+
+### 🐛 Debugging (DAP)
 
 | Key | Mode | Action |
 |-----|------|--------|
-| `<Leader>cc` | n/v | Open chat |
-| `<Leader>ca` | v | Add selection to chat |
-| `ga` | v | Quick chat with selection |
+| `<F6>` | n | Continue / Start debugging |
+| `<F7>` | n | Stop debugging |
+| `<F8>` | n | Toggle breakpoint |
+| `<F9>` | n | Step into |
+| `<F10>` | n | Step out |
+| `<F11>` | n | Step over |
+| `<leader>db` | n | Conditional breakpoint |
+| `<leader>dc` | n | Run to cursor |
+| `<leader>dl` | n | Run last |
+| `<leader>do` | n | Open REPL |
 
-## 🔧 Configuration
+### 🌳 Git
 
-### LSP Servers
+| Key | Mode | Action |
+|-----|------|--------|
+| `<leader>gg` | n | Toggle lazygit |
+| `<leader>gd` | n | Open diff view |
+| `<leader>gD` | n | Close diff view |
+| `<leader>gb` | n | Git blame line |
+| `<leader>gG` | n | Open fugitive |
+| `gps` | n | Git push |
+| `gpl` | n | Git pull |
+| `]g` | n | Next git hunk |
+| `[g` | n | Previous git hunk |
 
-Configure in `lua/core/settings.lua`:
+### 🖥️ Terminal
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `<C-\>` | n, i, t | Toggle horizontal terminal |
+| `<A-\>` | n, i, t | Toggle vertical terminal |
+| `<A-d>` | n, i, t | Toggle floating terminal |
+| `<F5>` | n, i, t | Toggle vertical terminal |
+| `<Esc><Esc>` | t | Exit terminal mode |
+
+### 🤖 AI Assistant (CodeCompanion)
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `<leader>cc` | n, v | Toggle AI chat |
+| `<leader>ck` | n, v | CodeCompanion actions |
+| `<leader>ca` | v | Add selection to chat |
+| `<leader>cs` | n | Select AI model |
+
+### 🔧 Tools & Utilities
+
+<details>
+<summary><b>File Explorer</b></summary>
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `<C-n>` | n | Toggle file tree |
+| `<leader>nf` | n | Find current file in tree |
+| `<leader>nr` | n | Refresh tree |
+
+</details>
+
+<details>
+<summary><b>Session Management</b></summary>
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `<leader>ss` | n | Save session |
+| `<leader>sl` | n | Load session |
+| `<leader>sd` | n | Delete session |
+
+</details>
+
+<details>
+<summary><b>Search & Replace</b></summary>
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `<leader>Ss` | n | Open search & replace panel |
+| `<leader>Sp` | n, v | Search current word in project |
+| `<leader>Sf` | n | Search current word in file |
+
+</details>
+
+<details>
+<summary><b>Package Manager</b></summary>
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `<leader>ph` | n | Show Lazy |
+| `<leader>ps` | n | Sync plugins |
+| `<leader>pu` | n | Update plugins |
+| `<leader>pi` | n | Install plugins |
+| `<leader>pp` | n | Profile startup time |
+| `<leader>pc` | n | Check for updates |
+| `<leader>px` | n | Clean unused plugins |
+
+</details>
+
+<details>
+<summary><b>Misc</b></summary>
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `<leader>r` | n, v | Run code (SnipRun) |
+| `<A-s>` | n | Save with sudo |
+| `<leader>o` | n | Toggle spell check |
+
+</details>
+
+---
+
+## 🌐 Language Support
+
+### 📊 Supported Languages
+
+This configuration provides first-class support for the following languages:
+
+| Language | LSP Server | DAP | Formatter | Treesitter | Extras |
+|----------|-----------|-----|-----------|------------|--------|
+| **Lua** | lua_ls | - | stylua | ✅ | Neodev for Neovim API |
+| **Go** | gopls | delve | goimports, gofumpt | ✅ | go.nvim toolkit |
+| **Rust** | rust-analyzer | codelldb | rustfmt | ✅ | rustaceanvim, crates.nvim |
+| **Python** | pylsp | debugpy | black, autopep8 | ✅ | - |
+| **C/C++** | clangd | codelldb/lldb | clang-format | ✅ | - |
+| **JavaScript/TS** | ts_ls | - | prettier | ✅ | - |
+| **HTML** | html | - | prettier | ✅ | Auto-close tags |
+| **CSS** | cssls | - | prettier | ✅ | Color highlighting |
+| **JSON** | jsonls | - | prettier | ✅ | - |
+| **YAML** | yamlls | - | prettier | ✅ | - |
+| **Bash** | bashls | - | shfmt | ✅ | - |
+| **Markdown** | - | - | prettier | ✅ | render-markdown |
+| **Dart** | dartls | - | dart format | ✅ | Flutter support |
+| **Vue** | volar | - | prettier | ✅ | - |
+| **LaTeX** | texlab | - | latexindent | ✅ | - |
+
+### 🔧 Adding New Languages
+
+#### 1. Install LSP Server
+
+Edit `lua/core/settings.lua` or `lua/user/settings.lua`:
 
 ```lua
 settings["lsp_deps"] = {
   "bashls",
   "clangd",
-  "gopls",
-  "lua_ls",
-  "pylsp",
-  "rust_analyzer",
-  -- Add more...
+  -- Add your LSP server here
+  "new_language_ls",
 }
 ```
 
-### Formatters & Linters
+#### 2. Install Formatter (Optional)
 
 ```lua
 settings["null_ls_deps"] = {
   "prettier",
   "stylua",
-  "black",
-  "eslint_d",
-  -- Add more...
+  -- Add formatter here
+  "your_formatter",
 }
 ```
 
-### Disable Format on Save for Specific Directories
+#### 3. Install Treesitter Parser
 
 ```lua
+settings["treesitter_deps"] = {
+  "lua",
+  "go",
+  -- Add parser here
+  "new_language",
+}
+```
+
+#### 4. Add DAP Configuration (Optional)
+
+Create a file in `lua/modules/configs/tool/dap/clients/`:
+
+```lua
+-- lua/modules/configs/tool/dap/clients/your_language.lua
+local dap = require("dap")
+
+dap.adapters.your_language = {
+  type = "executable",
+  command = "path-to-debugger",
+  args = { "--arg1", "--arg2" },
+}
+
+dap.configurations.your_language = {
+  {
+    type = "your_language",
+    request = "launch",
+    name = "Launch file",
+    program = "${file}",
+  },
+}
+```
+
+---
+
+## ⚙️ Configuration
+
+### 📂 User Directory Structure
+
+All user customizations go in `~/.config/nvim/lua/user/`:
+
+```
+lua/user/
+├── configs/               # Override plugin configurations
+│   ├── completion/        # LSP, completion configs
+│   ├── editor/            # Editor plugin configs
+│   ├── tool/              # Tool plugin configs
+│   └── ui/                # UI plugin configs
+├── keymap/                # Custom keybindings
+│   ├── init.lua
+│   ├── completion.lua
+│   ├── editor.lua
+│   └── tool.lua
+├── plugins/               # Additional plugins
+│   ├── completion.lua
+│   ├── editor.lua
+│   └── ui.lua
+├── event.lua              # Custom autocommands
+├── options.lua            # Custom vim options
+├── settings.lua           # Override core settings
+└── dashboard.lua          # Custom dashboard image
+```
+
+### 🎨 Core Settings
+
+Create or edit `lua/user/settings.lua`:
+
+```lua
+local settings = {}
+
+-- Git & Installation
+settings["use_ssh"] = true                    -- Use SSH for git operations
+
+-- Copilot
+settings["use_copilot"] = true                -- Enable GitHub Copilot
+
+-- Formatting
+settings["format_on_save"] = true             -- Auto-format on save
+settings["format_timeout"] = 1000             -- Format timeout (ms)
+settings["format_notify"] = true              -- Show format notifications
+settings["format_modifications_only"] = false -- Format only changed lines
+
+-- Formatter blocklist (skip formatting for these filetypes)
+settings["formatter_block_list"] = {
+  lua = false,  -- Set to true to disable formatting
+}
+
+-- Server formatting blocklist (disable formatting from these LSP servers)
+settings["server_formatting_block_list"] = {
+  clangd = true,
+  lua_ls = true,
+  ts_ls = true,
+}
+
+-- Directories where formatting is disabled
 settings["format_disabled_dirs"] = {
   "~/projects/legacy",
-  "~/vendor",
 }
-```
 
-### Custom Colorscheme
+-- Diagnostics
+settings["diagnostics_virtual_lines"] = true  -- Show diagnostics as virtual lines
+settings["diagnostics_level"] = "HINT"        -- Minimum level: ERROR, WARN, INFO, HINT
 
-```lua
-settings["colorscheme"] = "catppuccin"
-settings["background"] = "dark"  -- or "light"
-settings["transparent_background"] = false
-```
+-- Performance
+settings["load_big_files_faster"] = true      -- Optimize for large files
 
-### AI Chat Configuration
+-- Theme
+settings["colorscheme"] = "catppuccin"        -- catppuccin, catppuccin-latte, etc.
+settings["transparent_background"] = false    -- Transparent background
+settings["background"] = "dark"               -- "dark" or "light"
 
-Set up your API key:
+-- Search Backend
+settings["search_backend"] = "telescope"      -- "telescope" or "fzf"
 
-```bash
-export CODE_COMPANION_KEY="your-api-key"
-```
+-- LSP
+settings["lsp_inlayhints"] = false            -- Show inlay type hints
 
-Configure models in `lua/core/settings.lua`:
+-- LSP Servers to Install
+settings["lsp_deps"] = {
+  "bashls",
+  "clangd",
+  "html",
+  "jsonls",
+  "lua_ls",
+  "pylsp",
+  "gopls",
+}
 
-```lua
+-- Formatters & Linters
+settings["null_ls_deps"] = {
+  "clang_format",
+  "gofumpt",
+  "goimports",
+  "prettier",
+  "shfmt",
+  "stylua",
+}
+
+-- DAP Adapters
+settings["dap_deps"] = {
+  "codelldb",  -- C/C++/Rust
+  "delve",     -- Go
+  "python",    -- Python
+}
+
+-- Treesitter Parsers
+settings["treesitter_deps"] = {
+  "bash", "c", "cpp", "go", "lua",
+  "python", "rust", "javascript", "typescript",
+  -- Add more as needed
+}
+
+-- GUI Settings (for neovide/neovim-qt)
+settings["gui_config"] = {
+  font_name = "JetBrainsMono Nerd Font",
+  font_size = 12,
+}
+
+-- Dashboard ASCII Art
+settings["dashboard_image"] = {
+  [[Your ASCII art here]],
+  [[Line 2]],
+}
+
+-- AI Chat
+settings["use_chat"] = true                   -- Enable AI chat
+settings["chat_lang"] = "English"             -- Response language
+settings["chat_api_key"] = "CODE_COMPANION_KEY" -- Env variable name
 settings["chat_models"] = {
+  -- Free models
   "moonshotai/kimi-k2:free",
   "deepseek/deepseek-chat-v3-0324:free",
+  -- Paid models
   "openai/gpt-4.1-mini",
-  -- Add more models from https://openrouter.ai/models
+  "anthropic/claude-sonnet-4",
+}
+
+return settings
+```
+
+### 🎨 Customizing Colorscheme
+
+**Change variant:**
+
+```lua
+settings["colorscheme"] = "catppuccin-mocha"  -- mocha, latte, frappe, macchiato
+```
+
+**Enable transparency:**
+
+```lua
+settings["transparent_background"] = true
+```
+
+**Override colors:**
+
+```lua
+settings["palette_overwrite"] = {
+  sky = "#04A5E5",
+  red = "#F38BA8",
 }
 ```
 
-## 🎯 Tips & Tricks
+### 🔑 Adding Custom Keybindings
 
-### Large Files
+Create `lua/user/keymap/init.lua`:
 
-This config automatically optimizes for large files by disabling heavy features like Treesitter and LSP when files exceed certain size thresholds.
+```lua
+local bind = require("keymap.bind")
+local map_cr = bind.map_cr
+local map_cmd = bind.map_cmd
+local map_callback = bind.map_callback
 
-### Custom Dashboard Image
+-- Define your custom keybindings
+local custom_bindings = {
+  ["n|<leader>xx"] = map_cr("YourCommand")
+    :with_noremap()
+    :with_silent()
+    :with_desc("Your description"),
+    
+  ["n|<leader>yy"] = map_callback(function()
+      -- Your custom function
+      print("Hello!")
+    end)
+    :with_noremap()
+    :with_desc("Say hello"),
+}
 
-Generate ASCII art and add to `settings["dashboard_image"]`:
-
-```bash
-# Install: https://github.com/TheZoraiz/ascii-image-converter
-ascii-image-converter your-image.png -C
+-- Load the bindings
+bind.nvim_load_mapping(custom_bindings)
 ```
 
-### Project-specific Settings
+### 📦 Adding Custom Plugins
 
-Use `.neoconf.json` in your project root:
+Create `lua/user/plugins/editor.lua`:
+
+```lua
+return {
+  {
+    "your-username/your-plugin",
+    event = "VeryLazy",
+    config = function()
+      require("your-plugin").setup({
+        -- Plugin configuration
+      })
+    end,
+  },
+}
+```
+
+### 🎯 Project-Specific Settings
+
+Create `.neoconf.json` in your project root:
 
 ```json
 {
@@ -329,7 +871,12 @@ Use `.neoconf.json` in your project root:
       "settings": {
         "Lua": {
           "diagnostics": {
-            "globals": ["vim"]
+            "globals": ["vim", "describe", "it"]
+          },
+          "workspace": {
+            "library": {
+              "/path/to/library": true
+            }
           }
         }
       }
@@ -338,42 +885,482 @@ Use `.neoconf.json` in your project root:
 }
 ```
 
-## 🐛 Troubleshooting
+### 🤖 AI Chat Configuration
 
-### LSP Not Working
+#### 1. Get API Key
 
-```vim
-:checkhealth
-:Mason
+Register at [OpenRouter](https://openrouter.ai/) and generate an API key.
+
+#### 2. Set Environment Variable
+
+```bash
+# Add to ~/.bashrc or ~/.zshrc
+export CODE_COMPANION_KEY="sk-or-v1-..."
+
+# Or use a password manager
+export CODE_COMPANION_KEY=$(op read "op://personal/OpenRouter/credential")
 ```
 
-### Slow Startup
+#### 3. Configure Models
 
+Edit `lua/user/settings.lua`:
+
+```lua
+settings["chat_models"] = {
+  "moonshotai/kimi-k2:free",           -- Free, great for general tasks
+  "deepseek/deepseek-r1:free",         -- Free, reasoning model
+  "openai/gpt-4.1-mini",               -- Paid, fast and accurate
+  "anthropic/claude-sonnet-4",         -- Paid, excellent for code
+}
+```
+
+#### 4. Usage
+
+- `<leader>cc` - Toggle chat window
+- `<leader>ck` - Open actions menu
+- Select code in visual mode, then `<leader>ca` to add to chat
+- `<leader>cs` - Switch between models
+
+---
+
+## 💡 Tips & Tricks
+
+### ⚡ Performance Optimization
+
+**Check startup time:**
 ```vim
 :Lazy profile
 ```
 
-### Clear Cache
+**Large file optimization:**
+- Automatically disables Treesitter, LSP for files > 1MB
+- Customize in `lua/core/event.lua`
+
+**Reduce plugins:**
+```lua
+settings["disabled_plugins"] = {
+  "echasnovski/mini.align",
+  "folke/paint.nvim",
+}
+```
+
+### 🎨 Custom Dashboard
+
+Generate ASCII art:
 
 ```bash
-rm -rf ~/.local/share/nvim
-rm -rf ~/.cache/nvim
+# Install ascii-image-converter
+brew install TheZoraiz/ascii-image-converter/ascii-image-converter
+
+# Generate ASCII art
+ascii-image-converter your-image.png -C -W 60 -H 20
 ```
+
+Add to `lua/user/dashboard.lua`:
+
+```lua
+return {
+  [[  ⣴⣶⣤⡤⠦⣤⣀⣤⠆     ⣈⣭⣿⣶⣿⣦⣼⣆          ]],
+  [[   ⠉⠻⢿⣿⠿⣿⣿⣶⣦⠤⠄⡠⢾⣿⣿⡿⠋⠉⠉⠻⣿⣿⡛⣦       ]],
+  [[         ⠈⢿⣿⣟⠦ ⣾⣿⣿⣷    ⠻⠿⢿⣿⣧⣄     ]],
+  [[          ⣸⣿⣿⢧ ⢻⠻⣿⣿⣷⣄⣀⠄⠢⣀⡀⠈⠙⠿⠄    ]],
+}
+```
+
+### 🔧 Useful Commands
+
+```vim
+" Health checks
+:checkhealth
+:checkhealth nvim-treesitter
+:checkhealth telescope
+
+" Package management
+:Lazy
+:Mason
+:MasonUpdate
+
+" LSP info
+:LspInfo
+:LspLog
+:LspRestart
+
+" Treesitter
+:TSInstall <language>
+:TSUpdate
+:TSModuleInfo
+
+" DAP
+:DapInstall
+:DapUninstall
+
+" Git
+:Git status
+:Telescope git_files
+:DiffviewOpen
+
+" Sessions
+:SessionSave
+:SessionLoad
+:SessionDelete
+```
+
+### 🎯 Workflow Examples
+
+**Quick file navigation:**
+1. `<leader>ff` - Find files
+2. Type partial filename
+3. `<CR>` to open
+
+**Code review workflow:**
+1. `<leader>gd` - Open diff view
+2. Review changes
+3. `<leader>gD` - Close diff view
+
+**AI-assisted coding:**
+1. Select code in visual mode
+2. `<leader>ca` - Add to AI chat
+3. Ask question or request improvement
+4. `<leader>cs` - Switch model if needed
+
+**Debugging session:**
+1. `<F8>` - Set breakpoints
+2. `<F6>` - Start debugging
+3. `<F9>/<F10>/<F11>` - Step through code
+4. `<leader>do` - Open REPL for inspection
+
+---
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+<details>
+<summary><b>LSP not working / No completions</b></summary>
+
+**Check LSP status:**
+```vim
+:LspInfo
+:checkhealth nvim-lspconfig
+```
+
+**Reinstall LSP server:**
+```vim
+:Mason
+" Find your server, press 'X' to uninstall, then 'i' to reinstall
+```
+
+**Check if server is installed:**
+```bash
+which lua-language-server
+which gopls
+```
+
+</details>
+
+<details>
+<summary><b>Slow startup time</b></summary>
+
+**Profile startup:**
+```vim
+:Lazy profile
+```
+
+**Disable unnecessary plugins:**
+```lua
+-- In lua/user/settings.lua
+settings["disabled_plugins"] = {
+  "plugin-author/plugin-name",
+}
+```
+
+**Check for errors:**
+```vim
+:messages
+```
+
+</details>
+
+<details>
+<summary><b>Treesitter highlighting broken</b></summary>
+
+**Reinstall parser:**
+```vim
+:TSInstall! <language>
+:TSUpdate
+```
+
+**Check Treesitter health:**
+```vim
+:checkhealth nvim-treesitter
+```
+
+</details>
+
+<details>
+<summary><b>Telescope/FzfLua not finding files</b></summary>
+
+**Check if ripgrep is installed:**
+```bash
+which rg
+```
+
+**Install ripgrep:**
+```bash
+brew install ripgrep        # macOS
+sudo apt install ripgrep    # Ubuntu
+```
+
+**Check ignored files:**
+```vim
+" Make sure .gitignore isn't hiding your files
+:Telescope find_files hidden=true
+```
+
+</details>
+
+<details>
+<summary><b>Copilot not working</b></summary>
+
+**Authenticate:**
+```vim
+:Copilot auth
+```
+
+**Check status:**
+```vim
+:Copilot status
+```
+
+**Disable if not needed:**
+```lua
+settings["use_copilot"] = false
+```
+
+</details>
+
+<details>
+<summary><b>AI Chat not responding</b></summary>
+
+**Check API key:**
+```bash
+echo $CODE_COMPANION_KEY
+```
+
+**Set API key:**
+```bash
+export CODE_COMPANION_KEY="your-key-here"
+```
+
+**Check model availability:**
+- Visit [OpenRouter Models](https://openrouter.ai/models)
+- Ensure selected model is available
+
+**Check logs:**
+```vim
+:messages
+```
+
+</details>
+
+<details>
+<summary><b>Formatting not working</b></summary>
+
+**Check if formatter is installed:**
+```vim
+:Mason
+```
+
+**Check format settings:**
+```lua
+settings["format_on_save"] = true
+```
+
+**Manual format:**
+```vim
+:Format
+```
+
+**Check if filetype is blocked:**
+```lua
+settings["formatter_block_list"] = {
+  lua = false,  -- Should be false to enable
+}
+```
+
+</details>
+
+### 🔄 Reset Configuration
+
+If all else fails:
+
+```bash
+# Backup current config
+mv ~/.config/nvim ~/.config/nvim.broken
+
+# Clear all data
+rm -rf ~/.local/share/nvim
+rm -rf ~/.local/state/nvim
+rm -rf ~/.cache/nvim
+
+# Re-clone and start fresh
+git clone https://github.com/channinghsu/nvim.git ~/.config/nvim
+nvim
+```
+
+---
+
+## ❓ FAQ
+
+<details>
+<summary><b>How do I update plugins?</b></summary>
+
+```vim
+:Lazy sync
+```
+
+Or press `<leader>ps` in normal mode.
+
+</details>
+
+<details>
+<summary><b>How do I add a new LSP server?</b></summary>
+
+1. Add to `settings["lsp_deps"]` in `lua/user/settings.lua`
+2. Restart Neovim
+3. Mason will auto-install it
+
+</details>
+
+<details>
+<summary><b>Can I use this with VSCode Neovim?</b></summary>
+
+Not recommended. This config is designed for standalone Neovim. However, the `init.lua` checks for VSCode and skips most configuration.
+
+</details>
+
+<details>
+<summary><b>How do I change the color scheme?</b></summary>
+
+```lua
+-- In lua/user/settings.lua
+settings["colorscheme"] = "catppuccin-mocha"  -- or -latte, -frappe, -macchiato
+```
+
+</details>
+
+<details>
+<summary><b>How do I disable format on save?</b></summary>
+
+```lua
+settings["format_on_save"] = false
+```
+
+</details>
+
+<details>
+<summary><b>How do I use a different search backend?</b></summary>
+
+```lua
+settings["search_backend"] = "fzf"  -- or "telescope"
+```
+
+Requires `fzf` binary: `brew install fzf`
+
+</details>
+
+<details>
+<summary><b>How do I disable GitHub Copilot?</b></summary>
+
+```lua
+settings["use_copilot"] = false
+```
+
+</details>
+
+<details>
+<summary><b>How do I disable AI chat?</b></summary>
+
+```lua
+settings["use_chat"] = false
+```
+
+</details>
+
+<details>
+<summary><b>Can I use this config on Windows?</b></summary>
+
+Yes, but some features may need adjustments:
+- Use Windows paths in settings
+- Some tools may need Windows equivalents
+- Git Bash or WSL recommended
+
+</details>
+
+<details>
+<summary><b>How do I contribute?</b></summary>
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+
+</details>
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Whether it's:
+
+- 🐛 Bug reports
+- 💡 Feature suggestions
+- 📝 Documentation improvements
+- 🔧 Code contributions
+
+Please open an issue or pull request on [GitHub](https://github.com/channinghsu/nvim).
+
+---
 
 ## 📝 License
 
-MIT License - see LICENSE file for details
+MIT License - see [LICENSE](LICENSE) file for details.
 
-## 🙏 Credits
+---
 
-Based on [nvimdots](https://github.com/ayamir/nvimdots) by ayamir.
+## 🙏 Acknowledgments
+
+This configuration is built on the shoulders of giants:
+
+- **[nvimdots](https://github.com/ayamir/nvimdots)** by [@ayamir](https://github.com/ayamir) - Original inspiration and base structure
+- **[lazy.nvim](https://github.com/folke/lazy.nvim)** by [@folke](https://github.com/folke) - Plugin manager
+- **[catppuccin](https://github.com/catppuccin/nvim)** - Beautiful theme
+- All the amazing plugin authors in the Neovim ecosystem
+
+Special thanks to the Neovim core team and community for creating such an incredible editor!
+
+---
+
+## 📊 Stats
+
+- **Total Plugins**: 90+
+- **Supported Languages**: 15+
+- **Lines of Config**: ~8000
+- **Startup Time**: < 50ms (with lazy loading)
+- **Stars**: [![Stars](https://img.shields.io/github/stars/channinghsu/nvim?style=social)](https://github.com/channinghsu/nvim)
 
 ---
 
 <div align="center">
 
-**[⬆ back to top](#-neovim-configuration)**
+**[⬆ Back to Top](#-modern-neovim-configuration)**
 
-Made with ❤️ and Neovim
+---
+
+Made with ❤️ by [Channing Hsu](https://github.com/channinghsu)
+
+If you found this helpful, consider giving it a ⭐!
 
 </div>
