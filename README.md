@@ -6,12 +6,11 @@
   <i>A powerful, blazingly fast, and beautifully crafted Neovim setup for modern development</i>
 </p>
 
-[![Neovim](https://img.shields.io/badge/Neovim-0.9+-57A143?style=for-the-badge&logo=neovim&logoColor=white)](https://neovim.io/)
+[![Neovim](https://img.shields.io/badge/Neovim-0.10+-57A143?style=for-the-badge&logo=neovim&logoColor=white)](https://neovim.io/)
 [![Lua](https://img.shields.io/badge/Lua-5.1+-2C2D72?style=for-the-badge&logo=lua&logoColor=white)](https://www.lua.org/)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
-[![Stars](https://img.shields.io/github/stars/channinghsu/nvim?style=for-the-badge&color=yellow)](https://github.com/channinghsu/nvim/stargazers)
 
-[Features](#-features) • [Quick Start](#-quick-start) • [Installation](#-installation) • [Plugins](#-plugins) • [Keybindings](#-keybindings) • [Configuration](#-configuration) • [Languages](#-language-support) • [FAQ](#-faq)
+[Features](#-features) • [Quick Start](#-quick-start) • [Installation](#-installation) • [Plugins](#-plugins) • [Keybindings](#-keybindings) • [Configuration](#-configuration) • [Languages](#-language-support)
 
 </div>
 
@@ -21,18 +20,18 @@
 
 This is a feature-rich, highly customizable Neovim configuration designed for productivity, aesthetics, and performance. Built with Lua and lazy-loading in mind, it provides a modern IDE-like experience without sacrificing Vim's efficiency.
 
-**Highlights:**
-- 🎨 Beautiful Catppuccin theme with transparency support
-- 🧠 Full LSP support with auto-completion, diagnostics, and code actions
-- 🤖 Built-in AI assistant powered by CodeCompanion (supports multiple AI models)
-- ⚡ Lightning-fast startup with lazy.nvim plugin manager
-- 🐛 Complete debugging experience with DAP for multiple languages
-- 🔍 Advanced fuzzy finding with Telescope/FzfLua
-- 🌳 Comprehensive Git integration
-- 📦 90+ carefully selected plugins
-- 🎯 Smart navigation with Hop, Flash, and Treesitter
-- 💾 Automatic session management
-- 🔧 Highly customizable through user overrides
+**Key Highlights:**
+- 🎨 **Beautiful UI** - Catppuccin theme with transparency support, elegant statusline and bufferline
+- 🧠 **Full LSP Support** - Auto-completion, diagnostics, code actions, and formatting
+- 🤖 **AI Integration** - Built-in AI assistant with CodeCompanion and GitHub Copilot
+- ⚡ **Blazing Fast** - Optimized startup time with lazy.nvim plugin manager
+- 🐛 **Complete Debugging** - DAP support for C/C++, Go, Python, and Rust
+- 🔍 **Advanced Search** - Powerful fuzzy finding with Telescope/FzfLua and ripgrep
+- 🌳 **Git Integration** - Gitsigns, lazygit, diffview, and fugitive
+- 📦 **90+ Plugins** - Carefully selected and configured for optimal workflow
+- 🎯 **Smart Navigation** - Hop, Flash, and Treesitter text objects
+- 💾 **Session Management** - Automatic session save and restore
+- 🔧 **Highly Customizable** - User override system for easy personalization
 
 ---
 
@@ -61,12 +60,14 @@ This is a feature-rich, highly customizable Neovim configuration designed for pr
 - **Symbol Outline**: Dropbar for code context
 
 ### 🤖 **AI Integration**
-- **CodeCompanion**: Multi-model AI chat assistant
+- **CodeCompanion**: Multi-model AI chat assistant with inline chat support
+- **Copilot Chat**: Enhanced GitHub Copilot with chat interface
 - **Supported Providers**: OpenRouter, OpenAI, Anthropic, DeepSeek, and more
-- **Free Models**: Kimi-K2, Qwen3-Coder, DeepSeek-R1, Gemma-3
+- **Free Models**: Kimi-K2, Qwen3-Coder, DeepSeek-R1, Gemma2-Coder
 - **Premium Models**: GPT-4.1, Claude Sonnet 4, Gemini 2.5 Flash
 - **Visual Selection**: Send code snippets to AI for explanation or improvement
-- **Inline Suggestions**: GitHub Copilot integration
+- **Inline Suggestions**: GitHub Copilot integration with automatic completion
+- **Better Escape**: Enhanced ESC key handling for optimal workflow
 
 ### 🔍 **Search & Navigation**
 - **Fuzzy Finder**: Telescope or FzfLua (switchable)
@@ -93,15 +94,17 @@ This is a feature-rich, highly customizable Neovim configuration designed for pr
 
 ### 🔧 **Editor Enhancements**
 - **Treesitter**: Advanced syntax highlighting (70+ languages)
-- **Auto-pairs**: Smart bracket/quote closing
+- **Auto-close**: Smart bracket/quote closing with better-escape integration
 - **Auto-tags**: Auto-close HTML/JSX tags
-- **Comment**: Smart language-aware commenting
-- **Align**: Text alignment helpers
-- **Surround**: Change surrounding quotes/brackets
-- **Multi-cursor**: Visual-block mode enhancements
+- **Comment**: Smart language-aware commenting with context support
+- **Align**: Text alignment helpers (mini.align)
+- **Match-up**: Enhanced % matching for brackets and keywords
+- **Rainbow Delimiters**: Colored bracket pairs for better readability
 - **Search & Replace**: Grug-far for project-wide replacements
-- **Session Management**: Auto-save and restore sessions
-- **Large File Optimization**: Auto-disable features for large files
+- **Session Management**: Auto-save and restore sessions with persisted.nvim
+- **Large File Optimization**: Auto-disable heavy features for files > 1MB
+- **Highlight Colors**: Inline color preview for hex/rgb values
+- **Cursor Word**: Highlight current word occurrences
 
 ### 🖥️ **Terminal & Tools**
 - **Toggleterm**: Integrated terminal with float/split modes
@@ -121,14 +124,14 @@ Ensure you have the following installed:
 
 | Tool | Version | Required | Purpose |
 |------|---------|----------|---------|
-| **Neovim** | >= 0.9.0 | ✅ Yes | Editor |
-| **Git** | >= 2.23.0 | ✅ Yes | Version control |
-| **Node.js** | >= 16.x | ⚠️ Recommended | LSP servers (ts_ls, etc.) |
-| **Nerd Font** | Any | ⚠️ Recommended | Icons (try [JetBrainsMono](https://www.nerdfonts.com/)) |
-| **Ripgrep** | Latest | ⚠️ Recommended | Telescope live grep |
-| **fd** | Latest | ⬜ Optional | Faster file searching |
+| **Neovim** | >= 0.10.0 | ✅ Yes | Editor |
+| **Git** | >= 2.23.0 | ✅ Yes | Version control and plugin management |
+| **Nerd Font** | Any | ✅ Yes | Icons (recommended: [JetBrainsMono Nerd Font](https://www.nerdfonts.com/)) |
+| **Node.js** | >= 18.x | ⚠️ Recommended | LSP servers (ts_ls, etc.) |
+| **Ripgrep** | Latest | ⚠️ Recommended | Fast text search (telescope/fzf-lua) |
+| **fd** | Latest | ⚠️ Recommended | Fast file finding |
 | **lazygit** | Latest | ⬜ Optional | Git UI |
-| **fzf** | Latest | ⬜ Optional | FzfLua backend |
+| **fzf** | Latest | ⬜ Optional | Alternative fuzzy finder backend |
 
 ### One-Line Install
 
@@ -571,7 +574,7 @@ This configuration provides first-class support for the following languages:
 | **Rust** | rust-analyzer | codelldb | rustfmt | ✅ | rustaceanvim, crates.nvim |
 | **Python** | pylsp | debugpy | black, autopep8 | ✅ | - |
 | **C/C++** | clangd | codelldb/lldb | clang-format | ✅ | - |
-| **JavaScript/TS** | ts_ls | - | prettier | ✅ | - |
+| **JavaScript/TS** | ts_ls, vtsls | - | prettier | ✅ | Vue.js support |
 | **HTML** | html | - | prettier | ✅ | Auto-close tags |
 | **CSS** | cssls | - | prettier | ✅ | Color highlighting |
 | **JSON** | jsonls | - | prettier | ✅ | - |
@@ -586,15 +589,20 @@ This configuration provides first-class support for the following languages:
 
 #### 1. Install LSP Server
 
-Edit `lua/core/settings.lua` or `lua/user/settings.lua`:
+Create or edit `lua/user/settings.lua` to override default settings:
 
 ```lua
+local settings = {}
+
 settings["lsp_deps"] = {
   "bashls",
   "clangd",
+  "lua_ls",
   -- Add your LSP server here
   "new_language_ls",
 }
+
+return settings
 ```
 
 #### 2. Install Formatter (Optional)
@@ -621,10 +629,10 @@ settings["treesitter_deps"] = {
 
 #### 4. Add DAP Configuration (Optional)
 
-Create a file in `lua/modules/configs/tool/dap/clients/`:
+Create a file in `lua/modules/configs/tool/dap/clients/` or `lua/user/configs/tool/dap/clients/`:
 
 ```lua
--- lua/modules/configs/tool/dap/clients/your_language.lua
+-- lua/user/configs/tool/dap/clients/your_language.lua
 local dap = require("dap")
 
 dap.adapters.your_language = {
@@ -639,9 +647,12 @@ dap.configurations.your_language = {
     request = "launch",
     name = "Launch file",
     program = "${file}",
+    cwd = "${workspaceFolder}",
   },
 }
 ```
+
+Then require it in your user event file or DAP init.
 
 ---
 
@@ -655,22 +666,26 @@ All user customizations go in `~/.config/nvim/lua/user/`:
 lua/user/
 ├── configs/               # Override plugin configurations
 │   ├── completion/        # LSP, completion configs
+│   │   └── copilot-chat.lua
 │   ├── editor/            # Editor plugin configs
-│   ├── tool/              # Tool plugin configs
+│   │   └── better-escape.lua
+│   ├── tool/              # Tool plugin configs (DAP, telescope, etc.)
 │   └── ui/                # UI plugin configs
-├── keymap/                # Custom keybindings
-│   ├── init.lua
-│   ├── completion.lua
-│   ├── editor.lua
-│   └── tool.lua
-├── plugins/               # Additional plugins
-│   ├── completion.lua
-│   ├── editor.lua
-│   └── ui.lua
+├── keymap/                # Custom keybindings (loaded automatically)
+│   ├── init.lua           # Main keymap file (loads all others)
+│   ├── ai.lua             # AI-related keybindings
+│   ├── completion.lua     # Completion keybindings
+│   ├── core.lua           # Core editor keybindings
+│   ├── editor.lua         # Editor enhancement keybindings
+│   └── tool.lua           # Tool keybindings
+├── plugins/               # Additional plugins (loaded automatically)
+│   ├── completion.lua     # Completion-related plugins
+│   ├── editor.lua         # Editor enhancement plugins
+│   └── ui.lua             # UI-related plugins
 ├── event.lua              # Custom autocommands
 ├── options.lua            # Custom vim options
-├── settings.lua           # Override core settings
-└── dashboard.lua          # Custom dashboard image
+├── settings.lua           # Override core settings (most important)
+└── dashboard.lua          # Custom dashboard ASCII art
 ```
 
 ### 🎨 Core Settings
@@ -683,8 +698,9 @@ local settings = {}
 -- Git & Installation
 settings["use_ssh"] = true                    -- Use SSH for git operations
 
--- Copilot
+-- Copilot & AI
 settings["use_copilot"] = true                -- Enable GitHub Copilot
+settings["copilot_chat"] = true               -- Enable Copilot Chat
 
 -- Formatting
 settings["format_on_save"] = true             -- Auto-format on save
@@ -774,17 +790,20 @@ settings["dashboard_image"] = {
   [[Line 2]],
 }
 
--- AI Chat
-settings["use_chat"] = true                   -- Enable AI chat
-settings["chat_lang"] = "English"             -- Response language
-settings["chat_api_key"] = "CODE_COMPANION_KEY" -- Env variable name
+-- AI Chat (CodeCompanion)
+settings["use_chat"] = true                   -- Enable AI chat with CodeCompanion
+settings["chat_lang"] = "English"             -- Response language (or "Chinese")
+settings["chat_api_key"] = "CODE_COMPANION_KEY" -- Environment variable name
 settings["chat_models"] = {
-  -- Free models
+  -- Free models (great for general tasks)
   "moonshotai/kimi-k2:free",
-  "deepseek/deepseek-chat-v3-0324:free",
-  -- Paid models
+  "qwen/qwen3-coder:free",
+  "deepseek/deepseek-r1:free",
+  "google/gemma-2-9b-it:free",
+  -- Paid models (better quality)
   "openai/gpt-4.1-mini",
   "anthropic/claude-sonnet-4",
+  "google/gemini-2.5-flash-latest",
 }
 
 return settings
@@ -815,8 +834,9 @@ settings["palette_overwrite"] = {
 
 ### 🔑 Adding Custom Keybindings
 
-Create `lua/user/keymap/init.lua`:
+User keymaps are automatically loaded from `lua/user/keymap/`. You can create separate files for different categories:
 
+**Example: `lua/user/keymap/core.lua`**
 ```lua
 local bind = require("keymap.bind")
 local map_cr = bind.map_cr
@@ -824,41 +844,62 @@ local map_cmd = bind.map_cmd
 local map_callback = bind.map_callback
 
 -- Define your custom keybindings
-local custom_bindings = {
+return {
   ["n|<leader>xx"] = map_cr("YourCommand")
     :with_noremap()
     :with_silent()
-    :with_desc("Your description"),
+    :with_desc("Your custom command"),
     
   ["n|<leader>yy"] = map_callback(function()
-      -- Your custom function
-      print("Hello!")
+      vim.notify("Hello from custom keymap!", vim.log.levels.INFO)
     end)
     :with_noremap()
     :with_desc("Say hello"),
+    
+  -- Visual mode mapping
+  ["v|<leader>vv"] = map_cmd("<Cmd>YourVisualCommand<CR>")
+    :with_noremap()
+    :with_desc("Visual command"),
 }
-
--- Load the bindings
-bind.nvim_load_mapping(custom_bindings)
 ```
+
+Keymaps are loaded automatically when you restart Neovim. No need to call `nvim_load_mapping` manually.
 
 ### 📦 Adding Custom Plugins
 
-Create `lua/user/plugins/editor.lua`:
+User plugins are automatically loaded from `lua/user/plugins/`. Organize by category:
 
+**Example: `lua/user/plugins/editor.lua`**
 ```lua
 return {
   {
     "your-username/your-plugin",
-    event = "VeryLazy",
+    lazy = true,
+    event = "VeryLazy",  -- or other lazy-loading events
+    dependencies = {
+      "some-dependency/plugin",
+    },
     config = function()
       require("your-plugin").setup({
         -- Plugin configuration
+        option1 = true,
+        option2 = "value",
       })
     end,
   },
+  
+  -- Add more plugins...
+  {
+    "another/plugin",
+    cmd = "PluginCommand",  -- Load when command is executed
+    keys = {
+      { "<leader>p", "<cmd>PluginCommand<cr>", desc = "Plugin command" },
+    },
+  },
 }
 ```
+
+Plugins are automatically detected and loaded by lazy.nvim on startup.
 
 ### 🎯 Project-Specific Settings
 
@@ -916,10 +957,20 @@ settings["chat_models"] = {
 
 #### 4. Usage
 
-- `<leader>cc` - Toggle chat window
-- `<leader>ck` - Open actions menu
-- Select code in visual mode, then `<leader>ca` to add to chat
-- `<leader>cs` - Switch between models
+**CodeCompanion:**
+- `<leader>cc` - Toggle inline chat
+- `<leader>ca` - Add visual selection to chat
+- Type your question or request in the chat buffer
+
+**Copilot Chat (if enabled):**
+- `<leader>cce` - Explain code
+- `<leader>cct` - Generate tests
+- `<leader>ccf` - Fix code
+- `<leader>cco` - Optimize code
+- `<leader>ccd` - Generate docs
+
+**Switch Models:**
+Check `lua/modules/configs/tool/codecompanion.lua` to configure available models.
 
 ---
 
@@ -933,14 +984,27 @@ settings["chat_models"] = {
 ```
 
 **Large file optimization:**
-- Automatically disables Treesitter, LSP for files > 1MB
-- Customize in `lua/core/event.lua`
+- Automatically disables Treesitter, LSP, and other heavy features for files > 1MB
+- Configured in `lua/core/event.lua` (look for `LargeFile` event)
 
-**Reduce plugins:**
+**Disable specific plugins:**
+You can disable plugins by adding `enabled = false` in user plugin overrides:
+
 ```lua
-settings["disabled_plugins"] = {
-  "echasnovski/mini.align",
-  "folke/paint.nvim",
+-- lua/user/plugins/editor.lua
+return {
+  {
+    "echasnovski/mini.align",
+    enabled = false,  -- Disable this plugin
+  },
+}
+```
+
+**Optimize Treesitter:**
+```lua
+-- In lua/user/settings.lua, reduce parsers you don't need
+settings["treesitter_deps"] = {
+  "lua", "vim", "vimdoc",  -- Only essential parsers
 }
 ```
 
@@ -1298,14 +1362,31 @@ Yes, but some features may need adjustments:
 </details>
 
 <details>
+<summary><b>How do I keep my custom settings when updating?</b></summary>
+
+All your customizations should go in the `lua/user/` directory, which is gitignored by default. When you pull updates:
+
+```bash
+cd ~/.config/nvim
+git pull
+```
+
+Your user configurations will not be overwritten.
+
+</details>
+
+<details>
 <summary><b>How do I contribute?</b></summary>
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
+Contributions are welcome! Please:
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Make your changes
+4. Test thoroughly
+5. Commit with clear messages
+6. Push to your fork
+7. Open a Pull Request
 
 </details>
 
@@ -1347,9 +1428,21 @@ Special thanks to the Neovim core team and community for creating such an incred
 
 - **Total Plugins**: 90+
 - **Supported Languages**: 15+
-- **Lines of Config**: ~8000
-- **Startup Time**: < 50ms (with lazy loading)
-- **Stars**: [![Stars](https://img.shields.io/github/stars/channinghsu/nvim?style=social)](https://github.com/channinghsu/nvim)
+- **Lines of Config**: ~8000+
+- **Startup Time**: < 30ms (with lazy loading)
+- **Treesitter Parsers**: 70+ available
+- **LSP Servers**: 20+ pre-configured
+
+---
+
+## 🗺️ Roadmap
+
+- [ ] Add more AI model integrations
+- [ ] Improve DAP configurations for more languages
+- [ ] Add testing framework integration
+- [ ] Create video tutorials
+- [ ] Add docker development environment support
+- [ ] Improve documentation with more examples
 
 ---
 
@@ -1361,6 +1454,8 @@ Special thanks to the Neovim core team and community for creating such an incred
 
 Made with ❤️ by [Channing Hsu](https://github.com/channinghsu)
 
-If you found this helpful, consider giving it a ⭐!
+If you find this helpful, consider giving it a ⭐!
+
+**Happy Vimming! 🚀**
 
 </div>
