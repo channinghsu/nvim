@@ -3,6 +3,6 @@ return function()
 
 	-- Setup nvim-treesitter config with proper install directory
 	require("nvim-treesitter").setup({
-		install_dir = vim.fn.stdpath('data') .. '/site',
+		install_dir = vim.fn.stdpath("data") .. "/site",
 	})
 end
