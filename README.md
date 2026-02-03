@@ -94,7 +94,7 @@ This is a feature-rich, highly customizable Neovim configuration designed for pr
 
 ### 🔧 **Editor Enhancements**
 - **Treesitter**: Advanced syntax highlighting (70+ languages)
-- **Auto-close**: Smart bracket/quote closing with better-escape integration
+- **Auto-close**: Smart bracket/quote closing
 - **Auto-tags**: Auto-close HTML/JSX tags
 - **Comment**: Smart language-aware commenting with context support
 - **Align**: Text alignment helpers (mini.align)
@@ -668,7 +668,7 @@ lua/user/
 │   ├── completion/        # LSP, completion configs
 │   │   └── copilot-chat.lua
 │   ├── editor/            # Editor plugin configs
-│   │   └── better-escape.lua
+│   │   └── (removed) better-escape.lua
 │   ├── tool/              # Tool plugin configs (DAP, telescope, etc.)
 │   └── ui/                # UI plugin configs
 ├── keymap/                # Custom keybindings (loaded automatically)
