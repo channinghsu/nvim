@@ -658,35 +658,158 @@ Then require it in your user event file or DAP init.
 
 ## ⚙️ Configuration
 
+> **NEW**: See `lua/user/README.md` for a quick start guide to user customization!
+
 ### 📂 User Directory Structure
 
 All user customizations go in `~/.config/nvim/lua/user/`:
 
 ```
 lua/user/
+├── README.md              # 📖 START HERE - User folder guide
+├── KEYBINDINGS.md         # 🎯 All custom keybindings reference
+├── CONFIG_GUIDE.md        # 📚 Configuration examples & best practices
+│
+├── settings.lua           # ⭐ MAIN CONFIG - Global settings override
+├── options.lua            # 📋 Custom Neovim options
+├── event.lua              # 🔔 Custom autocommands & events
+├── dashboard.lua          # 🎨 Custom dashboard ASCII art
+│
 ├── configs/               # Override plugin configurations
 │   ├── completion/        # LSP, completion configs
 │   │   └── copilot-chat.lua
 │   ├── editor/            # Editor plugin configs
-│   │   └── (removed) better-escape.lua
 │   ├── tool/              # Tool plugin configs (DAP, telescope, etc.)
 │   └── ui/                # UI plugin configs
-├── keymap/                # Custom keybindings (loaded automatically)
-│   ├── init.lua           # Main keymap file (loads all others)
-│   ├── ai.lua             # AI-related keybindings
-│   ├── completion.lua     # Completion keybindings
+│
+├── keymap/                # Custom keybindings (auto-loaded)
+│   ├── init.lua           # Main keymap loader (loads all others)
 │   ├── core.lua           # Core editor keybindings
+│   ├── completion.lua     # LSP & completion keybindings
 │   ├── editor.lua         # Editor enhancement keybindings
-│   └── tool.lua           # Tool keybindings
-├── plugins/               # Additional plugins (loaded automatically)
-│   ├── completion.lua     # Completion-related plugins
-│   ├── editor.lua         # Editor enhancement plugins
-│   └── ui.lua             # UI-related plugins
-├── event.lua              # Custom autocommands
-├── options.lua            # Custom vim options
-├── settings.lua           # Override core settings (most important)
-└── dashboard.lua          # Custom dashboard ASCII art
+│   ├── tool.lua           # Tools & debugging keybindings
+│   └── ai.lua             # AI assistant keybindings
+│
+└── plugins/               # Additional plugins (auto-loaded)
+    ├── completion.lua     # Custom completion plugins
+    ├── editor.lua         # Custom editor plugins
+    └── ui.lua             # Custom UI plugins
 ```
+
+### 🚀 Quick Start for Users
+
+1. **Read the user folder README** for an overview:
+   ```bash
+   cat ~/.config/nvim/lua/user/README.md
+   ```
+
+2. **Configure global settings** in `lua/user/settings.lua`:
+   - Enable/disable features
+   - Change colorscheme and appearance
+   - Add LSP servers, formatters, etc.
+
+3. **Add custom keybindings** in `lua/user/keymap/`:
+   - See `KEYBINDINGS.md` for all current bindings
+   - Create new files and register them in `keymap/init.lua`
+
+4. **Add custom plugins** in `lua/user/plugins/`:
+   - Create spec files that return plugin tables
+   - Plugins are auto-loaded by lazy.nvim
+
+### 🎨 Core Settings
+
+Create or edit `lua/user/settings.lua`:
+
+```lua
+local settings = {}
+
+-- Git & Installation
+settings["use_ssh"] = true                    -- Use SSH for git operations
+
+-- Copilot & AI
+settings["use_copilot"] = true                -- Enable GitHub Copilot
+settings["copilot_chat"] = true               -- Enable Copilot Chat
+settings["use_chat"] = true                   -- Enable AI chat
+
+-- Formatting
+settings["format_on_save"] = true             -- Auto-format on save
+settings["format_timeout"] = 1000             -- Format timeout (ms)
+settings["format_notify"] = true              -- Show format notifications
+
+-- Appearance
+settings["colorscheme"] = "catppuccin"        -- Color scheme
+settings["transparent_background"] = false    -- Transparent background
+settings["background"] = "dark"               -- "dark" or "light"
+
+-- LSP
+settings["lsp_inlayhints"] = false            -- Show inlay type hints
+
+-- Language/Region
+settings["chat_lang"] = "English"             -- "English" or "Chinese"
+
+-- LSP Servers to Install
+settings["lsp_deps"] = {
+  "bashls", "clangd", "html", "jsonls",
+  "lua_ls", "pylsp", "gopls",
+}
+
+-- Formatters & Linters
+settings["null_ls_deps"] = {
+  "clang_format", "gofumpt", "goimports",
+  "prettier", "shfmt", "stylua",
+}
+
+-- Treesitter Parsers
+settings["treesitter_deps"] = {
+  "bash", "c", "cpp", "go", "lua", "python",
+  "rust", "javascript", "typescript",
+}
+
+-- DAP Adapters
+settings["dap_deps"] = {
+  "codelldb",  -- C/C++, Rust
+  "delve",     -- Go
+  "python",    -- Python
+}
+
+return settings
+```
+lua/user/
+├── README.md              # 📖 START HERE - User folder guide
+├── KEYBINDINGS.md         # 🎯 All custom keybindings reference
+├── CONFIG_GUIDE.md        # 📚 Configuration examples & best practices
+│
+├── settings.lua           # ⭐ MAIN CONFIG - Global settings override
+├── options.lua            # 📋 Custom Neovim options
+├── event.lua              # 🔔 Custom autocommands & events
+├── dashboard.lua          # 🎨 Custom dashboard ASCII art
+│
+├── configs/               # Override plugin configurations
+│   ├── completion/        # LSP, completion configs
+│   │   └── copilot-chat.lua
+│   ├── editor/            # Editor plugin configs
+│   ├── tool/              # Tool plugin configs (DAP, telescope, etc.)
+│   └── ui/                # UI plugin configs
+│
+├── keymap/                # Custom keybindings (auto-loaded)
+│   ├── init.lua           # Main keymap loader (loads all others)
+│   ├── core.lua           # Core editor keybindings
+│   ├── completion.lua     # LSP & completion keybindings
+│   ├── editor.lua         # Editor enhancement keybindings
+│   ├── tool.lua           # Tools & debugging keybindings
+│   └── ai.lua             # AI assistant keybindings
+│
+└── plugins/               # Additional plugins (auto-loaded)
+    ├── completion.lua     # Custom completion plugins
+    ├── editor.lua         # Custom editor plugins
+    └── ui.lua             # Custom UI plugins
+```
+
+**Key Files:**
+- `README.md` - Start here for user folder overview
+- `settings.lua` - Main configuration (most important!)
+- `KEYBINDINGS.md` - All custom keybindings reference
+- `CONFIG_GUIDE.md` - Practical configuration examples
 
 ### 🎨 Core Settings
 
@@ -834,22 +957,24 @@ settings["palette_overwrite"] = {
 
 ### 🔑 Adding Custom Keybindings
 
-User keymaps are automatically loaded from `lua/user/keymap/`. You can create separate files for different categories:
+User keymaps are automatically loaded from `lua/user/keymap/`. See `lua/user/KEYBINDINGS.md` for all current custom keybindings.
 
-**Example: `lua/user/keymap/core.lua`**
+**Create a new keymap file:**
+
 ```lua
+-- lua/user/keymap/custom.lua
 local bind = require("keymap.bind")
 local map_cr = bind.map_cr
-local map_cmd = bind.map_cmd
 local map_callback = bind.map_callback
 
--- Define your custom keybindings
 return {
+  -- Simple command
   ["n|<leader>xx"] = map_cr("YourCommand")
     :with_noremap()
     :with_silent()
     :with_desc("Your custom command"),
     
+  -- Callback function (for complex logic)
   ["n|<leader>yy"] = map_callback(function()
       vim.notify("Hello from custom keymap!", vim.log.levels.INFO)
     end)
@@ -863,7 +988,22 @@ return {
 }
 ```
 
-Keymaps are loaded automatically when you restart Neovim. No need to call `nvim_load_mapping` manually.
+**Register in init:**
+
+```lua
+-- lua/user/keymap/init.lua
+return vim.tbl_extend(
+  "force",
+  require("user.keymap.core"),
+  require("user.keymap.completion").plug_map,
+  require("user.keymap.editor"),
+  require("user.keymap.tool"),
+  require("user.keymap.ai"),
+  require("user.keymap.custom"),  -- Add this line
+)
+```
+
+Keymaps are loaded automatically when you restart Neovim. For more information, see `lua/user/KEYBINDINGS.md`.
 
 ### 📦 Adding Custom Plugins
 
@@ -901,6 +1041,8 @@ return {
 
 Plugins are automatically detected and loaded by lazy.nvim on startup.
 
+For detailed configuration examples and best practices, see `lua/user/CONFIG_GUIDE.md`.
+
 ### 🎯 Project-Specific Settings
 
 Create `.neoconf.json` in your project root:
@@ -925,6 +1067,17 @@ Create `.neoconf.json` in your project root:
   }
 }
 ```
+
+### 📚 Detailed Configuration Documentation
+
+For comprehensive guides and examples, see:
+
+- **`lua/user/README.md`** - User folder overview and quick start
+- **`lua/user/KEYBINDINGS.md`** - All custom keybindings reference
+- **`lua/user/CONFIG_GUIDE.md`** - Practical configuration examples and best practices
+  - Language-specific setups (Python, Rust, Go, JavaScript, etc.)
+  - Advanced topics (environment-specific configuration, etc.)
+  - Troubleshooting common issues
 
 ### 🤖 AI Chat Configuration
 
