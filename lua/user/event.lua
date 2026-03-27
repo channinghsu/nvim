@@ -20,16 +20,16 @@
 -- ============================================================================
 
 local definitions = {
-  -- Buffer-related events
-  bufs = {
-    -- Disable undo file for commit messages
-    -- This prevents creating undo files for temporary git commits
-    { "BufWritePre", "COMMIT_EDITMSG", "setlocal noundofile" },
-  },
-  -- Add more event groups as needed:
-  -- files = { ... },
-  -- windows = { ... },
-  -- etc.
+	-- Buffer-related events
+	bufs = {
+		-- Disable undo file for commit messages
+		-- This prevents creating undo files for temporary git commits
+		{ "BufWritePre", "COMMIT_EDITMSG", "setlocal noundofile" },
+	},
+	-- Add more event groups as needed:
+	-- files = { ... },
+	-- windows = { ... },
+	-- etc.
 }
 
 -- ============================================================================
