@@ -6,7 +6,7 @@
 
 local bind = require("keymap.bind")
 local map_callback = bind.map_callback
-local map_cu = bind.map_cu  -- Map to custom user command
+local map_cu = bind.map_cu -- Map to custom user command
 
 return {
 	-- =========================================================================
@@ -25,8 +25,8 @@ return {
 	-- Usage: <leader>fw
 	-- Allows advanced search patterns
 	["n|<leader>fw"] = map_callback(function()
-		require("telescope").extensions.live_grep_args.live_grep_args()
-	end)
+			require("telescope").extensions.live_grep_args.live_grep_args()
+		end)
 		:with_noremap()
 		:with_silent()
 		:with_desc("find: Word in project"),
@@ -42,10 +42,7 @@ return {
 	-- Find file by history (recently opened files)
 	-- Usage: <leader>fe
 	-- Quick access to recent files
-	["n|<leader>fe"] = map_cu("Telescope oldfiles")
-		:with_noremap()
-		:with_silent()
-		:with_desc("find: File by history"),
+	["n|<leader>fe"] = map_cu("Telescope oldfiles"):with_noremap():with_silent():with_desc("find: File by history"),
 
 	-- =========================================================================
 	-- File Explorer
@@ -82,8 +79,8 @@ return {
 	-- Usage: <leader>dd
 	-- Starts debugging session or continues from breakpoint
 	["n|<leader>dd"] = map_callback(function()
-		require("dap").continue()
-	end)
+			require("dap").continue()
+		end)
 		:with_noremap()
 		:with_silent()
 		:with_desc("debug: Run/Continue"),
@@ -92,8 +89,8 @@ return {
 	-- Usage: <leader>dj
 	-- Terminates the current debugging session
 	["n|<leader>dj"] = map_callback(function()
-		require("dap").terminate()
-	end)
+			require("dap").terminate()
+		end)
 		:with_noremap()
 		:with_silent()
 		:with_desc("debug: Stop"),
@@ -102,8 +99,8 @@ return {
 	-- Usage: <leader>db
 	-- Sets or removes a breakpoint at the current line
 	["n|<leader>db"] = map_callback(function()
-		require("dap").toggle_breakpoint()
-	end)
+			require("dap").toggle_breakpoint()
+		end)
 		:with_noremap()
 		:with_silent()
 		:with_desc("debug: Toggle breakpoint"),
@@ -112,8 +109,8 @@ return {
 	-- Usage: Alt + L (Meta + L)
 	-- Executes current line and enters function calls
 	["n|<M-l>"] = map_callback(function()
-		require("dap").step_into()
-	end)
+			require("dap").step_into()
+		end)
 		:with_noremap()
 		:with_silent()
 		:with_desc("debug: Step into"),
@@ -122,8 +119,8 @@ return {
 	-- Usage: Alt + K (Meta + K)
 	-- Executes until function returns
 	["n|<M-k>"] = map_callback(function()
-		require("dap").step_out()
-	end)
+			require("dap").step_out()
+		end)
 		:with_noremap()
 		:with_silent()
 		:with_desc("debug: Step out"),
@@ -132,8 +129,8 @@ return {
 	-- Usage: Alt + J (Meta + J)
 	-- Executes next line but doesn't enter function calls
 	["n|<M-j>"] = map_callback(function()
-		require("dap").step_over()
-	end)
+			require("dap").step_over()
+		end)
 		:with_noremap()
 		:with_silent()
 		:with_desc("debug: Step over"),

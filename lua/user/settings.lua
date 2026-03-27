@@ -16,39 +16,39 @@ local settings = {}
 -- ============================================================================
 -- Git & Installation Settings
 -- ============================================================================
-settings["use_ssh"] = false  -- Use SSH for git operations (vs HTTPS)
+settings["use_ssh"] = false -- Use SSH for git operations (vs HTTPS)
 
 -- ============================================================================
 -- Formatting Settings
 -- ============================================================================
-settings["format_on_save"] = false  -- Auto-format files on save
-settings["format_notify"] = false   -- Show format notifications
-settings["format_timeout"] = 1000   -- Format timeout in milliseconds
+settings["format_on_save"] = false -- Auto-format files on save
+settings["format_notify"] = false -- Show format notifications
+settings["format_timeout"] = 1000 -- Format timeout in milliseconds
 
 -- ============================================================================
 -- Appearance Settings
 -- ============================================================================
-settings["colorscheme"] = "catppuccin"              -- Color scheme to use
-settings["transparent_background"] = true          -- Transparent background
-settings["background"] = "dark"                     -- "dark" or "light"
+settings["colorscheme"] = "catppuccin" -- Color scheme to use
+settings["transparent_background"] = true -- Transparent background
+settings["background"] = "dark" -- "dark" or "light"
 
 -- ============================================================================
 -- LSP & Completion Settings
 -- ============================================================================
-settings["lsp_inlayhints"] = false  -- Show inlay type hints
+settings["lsp_inlayhints"] = false -- Show inlay type hints
 
 -- ============================================================================
 -- AI & Chat Settings
 -- ============================================================================
-settings["chat_lang"] = "Chinese"   -- Chat language ("English" or "Chinese")
-settings["use_copilot"] = true      -- Enable GitHub Copilot
-settings["copilot_chat"] = true     -- Enable Copilot Chat
-settings["use_chat"] = true         -- Enable CodeCompanion AI chat
+settings["chat_lang"] = "Chinese" -- Chat language ("English" or "Chinese")
+settings["use_copilot"] = true -- Enable GitHub Copilot
+settings["copilot_chat"] = true -- Enable Copilot Chat
+settings["use_chat"] = true -- Enable CodeCompanion AI chat
 
 -- ============================================================================
 -- Dashboard Settings
 -- ============================================================================
-settings["dashboard_image"] = require("user.dashboard")  -- Custom dashboard ASCII art
+settings["dashboard_image"] = require("user.dashboard") -- Custom dashboard ASCII art
 
 -- ============================================================================
 -- Validation & Defaults
@@ -65,7 +65,9 @@ local function apply_defaults()
 
 	-- Appearance settings
 	settings["colorscheme"] = settings["colorscheme"] or "catppuccin"
-	settings["transparent_background"] = settings["transparent_background"] ~= nil and settings["transparent_background"] or false
+	settings["transparent_background"] = settings["transparent_background"] ~= nil
+			and settings["transparent_background"]
+		or false
 	settings["background"] = settings["background"] or "dark"
 
 	-- LSP settings

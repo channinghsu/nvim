@@ -5,8 +5,8 @@
 -- ============================================================================
 
 local bind = require("keymap.bind")
-local map_cr = bind.map_cr  -- Map to command
-local map_cmd = bind.map_cmd  -- Map to key sequence
+local map_cr = bind.map_cr -- Map to command
+local map_cmd = bind.map_cmd -- Map to key sequence
 
 return {
 	-- =========================================================================
@@ -35,16 +35,12 @@ return {
 
 	-- Delete/close current buffer
 	-- Usage: <leader>x (Space + x)
-	["n|<leader>x"] = map_cr("BufDel")
-		:with_noremap()
-		:with_silent()
-		:with_desc("which_key_ignore"),
+	["n|<leader>x"] = map_cr("BufDel"):with_noremap():with_silent():with_desc("which_key_ignore"),
 
 	-- Force quit all without saving
 	-- Usage: <leader>q (Space + q)
 	-- ⚠️  Warning: Quits without saving!
-	["n|<leader>q"] = map_cr("qa!")
-		:with_desc("which_key_ignore"),
+	["n|<leader>q"] = map_cr("qa!"):with_desc("which_key_ignore"),
 
 	-- =========================================================================
 	-- Selection & Editing
@@ -52,10 +48,7 @@ return {
 
 	-- Select all content (gg = go to start, VG = select to end)
 	-- Usage: <leader>i (Space + i)
-	["n|<leader>i"] = map_cmd("ggVG")
-		:with_noremap()
-		:with_silent()
-		:with_desc("which_key_ignore"),
+	["n|<leader>i"] = map_cmd("ggVG"):with_noremap():with_silent():with_desc("which_key_ignore"),
 
 	-- =========================================================================
 	-- Insert Mode - Quick Save & Exit
@@ -64,9 +57,5 @@ return {
 	-- Save file and exit insert mode
 	-- Usage: Type 'jk' in insert mode
 	-- Note: Requires typing 'j' then 'k' quickly
-	["i|jk"] = map_cmd("<Esc>:w<CR>")
-		:with_noremap()
-		:with_silent()
-		:with_nowait()
-		:with_desc("edit: Save file"),
+	["i|jk"] = map_cmd("<Esc>:w<CR>"):with_noremap():with_silent():with_nowait():with_desc("edit: Save file"),
 }

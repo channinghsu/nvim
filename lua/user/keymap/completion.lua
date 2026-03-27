@@ -34,9 +34,7 @@ mappings["lsp"] = function(buf)
 		-- Show documentation (hover information)
 		-- Usage: K (capital k)
 		-- Shows function signature, documentation, and type information
-		["n|K"] = require("keymap.bind").map_cr("Lspsaga hover_doc")
-			:with_buffer(buf)
-			:with_desc("lsp: Show doc"),
+		["n|K"] = require("keymap.bind").map_cr("Lspsaga hover_doc"):with_buffer(buf):with_desc("lsp: Show doc"),
 
 		-- =====================================================================
 		-- Navigation & Definitions
@@ -45,18 +43,12 @@ mappings["lsp"] = function(buf)
 		-- Preview definition in a floating window
 		-- Usage: gD (shift + d after g)
 		-- Shows definition without jumping to it
-		["n|gD"] = map_cr("Glance definitions")
-			:with_silent()
-			:with_buffer(buf)
-			:with_desc("lsp: Preview definition"),
+		["n|gD"] = map_cr("Glance definitions"):with_silent():with_buffer(buf):with_desc("lsp: Preview definition"),
 
 		-- Go to definition (jump to definition location)
 		-- Usage: gd (d after g)
 		-- Jumps directly to where symbol is defined
-		["n|gd"] = map_cr("Lspsaga goto_definition")
-			:with_silent()
-			:with_buffer(buf)
-			:with_desc("lsp: Goto definition"),
+		["n|gd"] = map_cr("Lspsaga goto_definition"):with_silent():with_buffer(buf):with_desc("lsp: Goto definition"),
 
 		-- =====================================================================
 		-- Build Commands
@@ -65,14 +57,12 @@ mappings["lsp"] = function(buf)
 		-- Build/compile current project
 		-- Usage: <leader>r
 		-- Runs the 'make' command (requires Makefile)
-		["n|<leader>r"] = map_cmd(":make<CR>")
-			:with_desc("which_key_ignore"),
+		["n|<leader>r"] = map_cmd(":make<CR>"):with_desc("which_key_ignore"),
 
 		-- Clean build artifacts
 		-- Usage: <leader>c
 		-- Runs 'make clean' (requires Makefile)
-		["n|<leader>c"] = map_cmd(":make clean<CR>")
-			:with_desc("which_key_ignore"),
+		["n|<leader>c"] = map_cmd(":make clean<CR>"):with_desc("which_key_ignore"),
 	}
 end
 
