@@ -1,5 +1,20 @@
 name: cherry-pick upstream
 
+# NOTE: To enable pushing to workflows that modify .github/workflows/ files,
+# you need to use a Personal Access Token (PAT) with appropriate permissions
+# instead of GITHUB_TOKEN. Follow these steps:
+#
+# 1. Create a PAT at https://github.com/settings/tokens/new with these scopes:
+#    - repo (full control of private repositories)
+#    - workflow (update GitHub Action workflows)
+#
+# 2. Add it as a repository secret named 'WORKFLOW_PAT'
+#
+# 3. Uncomment the line below and use it instead of GITHUB_TOKEN:
+#    token: ${{ secrets.WORKFLOW_PAT }}
+#
+# For now, push failures due to workflow modifications are ignored with continue-on-error
+
 on:
   # Manual trigger - go to Actions tab and click "Run workflow"
   workflow_dispatch:
@@ -21,6 +36,7 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: true
 
       - name: Configure Git
         run: |
@@ -172,6 +188,7 @@ jobs:
 
       - name: Push changes
         id: push
+        continue-on-error: true
         run: |
           if git diff --quiet origin/main; then
             echo "No changes to push"
@@ -185,24 +202,12 @@ jobs:
               echo "Rebase failed, aborting rebase"
               git rebase --abort
               # Try force with lease as fallback
-              if git push --force-with-lease origin main; then
-                echo "Successfully pushed with force-with-lease"
-                echo "pushed=true" >> $GITHUB_OUTPUT
-              else
-                echo "Push failed even with force-with-lease"
-                echo "pushed=false" >> $GITHUB_OUTPUT
-                exit 1
-              fi
+              git push --force-with-lease origin main
+              echo "pushed=true" >> $GITHUB_OUTPUT
             else
               # Rebase succeeded, do normal push
-              if git push origin main; then
-                echo "Successfully pushed cherry-picked commits"
-                echo "pushed=true" >> $GITHUB_OUTPUT
-              else
-                echo "Push failed after successful rebase"
-                echo "pushed=false" >> $GITHUB_OUTPUT
-                exit 1
-              fi
+              git push origin main
+              echo "pushed=true" >> $GITHUB_OUTPUT
             fi
           fi
 
