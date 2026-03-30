@@ -188,7 +188,6 @@ jobs:
 
       - name: Push changes
         id: push
-        continue-on-error: true
         run: |
           if git diff --quiet origin/main; then
             echo "No changes to push"
@@ -196,6 +195,9 @@ jobs:
           else
             # Fetch latest remote state
             git fetch origin main
+            
+            # Reset any changes to workflow files to avoid permission issues
+            git checkout origin/main -- .github/workflows/ 2>/dev/null || true
             
             # Try to rebase, if it fails, abort and try direct push
             if ! git rebase origin/main; then
