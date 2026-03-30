@@ -196,20 +196,33 @@ jobs:
             # Fetch latest remote state
             git fetch origin main
             
-            # Reset any changes to workflow files to avoid permission issues
-            git checkout origin/main -- .github/workflows/ 2>/dev/null || true
-            
             # Try to rebase, if it fails, abort and try direct push
             if ! git rebase origin/main; then
               echo "Rebase failed, aborting rebase"
               git rebase --abort
+              
+              # Reset any changes to workflow files to avoid permission issues
+              git checkout origin/main -- .github/workflows/ 2>/dev/null || true
+              git add .github/workflows/
+              
               # Try force with lease as fallback
-              git push --force-with-lease origin main
-              echo "pushed=true" >> $GITHUB_OUTPUT
+              if git push --force-with-lease origin main; then
+                echo "pushed=true" >> $GITHUB_OUTPUT
+              else
+                echo "pushed=false" >> $GITHUB_OUTPUT
+              fi
             else
-              # Rebase succeeded, do normal push
-              git push origin main
-              echo "pushed=true" >> $GITHUB_OUTPUT
+              # Rebase succeeded
+              # Reset any changes to workflow files to avoid permission issues
+              git checkout origin/main -- .github/workflows/ 2>/dev/null || true
+              git add .github/workflows/
+              
+              # Do normal push
+              if git push origin main; then
+                echo "pushed=true" >> $GITHUB_OUTPUT
+              else
+                echo "pushed=false" >> $GITHUB_OUTPUT
+              fi
             fi
           fi
 
