@@ -174,7 +174,8 @@ jobs:
             echo "No changes to push"
             echo "pushed=false" >> $GITHUB_OUTPUT
           else
-            git pull --rebase origin main
+            git fetch origin main
+            git rebase origin/main
             git push origin main
             echo "Successfully pushed cherry-picked commits"
             echo "pushed=true" >> $GITHUB_OUTPUT
