@@ -101,34 +101,9 @@ jobs:
               else
                 echo "✗ Conflict detected for $commit"
                 
-                # 获取冲突的文件列表
-                CONFLICTED_FILES=$(git diff --name-only --diff-filter=U)
-                
-                # 检查是否所有冲突文件都应该跳过
-                SHOULD_SKIP=true
-                for file in $CONFLICTED_FILES; do
-                  # 跳过 README.md
-                  if [[ "$file" =~ [Rr][Ee][Aa][Dd][Mm][Ee]\.[Mm][Dd]$ ]]; then
-                    echo "⊘ Skipping README.md file: $file"
-                    continue
-                  fi
-                  
-                  # 检查文件是否存在于 main 分支
-                  if git cat-file -e origin/main:"$file" 2>/dev/null; then
-                    SHOULD_SKIP=false
-                    break
-                  else
-                    echo "⊘ File $file does not exist in main branch, will skip"
-                  fi
-                done
-                
-                if [ "$SHOULD_SKIP" = true ]; then
-                  echo "⊘ All conflicted files should be skipped for $commit"
-                  SKIPPED=$((SKIPPED + 1))
-                else
-                  CONFLICTS=$((CONFLICTS + 1))
-                  echo "- ❌ [\`${commit:0:7}\`](https://github.com/ayamir/nvimdots/commit/$commit) $COMMIT_MSG (by $COMMIT_AUTHOR)" >> $CONFLICT_FILE
-                fi
+                # 自动跳过有冲突的提交
+                echo "⊘ Skipping conflicted commit automatically"
+                SKIPPED=$((SKIPPED + 1))
                 
                 git cherry-pick --abort 2>&1 || true
               fi
