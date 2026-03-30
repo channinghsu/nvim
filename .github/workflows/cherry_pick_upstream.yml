@@ -5,6 +5,10 @@ on:
   workflow_dispatch:
   schedule: [{ cron: "0 13 * * *" }]
 
+concurrency:
+  group: cherry-pick-upstream
+  cancel-in-progress: false
+
 jobs:
   cherry-pick-upstream:
     runs-on: ubuntu-latest
