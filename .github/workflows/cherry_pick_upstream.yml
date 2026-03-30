@@ -178,11 +178,33 @@ jobs:
             echo "No changes to push"
             echo "pushed=false" >> $GITHUB_OUTPUT
           else
+            # Fetch latest remote state
             git fetch origin main
-            git rebase origin/main
-            git push origin main
-            echo "Successfully pushed cherry-picked commits"
-            echo "pushed=true" >> $GITHUB_OUTPUT
+            
+            # Try to rebase, if it fails, abort and try direct push
+            if ! git rebase origin/main; then
+              echo "Rebase failed, aborting rebase"
+              git rebase --abort
+              # Try force with lease as fallback
+              if git push --force-with-lease origin main; then
+                echo "Successfully pushed with force-with-lease"
+                echo "pushed=true" >> $GITHUB_OUTPUT
+              else
+                echo "Push failed even with force-with-lease"
+                echo "pushed=false" >> $GITHUB_OUTPUT
+                exit 1
+              fi
+            else
+              # Rebase succeeded, do normal push
+              if git push origin main; then
+                echo "Successfully pushed cherry-picked commits"
+                echo "pushed=true" >> $GITHUB_OUTPUT
+              else
+                echo "Push failed after successful rebase"
+                echo "pushed=false" >> $GITHUB_OUTPUT
+                exit 1
+              fi
+            fi
           fi
 
       - name: Create sync report issue
