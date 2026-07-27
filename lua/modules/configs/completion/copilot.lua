@@ -1,26 +1,13 @@
 return function()
 	vim.defer_fn(function()
 		require("modules.utils").load_plugin("copilot", {
-			cmp = {
-				enabled = true,
-				method = "getCompletionsCycling",
-			},
 			panel = {
-				-- if true, it can interfere with completions in copilot-cmp
+				-- if true, it can interfere with completions in blink-copilot
 				enabled = false,
 			},
 			suggestion = {
-				enabled = true, -- 启用内联建议
-				auto_trigger = true, -- 自动触发建议
-				debounce = 75,
-				keymap = {
-					accept = "<M-;>", -- 接受建议的快捷键
-					accept_word = false,
-					accept_line = false,
-					next = "<M-]>", -- 下一个建议
-					prev = "<M-[>", -- 上一个建议
-					dismiss = "<C-]>", -- 关闭建议
-				},
+				-- if true, it can interfere with completions in blink-copilot
+				enabled = false,
 			},
 			filetypes = {
 				["dap-repl"] = false,
