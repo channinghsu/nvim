@@ -32,6 +32,16 @@ local definitions = {
 	-- etc.
 }
 
+-- Ensure Comment.nvim's `gcc` uses XML comments even when no XML Treesitter
+-- parser is installed for nvim-ts-context-commentstring to inspect.
+vim.api.nvim_create_autocmd("FileType", {
+	group = vim.api.nvim_create_augroup("UserXmlCommentString", { clear = true }),
+	pattern = "xml",
+	callback = function(event)
+		vim.bo[event.buf].commentstring = "<!-- %s -->"
+	end,
+})
+
 -- ============================================================================
 -- Custom Event Examples
 -- ============================================================================

@@ -13,6 +13,18 @@
 
 local settings = {}
 
+-- GUI-launched Neovim may not source nvm's shell initialization. Add the
+-- configured default Node.js runtime so Mason-installed npm servers can run.
+local nvm_dir = vim.fn.expand("~/.nvm")
+local default_alias = vim.fn.readfile(nvm_dir .. "/alias/default")[1]
+local node_version = default_alias and default_alias:match("^v?(%d+%.%d+%.%d+)$")
+if node_version then
+	local node_bin = nvm_dir .. "/versions/node/v" .. node_version .. "/bin"
+	if vim.fn.isdirectory(node_bin) == 1 then
+		vim.env.PATH = node_bin .. ":" .. (vim.env.PATH or "")
+	end
+end
+
 -- ============================================================================
 -- Git & Installation Settings
 -- ============================================================================
@@ -64,10 +76,16 @@ local function exclude_disabled(packages)
 	end
 end
 
-settings["lsp_deps"] = exclude_disabled({
+local filter_lsp_deps = exclude_disabled({
 	gopls = false, -- Requires the Go toolchain, which is not installed.
 	pyrefly = false, -- Mason's pinned PyPI release is unavailable in the configured index.
 })
+
+settings["lsp_deps"] = function(defaults)
+	local filtered = filter_lsp_deps(defaults)
+	table.insert(filtered, "jdtls") -- Java language server for Java navigation such as `gd`.
+	return filtered
+end
 
 settings["null_ls_deps"] = exclude_disabled({
 	gofumpt = false, -- Requires Go.
