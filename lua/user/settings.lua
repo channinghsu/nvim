@@ -50,6 +50,36 @@ settings["use_chat"] = true -- Enable CodeCompanion AI chat
 -- ============================================================================
 settings["dashboard_image"] = require("user.dashboard") -- Custom dashboard ASCII art
 
+-- Keep the base package lists, but let false-valued entries opt out of
+-- automatic installation after the defaults are merged.
+local function exclude_disabled(packages)
+	return function(defaults)
+		local filtered = {}
+		for _, package in ipairs(defaults) do
+			if packages[package] ~= false then
+				table.insert(filtered, package)
+			end
+		end
+		return filtered
+	end
+end
+
+settings["lsp_deps"] = exclude_disabled({
+	gopls = false, -- Requires the Go toolchain, which is not installed.
+	pyrefly = false, -- Mason's pinned PyPI release is unavailable in the configured index.
+})
+
+settings["null_ls_deps"] = exclude_disabled({
+	gofumpt = false, -- Requires Go.
+	goimports = false, -- Requires Go.
+	clang_format = false, -- Mason's pinned PyPI release is unavailable in the configured index.
+	vint = false, -- Mason's pinned PyPI release is unavailable in the configured index.
+})
+
+settings["dap_deps"] = exclude_disabled({
+	delve = false, -- Requires the Go toolchain, which is not installed.
+})
+
 -- ============================================================================
 -- Validation & Defaults
 -- ============================================================================
