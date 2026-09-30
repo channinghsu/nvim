@@ -52,10 +52,34 @@ settings["lsp_inlayhints"] = false -- Show inlay type hints
 -- ============================================================================
 -- AI & Chat Settings
 -- ============================================================================
-settings["chat_lang"] = "Chinese" -- Chat language ("English" or "Chinese")
-settings["use_copilot"] = true -- Enable GitHub Copilot
-settings["copilot_chat"] = true -- Enable Copilot Chat
-settings["use_chat"] = true -- Enable CodeCompanion AI chat
+settings["use_copilot"] = false -- Enable GitHub Copilot
+settings["copilot_chat"] = false -- Enable Copilot Chat
+settings["use_chat"] = false -- Enable CodeCompanion AI chat
+settings["edit_prediction_source"] = "none" -- Disable AI completion predictions
+settings["ai_api_key"] = "OPENAI_API_KEY"
+
+-- Tequila API provides an OpenAI-compatible endpoint. Keep the key outside
+-- this file and expose OPENAI_API_KEY before starting Neovim.
+settings["ai_adapters"] = {
+	tequila = {
+		type = "openai-compatible",
+		name = "Tequila API",
+		base_url = vim.env.OPENAI_BASE_URL or "https://tequilaapi.cc/v1",
+		chat_url = "/chat/completions",
+		api_key = "OPENAI_API_KEY",
+		models = {
+			"gpt-5.6",
+			"gpt-6-sol",
+			"gpt-6-luna",
+			"gpt-6-astra",
+		},
+		default_model = "gpt-5.6",
+	},
+}
+settings["codecompanion_adapter"] = "tequila"
+settings["pred_adapter"] = "tequila"
+settings["pred_model"] = "gpt-5.6"
+
 
 -- ============================================================================
 -- Dashboard Settings
@@ -97,41 +121,4 @@ settings["null_ls_deps"] = exclude_disabled({
 settings["dap_deps"] = exclude_disabled({
 	delve = false, -- Requires the Go toolchain, which is not installed.
 })
-
--- ============================================================================
--- Validation & Defaults
--- ============================================================================
--- Ensure required settings exist with sensible defaults
-local function apply_defaults()
-	-- Git settings
-	settings["use_ssh"] = settings["use_ssh"] ~= nil and settings["use_ssh"] or false
-
-	-- Format settings
-	settings["format_on_save"] = settings["format_on_save"] ~= nil and settings["format_on_save"] or false
-	settings["format_notify"] = settings["format_notify"] ~= nil and settings["format_notify"] or true
-	settings["format_timeout"] = settings["format_timeout"] or 1000
-
-	-- Appearance settings
-	settings["colorscheme"] = settings["colorscheme"] or "catppuccin"
-	settings["transparent_background"] = settings["transparent_background"] ~= nil
-			and settings["transparent_background"]
-		or false
-	settings["background"] = settings["background"] or "dark"
-
-	-- LSP settings
-	settings["lsp_inlayhints"] = settings["lsp_inlayhints"] ~= nil and settings["lsp_inlayhints"] or false
-
-	-- AI settings
-	settings["chat_lang"] = settings["chat_lang"] or "English"
-	settings["use_copilot"] = settings["use_copilot"] ~= nil and settings["use_copilot"] or true
-	settings["copilot_chat"] = settings["copilot_chat"] ~= nil and settings["copilot_chat"] or true
-	settings["use_chat"] = settings["use_chat"] ~= nil and settings["use_chat"] or true
-end
-
--- Apply defaults
-apply_defaults()
-
--- ============================================================================
--- Return Configuration
--- ============================================================================
 return settings
