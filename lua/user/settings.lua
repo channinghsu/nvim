@@ -25,6 +25,18 @@ if node_version then
 	end
 end
 
+-- Disable unused remote plugin providers so `:checkhealth` stays clean.
+-- This config is fully Lua-based (lazy.nvim): no plugin needs the Node.js,
+-- Perl, or legacy Python remote-plugin hosts (debugpy runs as a standalone
+-- DAP executable, not through the Python provider).
+--
+-- To re-enable the Python provider, install `pynvim` for the interpreter set
+-- in `vim.g.python3_host_prog` and remove the line below.
+vim.g.loaded_node_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_python3_provider = 0
+
 -- ============================================================================
 -- Git & Installation Settings
 -- ============================================================================
@@ -80,7 +92,6 @@ settings["codecompanion_adapter"] = "tequila"
 settings["pred_adapter"] = "tequila"
 settings["pred_model"] = "gpt-5.6"
 
-
 -- ============================================================================
 -- Dashboard Settings
 -- ============================================================================
@@ -121,4 +132,5 @@ settings["null_ls_deps"] = exclude_disabled({
 settings["dap_deps"] = exclude_disabled({
 	delve = false, -- Requires the Go toolchain, which is not installed.
 })
+
 return settings
